@@ -1,6 +1,6 @@
 package textrpg;
 
-import textrpg.jobs.Warrior;
+import textrpg.jobs.*;
 import java.util.Scanner;
 
 public final class Battle 
@@ -34,7 +34,8 @@ public final class Battle
         {
             if(hero.getJob().equals("Warrior"))
             {
-                m.setHealth(Warrior.attack());
+                //m.setHealth(hero.job.skill???);
+                System.out.println("Attacked!!!~~~!~!~@!~#~#");
             }
         }
     }
