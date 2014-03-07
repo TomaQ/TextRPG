@@ -1,12 +1,17 @@
 package textrpg;
 
+import java.util.Scanner;
+import jobs.*;
+
 public final class Battle 
 {
+    Scanner scan = new Scanner(System.in);
+    
     public Battle(Player hero, Monster m)
     {
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
-        if(moveFirst(hero, m)){System.out.println("Your turn!");}
+        if(moveFirst(hero, m)){playerTurn(hero, m);}
         else{System.out.println(m.getName() + "'s turn!");}
     }
     
@@ -18,8 +23,19 @@ public final class Battle
             return false;
     }
     
-    public int slash()//skills go here?
-    {
-        return 1-0;
+    public void playerTurn(Player hero, Monster m)
+    {   
+        System.out.println("Your turn!");
+        System.out.println("Attack = 1, Skills = 2");
+        int input = scan.nextInt();
+        scan.nextLine();
+        
+        if(input == 1)
+        {
+            if(hero.getJob().equals("Warrior"))
+            {
+                m.setHealth(Warrior.attack());
+            }
+        }
     }
 }
