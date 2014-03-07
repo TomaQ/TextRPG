@@ -1,6 +1,5 @@
 package textrpg;
 
-import textrpg.jobs.*;
 import java.util.Scanner;
 
 public final class Battle 
@@ -9,6 +8,7 @@ public final class Battle
     
     public Battle(Player hero, Monster m)
     {
+        Game.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
         if(moveFirst(hero, m)){playerTurn(hero, m);}
@@ -34,8 +34,8 @@ public final class Battle
         {
             if(hero.getJob().equals("Warrior"))
             {
-                //m.setHealth(hero.job.skill???);
-                System.out.println("Attacked!!!~~~!~!~@!~#~#");
+                m.setHealth(hero.getAttack());
+                System.out.println("Attacked! Did " +  hero.getAttack() + " damage!");
             }
         }
     }

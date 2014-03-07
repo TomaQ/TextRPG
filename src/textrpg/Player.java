@@ -1,5 +1,7 @@
 package textrpg;
 
+import textrpg.jobs.*;
+
 public class Player extends Being
 {
     private int job;
@@ -44,5 +46,13 @@ public class Player extends Being
             super.setStrength(13);
             super.setMagicDefense(8);
         }
+    }
+    
+    public int getAttack()
+    {
+        //something like this, make player class pass to every class
+        Warrior war = new Warrior(this);
+        if(job == 1){return war.attack();}
+        else{return 1;}
     }
 }
