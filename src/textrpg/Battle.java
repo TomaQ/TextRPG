@@ -1,7 +1,7 @@
 package textrpg;
 
+import textrpg.jobs.Warrior;
 import java.util.Scanner;
-import jobs.*;
 
 public final class Battle 
 {

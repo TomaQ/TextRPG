@@ -1,4 +1,4 @@
-package jobs;
+package textrpg.jobs;
 
 import textrpg.Player;
 
