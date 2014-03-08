@@ -1,6 +1,9 @@
 package textrpg.jobs;
 
-public class Thief 
+public class Thief implements job
 {
-
+    public int attack()
+    {
+        return 0;
+    }
 }

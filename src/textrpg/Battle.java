@@ -32,11 +32,13 @@ public final class Battle
         
         if(input == 1)
         {
-            if(hero.getJob().equals("Warrior"))
+            /*if(hero.getJob().equals("Warrior"))
             {
                 m.setHealth(hero.getAttack());
                 System.out.println("Attacked! Did " +  hero.getAttack() + " damage!");
-            }
+            }*/
+            
+            
         }
     }
 }

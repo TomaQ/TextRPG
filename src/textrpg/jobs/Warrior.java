@@ -2,7 +2,7 @@ package textrpg.jobs;
 
 import textrpg.Player;
 
-public class Warrior 
+public class Warrior implements job //extends Player???
 {
     Player hero = new Player();
     
