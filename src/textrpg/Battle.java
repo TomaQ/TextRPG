@@ -30,15 +30,10 @@ public final class Battle
         int input = scan.nextInt();
         scan.nextLine();
         
-        if(input == 1)
+        if(input == 1) //separate method make you should
         {
-            /*if(hero.getJob().equals("Warrior"))
-            {
-                m.setHealth(hero.getAttack());
-                System.out.println("Attacked! Did " +  hero.getAttack() + " damage!");
-            }*/
-            
-            
+            hero.attack();
+            System.out.println("Did " + hero.attack() + " damage!"); //make a variable for hero.attack()
         }
     }
 }

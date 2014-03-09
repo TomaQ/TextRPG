@@ -34,5 +34,4 @@ public class Being
     
     public int getMagicDefense(){return magicDefense;}
     public void setMagicDefense(int input){magicDefense = input;}
-
 }

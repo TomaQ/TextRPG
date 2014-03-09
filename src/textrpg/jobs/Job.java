@@ -1,6 +1,7 @@
 package textrpg.jobs;
 
-public interface job 
+public interface Job 
 {
     public int attack();
+    public String getJob();
 }
