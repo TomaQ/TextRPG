@@ -1,7 +1,5 @@
 package textrpg.monster_types;
 
-import textrpg.Monster;
-
 public class Slime extends Monster
 {
     public Slime()

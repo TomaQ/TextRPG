@@ -1,5 +1,6 @@
 package textrpg;
 
+import textrpg.monster_types.Monster;
 import java.util.Scanner;
 
 public final class Battle 

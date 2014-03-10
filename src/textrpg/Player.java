@@ -2,7 +2,7 @@ package textrpg;
 
 import textrpg.jobs.*;
 
-public class Player extends Being
+public class Player extends Entity
 {
     Job job;
     

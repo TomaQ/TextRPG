@@ -1,6 +1,6 @@
 package textrpg;
 
-public class Being 
+public class Entity 
 {
     private String name;
     private int health;

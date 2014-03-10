@@ -18,7 +18,7 @@ public class TextRPG
        else{continueGame();}
    }
    
-   public final void newGame() throws IOException
+   public static void newGame() throws IOException
    {
         Scanner scan = new Scanner(System.in);
         String nameInput;    
@@ -47,13 +47,13 @@ public class TextRPG
         new Game(p);
    }
 
-   public void continueGame(){}
+   public static void continueGame(){}
    
-    public static void main(String[] args) throws IOException 
-    {
-        final double version = 0.1;
+   public static void main(String[] args) throws IOException 
+   {
+       final double version = 0.1;
         
-        System.out.println("TextRPG! v" + version);
-        new TextRPG();
-    }    
+       System.out.println("TextRPG! v" + version);
+       new TextRPG();
+   }    
 }
