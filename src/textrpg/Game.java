@@ -1,6 +1,7 @@
 package textrpg;
 
 import textrpg.monster_types.*;
+import textrpg.rooms.*;
 
 public class Game 
 {
@@ -8,7 +9,9 @@ public class Game
     public Game(Player hero)
     {
         printBreak();
-        System.out.println("You ran into a monster!");
+        
+        Room startR = new StartingRoom();
+        
         Slime m = new Slime();
         new Battle(hero, m);
     } 
