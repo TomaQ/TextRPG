@@ -1,3 +1,5 @@
+//This is the main game
+
 package textrpg;
 
 import textrpg.monster_types.*;
@@ -10,9 +12,9 @@ public class Game
     {
         printBreak();
         
-        Room startR = new StartingRoom();
+        Room startR = new StartingRoom();//generates the starting room, for testing atm
         
-        Slime m = new Slime();
+        Slime m = new Slime(); //for testing atm
         new Battle(hero, m);
     } 
     

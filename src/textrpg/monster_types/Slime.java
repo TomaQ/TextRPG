@@ -1,5 +1,7 @@
 package textrpg.monster_types;
 
+import textrpg.items.SlimeExtract;
+
 public class Slime extends Monster
 {
     public Slime()
@@ -12,6 +14,9 @@ public class Slime extends Monster
         super.setAgility(3);
         super.setDefense(6);
         super.setMagicDefense(2);
+        
+        super.setGoldWorth(30);
+        //super.setLoot(SlimeExtract);
     }
     
     public int slash()

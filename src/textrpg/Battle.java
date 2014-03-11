@@ -1,3 +1,5 @@
+//This class handles all of the battle functions needed for a standard battle
+
 package textrpg;
 
 import textrpg.monster_types.Monster;
@@ -16,7 +18,7 @@ public final class Battle
         else{System.out.println(m.getName() + "'s turn!");}
     }
     
-    public boolean moveFirst(Player hero, Monster enemy)
+    public boolean moveFirst(Player hero, Monster enemy)//calculates who gets the first turn based on agility
     {
         if(hero.getAgility() > enemy.getAgility())
             return true;
@@ -27,7 +29,7 @@ public final class Battle
     public void playerTurn(Player hero, Monster m)
     {   
         System.out.println("Your turn!");
-        System.out.println("Attack = 1, Skills = 2");
+        System.out.println("Attack = 1, Skills = 2");//should get an array of skills
         int input = scan.nextInt();
         scan.nextLine();
         

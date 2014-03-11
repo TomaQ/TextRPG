@@ -1,9 +1,16 @@
 package textrpg.monster_types;
 
 import textrpg.Entity;
+import textrpg.items.*;
 
 public class Monster extends Entity
 {
-    //loot and stuff maybe
+    private Item[] loot;
+    private int goldWorth;
     
+    public Item[] getLoot(){return loot;}
+    public void setLoot(Item[] l){loot = l;}
+    
+    public int getGoldWorth(){return goldWorth;}//usually called in a statement multiplied by a random decimal 
+    public void setGoldWorth(int g){goldWorth = g;}
 }

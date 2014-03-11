@@ -1,6 +1,8 @@
+//All living things in the game (The Player, NPCs, and monsters) inherit this class
+
 package textrpg;
 
-public class Entity 
+public class Entity
 {
     private String name;
     private int health;
