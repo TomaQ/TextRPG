@@ -11,7 +11,7 @@ public class Room
     
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
-    
+     
     public String getRoomDescription(){return roomDescription;}
     public void setRoomDescription(String n){roomDescription = n;}
     

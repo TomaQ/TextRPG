@@ -8,25 +8,30 @@ import java.util.Scanner;
 public final class Battle 
 {
     Scanner scan = new Scanner(System.in);
+    Player hero;
+    Monster monster;
     
-    public Battle(Player hero, Monster m)
+    
+    public Battle(Player h, Monster m)
     {
+        hero = h;
+        monster = m;
         Game.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
-        if(moveFirst(hero, m)){playerTurn(hero, m);}
-        else{System.out.println(m.getName() + "'s turn!");}
+        if(moveFirst()){playerTurn();}
+        else{monsterTurn();}
     }
     
-    public boolean moveFirst(Player hero, Monster enemy)//calculates who gets the first turn based on agility
+    public boolean moveFirst()//calculates who gets the first turn based on agility
     {
-        if(hero.getAgility() > enemy.getAgility())
+        if(hero.getAgility() > monster.getAgility())
             return true;
         else
             return false;
     }
     
-    public void playerTurn(Player hero, Monster m)
+    public void playerTurn()
     {   
         System.out.println("Your turn!");
         System.out.println("Attack = 1, Skills = 2");//should get an array of skills
@@ -38,5 +43,11 @@ public final class Battle
             hero.attack();
             System.out.println("Did " + hero.attack() + " damage!"); //make a variable for hero.attack()
         }
+    }
+    
+    public void monsterTurn()
+    {
+        System.out.println(monster.getName() + "'s turn!");
+        //monster.getSkills();
     }
 }
