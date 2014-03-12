@@ -2,7 +2,7 @@
 
 package textrpg;
 
-import textrpg.monster_types.*;
+import textrpg.monsters.Slime;
 import textrpg.rooms.*;
 
 public class Game 

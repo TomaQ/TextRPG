@@ -4,8 +4,7 @@ public class Item
 {
     private int itemType; //the type of item it is
     //1 = consumable item(pots, elixers, food, and such that modifies stats or states)
-    //2 = armor/weapons
-    //3 = key items/quest items/materials
+    //2 = key items/quest items/materials
     //should work on this.....
     
     private int goldWorth;

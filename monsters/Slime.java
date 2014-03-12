@@ -1,4 +1,4 @@
-package textrpg.monster_types;
+package textrpg.monsters;
 
 import textrpg.items.SlimeExtract;
 

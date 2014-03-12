@@ -2,7 +2,7 @@
 
 package textrpg;
 
-import textrpg.monster_types.Monster;
+import textrpg.monsters.Monster;
 import java.util.Scanner;
 
 public final class Battle 
