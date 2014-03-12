@@ -7,7 +7,7 @@ public class Slime extends Monster
     public Slime()
     {
         super.setName("Slime");
-        super.setHealth(50);
+        super.setHealth(200);
         super.setMana(10);        
         super.setStrength(5);
         super.setMagic(2);

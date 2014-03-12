@@ -19,8 +19,13 @@ public final class Battle
         Game.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
-        if(moveFirst()){playerTurn();}
-        else{monsterTurn();}
+        while(hero.getHealth() > 0 && monster.getHealth() > 0)
+        {
+            if(moveFirst()){playerTurn();}//need to make it switch to monsters turn if not that's like omg totally like unfair~
+            else{monsterTurn();}
+        }
+        
+        System.out.println("The battle is like done yo.");
     }
     
     public boolean moveFirst()//calculates who gets the first turn based on agility
@@ -40,8 +45,11 @@ public final class Battle
         
         if(input == 1) //separate method make you should
         {
-            hero.attack();
-            System.out.println("Did " + hero.attack() + " damage!"); //make a variable for hero.attack()
+            int dmg;
+            dmg = hero.attack();
+            monster.setHealth(monster.getHealth() - dmg);
+            
+            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
         }
     }
     
