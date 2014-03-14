@@ -1,5 +1,7 @@
 package textrpg.rooms;
 
+import textrpg.items.*;
+
 public class Room 
 {
     private String roomName;
@@ -9,11 +11,16 @@ public class Room
     Room eExit = null;
     Room wExit = null;
     
+    Item roomLoot[] = null;
+    
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
      
     public String getRoomDescription(){return roomDescription;}
     public void setRoomDescription(String n){roomDescription = n;}
+    
+    public Item[] getRoomLoot(){return roomLoot;}//returns an array of items
+    public void setRoomLoot(Item[] i){roomLoot = i;}//have to pass an array of items
     
     
     public void getExits()//tells you the exits that are available from the current room NEED TO FIX FORMATTTTT
@@ -73,4 +80,6 @@ public class Room
         System.out.println("You entered " + getRoomName());
         System.out.println(getRoomDescription());
     }
+    
+    public static void noExit(){System.out.println("There is no exit this way!");}
 }

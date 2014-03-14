@@ -25,7 +25,7 @@ public class Game
         //need player to know which room they're in
         
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
-        while(!userInput.equals("exit"))
+        while(!userInput.equals("quit"))
         {
             userInput = scan.nextLine();
             command(hero);
@@ -39,18 +39,33 @@ public class Game
         System.out.println(lineBreak);
     }
     
-    public final void command(Player hero)
-    {
-        
-        if(userInput.equals("b"))//method n stuff ya know, just for testing
+    public final void command(Player hero)//checks what to do from the users input
+    { 
+        switch(userInput)
         {
-            Slime m = new Slime(); //for testing atm
-            new Battle(hero, m); 
+            case "b": Slime m = new Slime();
+                new Battle(hero, m);
+                break;
+            case "help": System.out.println("Type stuff in and things happen.");
+                break;
+            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these
+                else{Room.noExit();}
+                break;
+            case "s": if(currentRoom.getSExit() != null){currentRoom = currentRoom.getSExit();}
+                else{Room.noExit();}
+                break;
+            case "e": if(currentRoom.getEExit() != null){currentRoom = currentRoom.getEExit();}
+                else{Room.noExit();}
+                break;
+            case "w": if(currentRoom.getWExit() != null){currentRoom = currentRoom.getWExit();}
+                else{Room.noExit();}
+                break;    
+            case "exits": currentRoom.getExits();
+                break;
+            case "look": currentRoom.getRoomDescription();
+                break;
+            default: System.out.println("Command not recognized.");   
+                break;             
         }
-        if(userInput.equals("help"))//for testing
-        {
-            System.out.println("Type stuff in and things happen.");
-        }
-        else{System.out.println("Command not Recognized.");}
     }
 }
