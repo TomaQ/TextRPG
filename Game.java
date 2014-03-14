@@ -28,16 +28,7 @@ public class Game
         while(!userInput.equals("exit"))
         {
             userInput = scan.nextLine();
-            
-            if(userInput.equals("b"))//method n stuff ya know, just for testing
-            {
-                Slime m = new Slime(); //for testing atm
-                new Battle(hero, m); 
-            }
-            if(userInput.equals("help"))//for testing
-            {
-                System.out.println("Type stuff in and things happen.");
-            }
+            command(hero);
         }
         
         System.out.println("Bye!!");
@@ -46,5 +37,20 @@ public class Game
     public static final void printBreak()//prints a LINE_BREAKERRR!
     {
         System.out.println(lineBreak);
+    }
+    
+    public final void command(Player hero)
+    {
+        
+        if(userInput.equals("b"))//method n stuff ya know, just for testing
+        {
+            Slime m = new Slime(); //for testing atm
+            new Battle(hero, m); 
+        }
+        if(userInput.equals("help"))//for testing
+        {
+            System.out.println("Type stuff in and things happen.");
+        }
+        else{System.out.println("Command not Recognized.");}
     }
 }

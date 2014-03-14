@@ -26,6 +26,7 @@ public final class Battle
         }
         
         System.out.println("The battle is like done yo.");
+        Game.printBreak();
     }
     
     public boolean moveFirst()//calculates who gets the first turn based on agility

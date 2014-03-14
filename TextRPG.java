@@ -47,7 +47,11 @@ public class TextRPG
         new Game(p);
    }
 
-   public static void continueGame(){}
+   public static void continueGame() throws IOException
+   {
+       System.out.println("This doesn't work atm lol.");
+       newGame();
+   }
    
    public static void main(String[] args) throws IOException 
    {
