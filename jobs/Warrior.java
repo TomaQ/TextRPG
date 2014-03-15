@@ -1,12 +1,13 @@
 package textrpg.jobs;
 
+import java.lang.reflect.Method;
 import textrpg.Player;
 
 public class Warrior implements Job
 {
     private final String class_name = "Warrior";
     Player hero = null;
-    
+        
     public Warrior(Player p)
     {
         hero = p;
@@ -23,8 +24,23 @@ public class Warrior implements Job
     {
         return (int)(hero.getStrength() * .3) + 50;
     }
-    public String getJob()
+    
+    public String getJob(){return class_name;}
+    
+    public String getSkills()
     {
-        return class_name;
+        String output = "";
+        for(Method s: skills.class.getDeclaredMethods())
+        {
+            output += skills.class.getDeclaredMethods().toString() + " ";
+        }
+        return output;    
     }
+    
+    public class skills
+    {
+        public int heroicStrike(){return hero.getStrength();}
+        public int charge(){return (int)(hero.getStrength() * .5);}
+    }
+    
 }

@@ -23,8 +23,9 @@ public class Mage implements Job
     {
         return (int)(hero.getStrength() * .3) + 10;//magic number!!!!!!!
     }
-    public String getJob()
-    {
-        return class_name;
-    }
+    
+    public String getJob(){return class_name;}
+    
+    public String getSkills(){return "";};
+    
 }

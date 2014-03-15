@@ -4,4 +4,5 @@ public interface Job
 {
     public int attack();
     public String getJob();
+    public String getSkills();
 }
