@@ -1,8 +1,11 @@
 package textrpg;
 
+import java.util.ArrayList;
+import java.util.List;
 import textrpg.equipment.*;
 import textrpg.jobs.*;
 import textrpg.weapons.*;
+import textrpg.items.*;
 
 public class Player extends Entity
 {
@@ -18,7 +21,9 @@ public class Player extends Entity
     Equipment ring1 = null;
     Equipment ring2 = null;
     Equipment hat = null;
-    Equipment goggles = null;   
+    Equipment goggles = null;
+    
+    List<Item> inventory = new ArrayList<>();
     
     public Player(){}
     
@@ -33,7 +38,6 @@ public class Player extends Entity
     public String getJob(){return job.getJob();}
     
     public int attack(){return job.attack();}
-    
     
     
     public Weapon getWeapon(){return weapon;}
@@ -69,5 +73,16 @@ public class Player extends Entity
     public Equipment getGoggles(){return goggles;}
     public void setGoggles(Equipment e){goggles = e;}
     
+    public List<Item> getInventory(){return inventory;}
+    public void addInventory(Item i){inventory.add(i);}
     
+    public void printInventory()
+    {
+        System.out.println("Your inventory:");
+        for(Item i: inventory)
+        {
+            System.out.print(i.getName() + " ");
+        }
+        System.out.println();
+    }
 }

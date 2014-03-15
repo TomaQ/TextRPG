@@ -9,9 +9,14 @@ public class Item
     
     private int goldWorth;
     
+    private String name;
+    
     public int getItemType(){return itemType;}
     public void setItemType(int t){itemType = t;}
     
     public int getGoldWorth(){return goldWorth;}
     public void setGoldWorth(int g){goldWorth = g;}
+    
+    public String getName(){return name;}
+    public void setName(String s){name = s;}
 }

@@ -6,5 +6,6 @@ public class SlimeExtract extends Item
     {
         super.setItemType(3);
         super.setGoldWorth(3);
+        super.setName("Slime Extract");
     }
 }

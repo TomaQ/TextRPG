@@ -3,6 +3,7 @@
 package textrpg;
 
 import java.util.Scanner;
+import textrpg.items.*;
 import textrpg.monsters.Slime;
 import textrpg.rooms.*;
 
@@ -23,8 +24,11 @@ public class Game
         
         currentRoom = new StartingRoom();//generates the starting room, for testing atm
         //need player to know which room they're in
-        
+               
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
+        System.out.println("Here are some items for you!");
+        Item s = new SlimeExtract();
+        hero.addInventory(s);
         while(!userInput.equals("quit"))
         {
             userInput = scan.nextLine();
@@ -48,8 +52,8 @@ public class Game
                 break;
             case "help": System.out.println("Type stuff in and things happen.");
                 break;
-            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these
-                else{Room.noExit();}
+            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these, also need
+                else{Room.noExit();}                                                           //to parse spaces
                 break;
             case "s": if(currentRoom.getSExit() != null){currentRoom = currentRoom.getSExit();}
                 else{Room.noExit();}
@@ -62,10 +66,12 @@ public class Game
                 break;    
             case "exits": currentRoom.getExits();
                 break;
-            case "look": currentRoom.getRoomDescription();
+            case "look": System.out.println(currentRoom.getRoomDescription());
+                break;
+            case "inventory": hero.printInventory();
                 break;
             default: System.out.println("Command not recognized.");   
-                break;             
+                break;
         }
     }
 }
