@@ -40,6 +40,7 @@ public class Warrior implements Job
     public class skills
     {
         public int heroicStrike(){return hero.getStrength();}
+        //heroicStrike().toString(){return "Heroic Strike"};
         public int charge(){return (int)(hero.getStrength() * .5);}
     }
     

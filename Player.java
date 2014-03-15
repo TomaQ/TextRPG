@@ -11,21 +11,23 @@ public class Player extends Entity
 {
     Job job;
     
-    Weapon weapon = null;
-    Weapon offHand = null; //shield or offhand goes here
-    Equipment chest = null;
-    Equipment legs = null;
-    Equipment bracers = null;
-    Equipment boots = null;
-    Equipment gloves = null;
-    Equipment ring1 = null;
-    Equipment ring2 = null;
-    Equipment hat = null;
-    Equipment goggles = null;
+    private Weapon weapon = null;
+    private Weapon offHand = null; //shield or offhand goes here
+    private Equipment chest = null;
+    private Equipment legs = null;
+    private Equipment bracers = null;
+    private Equipment boots = null;
+    private Equipment gloves = null;
+    private Equipment ring1 = null;
+    private Equipment ring2 = null;
+    private Equipment hat = null;
+    private Equipment goggles = null;
     
-    List<Item> inventory = new ArrayList<>();
+    private List<Item> inventory = new ArrayList<>();
     
-    public Player(){}
+    private int level;
+    
+    public Player(){level = 1;}
     
     public Player(String n, int j)
     {
@@ -85,4 +87,7 @@ public class Player extends Entity
         }
         System.out.println();
     }
+    
+    public int getLevel(){return level;}
+    public void incrimentLevel(){level += 1;}
 }
