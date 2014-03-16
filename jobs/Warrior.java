@@ -1,43 +1,41 @@
 package textrpg.jobs;
 
-import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import textrpg.Player;
-import textrpg.skills.WarriorSkills;
+import textrpg.skills.Skill;
 
-public class Warrior implements Job
+public class Warrior extends Job
 {
-    private final String class_name = "Warrior";
-    Player hero = null;
-    WarriorSkills skillz;
-        
+    private String[] sk = {"HeroicStrike"};
+
+    Class[] s = {};
     public Warrior(Player p)
     {
-        hero = p;
-        hero.setHealth(100);
-        hero.setMana(50);
-        hero.setAgility(15);
-        hero.setDefense(20);
-        hero.setMagic(6);
-        hero.setStrength(22);
-        hero.setMagicDefense(11);
+        this.availableSkills  = sk;
+        this.jobName = "Warrior";
+        this.skillsLearned = new ArrayList<>();
         
-        skillz = new WarriorSkills(p);
+        p.setHealth(100);
+        p.setMana(50);
+        p.setAgility(15);
+        p.setDefense(20);
+        p.setMagic(6);
+        p.setStrength(22);
+        p.setMagicDefense(11);
+        try {
+            this.initSkills();
+        } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
+        
     }
     
-    public int attack()
+    /*public int attack()
     {
-        return (int)(hero.getStrength() * .3) + 50;
-    }
+        return (int)(p.getStrength() * .3) + 50;
+    }*/
     
-    public String getJob(){return class_name;}
-    
-    public String getSkills()
-    {
-        String output = "";
-        /*for(Method s: skillz)//use method for getting skills from WarriorSkills and make var for skills usable maybe
-        {
-            output += skillz;
-        }*/
-        return output;    
-    }   
+    //public String getJob(){return class_name;}
+      
 }

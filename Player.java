@@ -33,13 +33,13 @@ public class Player extends Entity
     {
         super.setName(n);
         if(j == 1){job = new Warrior(this);}
-        else if(j == 2){job = new Mage(this);}
-        else{job = new Thief(this);}
+        //else if(j == 2){job = new Mage(this);}
+        //else{job = new Thief(this);}
     }
     
     public String getJob(){return job.getJob();}
     
-    public int attack(){return job.attack();}
+    public int attack(){return 1;}
     
     
     public Weapon getWeapon(){return weapon;}

@@ -1,17 +1,20 @@
 package textrpg.rooms;
 
 import textrpg.items.*;
+import textrpg.monsters.*;
 
 public class Room 
 {
     private String roomName;
     private String roomDescription;
-    Room nExit = null;
-    Room sExit = null;
-    Room eExit = null;
-    Room wExit = null;
+    private Room nExit = null;
+    private Room sExit = null;
+    private Room eExit = null;
+    private Room wExit = null;
     
-    Item roomLoot[] = null;
+    private Item[] roomLoot = null;
+    private Monster[] monsterEncounters;
+    private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
     
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
@@ -82,4 +85,10 @@ public class Room
     }
     
     public static void noExit(){System.out.println("There is no exit this way!");}
+    
+    public Monster[] getMonsterEncounters(){return monsterEncounters;}
+    public void setMonsterEncounters(Monster[] m){monsterEncounters = m;}
+    
+    public int[] getMonsterEncounterChance(){return monsterEncounterChance;}
+    public void setMonsterEncounterChance(int[] i){monsterEncounterChance = i;}
 }
