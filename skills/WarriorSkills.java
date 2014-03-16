@@ -1,5 +1,6 @@
 package textrpg.skills;
 
+import java.lang.reflect.Method;
 import textrpg.Player;
 
 public class WarriorSkills 
@@ -9,6 +10,19 @@ public class WarriorSkills
     {
         hero = h;
     }
+    
+    public String getSkills()
+    {
+        int i;
+        String output = "";
+        Class c[] = WarriorSkills.class.getDeclaredClasses();
+        for(i = 0; i < WarriorSkills.class.getDeclaredClasses().length; i++)
+        {
+            //if(c[i].getRequiredLevel() < hero.getLevel())
+        }
+        return output;
+    }
+    
     public class heroicStrike extends Skill
     {
         public heroicStrike()

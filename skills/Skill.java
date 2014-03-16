@@ -6,7 +6,7 @@ public class Skill
     private int levelRequirement;
     private String[] itemsRequired;
     
-    public String getName(){return name;}
+    public String getNameZ(){return name;}
     public void setName(String n){name = n;}
     
     public int getLevelRequirement(){return levelRequirement;}
