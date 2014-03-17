@@ -4,13 +4,29 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import textrpg.Player;
-import textrpg.skills.*;
+import textrpg.skills.Skill;
 
 public class Job
 {
-    Player h;
+    Player hero;
     protected String jobName;
-    public String getJob()
+    
+    private final String skills_package_path = "textrpg.skills.";
+    
+    protected List<Skill> skillsLearned;
+    protected String[] availableSkills;
+    
+    public Job(){}//default
+    
+    public Job(Player h, int i)
+    {
+        if(i == 1){h.setJob(new Warrior(h));}
+        else if(i == 2){h.setJob(new Mage(h));}
+        else{h.setJob(new Thief(h));}
+        //do stuff here with if's to check job and stuff
+    }
+    
+    public String getJobName()
     {
         return jobName;
     }
@@ -20,22 +36,19 @@ public class Job
     }
     public void printSkills()
     {
-        for(int i = 0; i < availableSkills.length; i++)
+        for(int i = 0; i < skillsLearned.size(); i++)
         {
-            System.out.println(skillsLearned.getSkillName());
+            System.out.print(skillsLearned.get(i).getSkillName() + ", ");
         }
+        System.out.println();
     }
-    protected List<Object> skillsLearned;
-    protected String[] availableSkills;
     
     public void initSkills() throws ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
-        for(int i = 0; i < availableSkills.length; i++)
-        {
-            String s = availableSkills[i];
-            Class clazz = Class.forName("textrpg.skills." + s);
+        for (String s : availableSkills) {
+            Class clazz = Class.forName(skills_package_path + s);
             Constructor constructor = clazz.getConstructor(Player.class);
-            Object skill = constructor.newInstance(h);
+            Skill skill = (Skill) constructor.newInstance(hero);
             skillsLearned.add(skill);
         }
     }

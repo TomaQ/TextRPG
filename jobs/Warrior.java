@@ -1,22 +1,21 @@
 package textrpg.jobs;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import textrpg.Player;
-import textrpg.skills.Skill;
 
 public class Warrior extends Job
 {
-    private String[] sk = {"HeroicStrike"};
+    private final String class_name = "Warrior";
 
-    Class[] s = {};
+    private final String[] sk = {"HeroicStrike", "Attack"};
+    
     public Warrior(Player p)
     {
-        this.availableSkills  = sk;
-        this.jobName = "Warrior";
-        this.skillsLearned = new ArrayList<>();
+        availableSkills  = sk;
+        jobName = class_name;
+        skillsLearned = new ArrayList<>();
         
         p.setHealth(100);
         p.setMana(50);
@@ -29,13 +28,5 @@ public class Warrior extends Job
             this.initSkills();
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
         
-    }
-    
-    /*public int attack()
-    {
-        return (int)(p.getStrength() * .3) + 50;
-    }*/
-    
-    //public String getJob(){return class_name;}
-      
+    }    
 }

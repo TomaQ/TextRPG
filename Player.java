@@ -9,7 +9,7 @@ import textrpg.items.*;
 
 public class Player extends Entity
 {
-    Job job;
+    private Job job;
     
     private Weapon weapon = null;
     private Weapon offHand = null; //shield or offhand goes here
@@ -32,15 +32,10 @@ public class Player extends Entity
     public Player(String n, int j)
     {
         super.setName(n);
-        if(j == 1){job = new Warrior(this);}
-        //else if(j == 2){job = new Mage(this);}
-        //else{job = new Thief(this);}
+        new Job(this, j);
     }
     
-    public String getJob(){return job.getJob();}
-    
-    public int attack(){return 1;}
-    
+    public String getJobName(){return job.getJobName();}
     
     public Weapon getWeapon(){return weapon;}
     public void setWeapon(Weapon e){weapon = e;}
@@ -77,6 +72,9 @@ public class Player extends Entity
     
     public List<Item> getInventory(){return inventory;}
     public void addInventory(Item i){inventory.add(i);}
+    
+    public Job getJob(){return job;}
+    public void setJob(Job j){job = j;}
     
     public void printInventory()
     {

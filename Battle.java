@@ -46,8 +46,8 @@ public final class Battle
         
         if(input == 1) //separate method make you should
         {
-            int dmg;
-            dmg = hero.attack();
+            int dmg = 0;
+            //dmg = hero.getJob().getSkills().attack();
             monster.setHealth(monster.getHealth() - dmg);
             
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());

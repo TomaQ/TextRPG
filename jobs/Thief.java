@@ -1,30 +1,21 @@
-//package textrpg.jobs;
-//
-//import textrpg.Player;
-//
-//public class Thief implements Job
-//{
-//    private final String class_name = "Thief";
-//    Player hero = null;
-//    
-//    public Thief(Player p)
-//    {
-//        hero = p;
-//        hero.setHealth(85);
-//        hero.setMana(40);
-//        hero.setAgility(25);
-//        hero.setDefense(10);
-//        hero.setMagic(8);
-//        hero.setStrength(13);
-//        hero.setMagicDefense(8);
-//    }
-//    
-//    public int attack()
-//    {
-//        return (int)(hero.getStrength() * .3) + 30;
-//    }
-//    
-//    public String getJob(){return class_name;}
-//    
-//    public String getSkills(){return "";};
-//}
+package textrpg.jobs;
+
+import textrpg.Player;
+
+public class Thief extends Job
+{
+    private final String class_name = "Thief";
+    
+    public Thief(Player p)
+    {
+        jobName = class_name;
+        
+        p.setHealth(85);
+        p.setMana(40);
+        p.setAgility(25);
+        p.setDefense(10);
+        p.setMagic(8);
+        p.setStrength(13);
+        p.setMagicDefense(8);
+    }
+}

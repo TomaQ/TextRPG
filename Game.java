@@ -70,7 +70,7 @@ public class Game
                 break;
             case "inventory": hero.printInventory();
                 break;
-            case "skills": hero.job.printSkills();
+            case "skills": hero.getJob().printSkills();
                 break;
             default: System.out.println("Command not recognized.");   
                 break;
