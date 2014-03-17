@@ -9,11 +9,11 @@ public class Warrior extends Job
 {
     private final String class_name = "Warrior";
 
-    private final String[] sk = {"HeroicStrike", "Attack"};
+    private final String[] initialSkills = {"HeroicStrike", "Attack"};
     
     public Warrior(Player p)
     {
-        availableSkills  = sk;
+        availableSkills  = initialSkills;
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
