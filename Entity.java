@@ -16,7 +16,12 @@ public class Entity
     public String getName(){return name;}
     public void setName(String input){name = input;}
     
-    public int getHealth(){return health;}
+    public int getHealth()
+    {
+        if(health < 0)
+            return 0;
+        return health;
+    }
     public void setHealth(int input){health = input;}
     
     public int getMana(){return mana;}

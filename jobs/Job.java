@@ -8,13 +8,12 @@ import textrpg.skills.Skill;
 
 public class Job
 {
-    Player hero;
     protected String jobName;
     
     private final String skills_package_path = "textrpg.skills.";
     
-    protected List<Skill> skillsLearned;
-    protected String[] availableSkills;
+    protected List<Skill> skillsLearned;//the skills that the player currently has learned
+    protected String[] availableSkills;//skills that the job is able to learn, ALL JOBS MUST LEARN ATTACK
     
     public Job(){}//default
     
@@ -30,11 +29,14 @@ public class Job
     {
         return jobName;
     }
-    public String[] getSkills()
+    public Skill[] getSkills()//returns all of the skills learned as objects
     {
-        return availableSkills;
+        Skill[] s = new Skill[skillsLearned.size()];
+        for(int i = 0; i < skillsLearned.size(); i++)
+                s[i] = skillsLearned.get(i);
+        return s;
     }
-    public void printSkills()
+    public void printSkills()//prints all of the skills learned
     {
         for(int i = 0; i < skillsLearned.size(); i++)
         {
@@ -43,12 +45,13 @@ public class Job
         System.out.println();
     }
     
-    public void initSkills() throws ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
+    //initializes all of the skills that are learned at level 1
+    public void initSkills(Player hero) throws ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
         for (String s : availableSkills) {
             Class clazz = Class.forName(skills_package_path + s);
             Constructor constructor = clazz.getConstructor(Player.class);
-            Skill skill = (Skill) constructor.newInstance(hero);
+            Skill skill = (Skill)constructor.newInstance(hero);
             skillsLearned.add(skill);
         }
     }

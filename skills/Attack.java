@@ -12,7 +12,8 @@ public class Attack extends Skill
         super.setItemsRequired(null);
         hero = h;
     }
-      
+    
+    @Override  
     public int use()
     {
         return (int)(hero.getStrength() * .3) + 50;

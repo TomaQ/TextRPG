@@ -4,6 +4,7 @@ package textrpg;
 
 import textrpg.monsters.Monster;
 import java.util.Scanner;
+import textrpg.skills.Skill;
 
 public final class Battle 
 {
@@ -37,19 +38,38 @@ public final class Battle
             return false;
     }
     
-    public void playerTurn()
+    public void playerTurn()//need to organize this like totally better
     {   
         System.out.println("Your turn!");
         System.out.println("Attack = 1, Skills = 2");//should get an array of skills
         int input = scan.nextInt();
         scan.nextLine();
         
+        int dmg = 0;
         if(input == 1) //separate method make you should
         {
-            int dmg = 0;
-            //dmg = hero.getJob().getSkills().attack();
-            monster.setHealth(monster.getHealth() - dmg);
+            for (Skill skill : hero.getJob().getSkills()) 
+                if (skill.getSkillName().equals("Attack")) 
+                    dmg = skill.use();   
             
+            monster.setHealth(monster.getHealth() - dmg);
+            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
+        }
+        else
+        {
+            for(int i = 0; i < hero.getJob().getSkills().length; i++) 
+            {
+                if(!hero.getJob().getSkills()[i].getSkillName().equals("Attack"))//Need to remove getSkills from adding Attack  
+                    System.out.print(hero.getJob().getSkills()[i].getSkillName() + "(" + i + ")" + ", ");
+            }
+            System.out.println();
+            
+            System.out.println("Which skill will you use?");
+            int skillChosen = scan.nextInt();
+            scan.nextLine();//maybe i should just cast ints...
+            
+            dmg = hero.getJob().getSkills()[skillChosen].use();
+            monster.setHealth(monster.getHealth() - dmg);
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
         }
     }

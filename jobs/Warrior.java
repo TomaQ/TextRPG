@@ -11,7 +11,7 @@ public class Warrior extends Job
 
     private final String[] initialSkills = {"HeroicStrike", "Attack"};
     
-    public Warrior(Player p)
+    public Warrior(Player p)//need way to check for new available skills to be learnable
     {
         availableSkills  = initialSkills;
         jobName = class_name;
@@ -25,7 +25,7 @@ public class Warrior extends Job
         p.setStrength(22);
         p.setMagicDefense(11);
         try {
-            this.initSkills();
+            this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
         
     }    
