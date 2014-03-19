@@ -2,9 +2,10 @@ package textrpg.rooms;
 
 public class StartingRoom extends Room
 {
-    public StartingRoom(Room n, Room s, Room e, Room w)
+    public StartingRoom()
     {
-        super.setExits(n, s, e, w);
+        Room r = new PowerRangerRoom();
+        super.setExits(r, null, null, null);
         super.setRoomName("Starting Room");
         super.setRoomDescription("You are in a room, it feels like a starting room. Lol.");
         

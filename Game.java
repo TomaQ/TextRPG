@@ -24,8 +24,7 @@ public class Game
         
         //for(Room r: textrpg.rooms.Room.class.get)//maybe have a constant that is all of the room names
         
-        Room prR = new PowerRangerRoom(null, null, null, null);//dont do this usually btw lolz
-        currentRoom = new StartingRoom(prR, null, null, null);//generates the starting room, for testing atm
+        currentRoom = new StartingRoom();//generates the starting room, for testing atm
         //need player to know which room they're in
                
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
