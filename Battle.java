@@ -50,7 +50,7 @@ public final class Battle
         {
             for (Skill skill : hero.getJob().getSkills()) 
                 if (skill.getSkillName().equals("Attack")) 
-                    dmg = skill.use();   
+                    dmg = skill.use();
             
             monster.setHealth(monster.getHealth() - dmg);
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
