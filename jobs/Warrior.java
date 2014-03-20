@@ -17,13 +17,13 @@ public class Warrior extends Job
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
-        p.setHealth(100);
-        p.setMana(50);
-        p.setAgility(15);
-        p.setDefense(20);
-        p.setMagic(6);
-        p.setStrength(22);
-        p.setMagicDefense(11);
+        p.setBaseHealth(100);
+        p.setBaseMana(50);
+        p.setBaseAgility(15);
+        p.setBaseDefense(20);
+        p.setBaseMagic(6);
+        p.setBaseStrength(22);
+        p.setBaseMagicDefense(11);
         try {
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}

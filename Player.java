@@ -87,5 +87,5 @@ public class Player extends Entity
     }
     
     public int getLevel(){return level;}
-    public void incrimentLevel(){level += 1;}
+    public void incrimentLevel(){level += 1;}//need more than just this
 }

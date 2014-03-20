@@ -38,7 +38,7 @@ public class TextRPG
             p = new Player(nameInput, jobSelector);
 
             System.out.println("Name: " + p.getName() + "\tJob: " + p.getJobName());
-            System.out.println("Health:" + p.getHealth() + "\nMana:" + p.getMana() + "\nStrength:" + p.getStrength() + "\nMagic:" + p.getMagic()+ "\nAgility:" + p.getAgility()+ "\nDefense:" + p.getDefense()+ "\nMagic Defense:" + p.getMagicDefense());
+            System.out.println("Health:" + p.getCurrentHealth() + "\nMana:" + p.getCurrentMana() + "\nStrength:" + p.getCurrentStrength() + "\nMagic:" + p.getCurrentMagic()+ "\nAgility:" + p.getCurrentAgility()+ "\nDefense:" + p.getCurrentDefense()+ "\nMagic Defense:" + p.getCurrentMagicDefense());
 
             System.out.println("Your new adventure is about to begin!~ Are you ready?(Y/N)");
             

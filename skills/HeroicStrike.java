@@ -16,6 +16,6 @@ public class HeroicStrike extends Skill
     @Override
     public int use()
     {
-        return (int)(hero.getStrength() * 2.5);
+        return (int)(hero.getBaseStrength() * 2.5);
     }
 }

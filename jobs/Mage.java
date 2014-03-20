@@ -17,13 +17,13 @@ public class Mage extends Job
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
-        p.setHealth(80);
-        p.setMana(80);
-        p.setAgility(10);
-        p.setDefense(10);
-        p.setMagic(25);
-        p.setStrength(6);
-        p.setMagicDefense(15);
+        p.setBaseHealth(80);
+        p.setBaseMana(80);
+        p.setBaseAgility(10);
+        p.setBaseDefense(10);
+        p.setBaseMagic(25);
+        p.setBaseStrength(6);
+        p.setBaseMagicDefense(15);
         try {
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}

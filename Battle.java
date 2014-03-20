@@ -20,7 +20,7 @@ public final class Battle
         Game.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
-        while(hero.getHealth() > 0 && monster.getHealth() > 0)
+        while(hero.getCurrentHealth() > 0 && monster.getCurrentHealth() > 0)
         {
             if(moveFirst()){playerTurn();}//need to make it switch to monsters turn if not that's like omg totally like unfair~
             else{monsterTurn();}
@@ -32,7 +32,7 @@ public final class Battle
     
     public boolean moveFirst()//calculates who gets the first turn based on agility
     {
-        if(hero.getAgility() > monster.getAgility())
+        if(hero.getCurrentAgility() > monster.getCurrentAgility())
             return true;
         else
             return false;
@@ -52,8 +52,8 @@ public final class Battle
                 if (skill.getSkillName().equals("Attack")) 
                     dmg = skill.use();
             
-            monster.setHealth(monster.getHealth() - dmg);
-            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
+            monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
+            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
         }
         else
         {
@@ -69,8 +69,8 @@ public final class Battle
             scan.nextLine();//maybe i should just cast ints...
             
             dmg = hero.getJob().getSkills()[skillChosen].use();
-            monster.setHealth(monster.getHealth() - dmg);
-            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getHealth());
+            monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
+            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
         }
     }
     

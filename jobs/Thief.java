@@ -17,13 +17,13 @@ public class Thief extends Job
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
-        p.setHealth(85);
-        p.setMana(40);
-        p.setAgility(25);
-        p.setDefense(10);
-        p.setMagic(8);
-        p.setStrength(13);
-        p.setMagicDefense(8);
+        p.setBaseHealth(85);
+        p.setBaseMana(40);
+        p.setBaseAgility(25);
+        p.setBaseDefense(10);
+        p.setBaseMagic(8);
+        p.setBaseStrength(13);
+        p.setBaseMagicDefense(8);
         try {
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
