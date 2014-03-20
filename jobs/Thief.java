@@ -24,6 +24,7 @@ public class Thief extends Job
         p.setBaseMagic(8);
         p.setBaseStrength(13);
         p.setBaseMagicDefense(8);
+        p.initCurrentStats();
         try {
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}

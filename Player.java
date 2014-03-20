@@ -26,6 +26,8 @@ public class Player extends Entity
     private List<Item> inventory = new ArrayList<>();
     
     private int level;
+    private int currentExp;
+    private int nextLevelExp;//exp needed to reach the next level
     
     public Player(){level = 1;}
     
@@ -87,5 +89,9 @@ public class Player extends Entity
     }
     
     public int getLevel(){return level;}
-    public void incrimentLevel(){level += 1;}//need more than just this
+    public void levelUp()//need more than just this
+    {
+        level += 1;
+        getJob().levelUp(this);
+    }
 }

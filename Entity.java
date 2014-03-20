@@ -11,7 +11,7 @@ public class Entity
     private int baseMagic, currentMagic;
     private int baseAgility, currentAgility;
     private int baseDefense, currentDefense;
-    private int baseMagicDefense, currentMagicDefense;//lvl up in job objects, also need to set current of each stat somewhere
+    private int baseMagicDefense, currentMagicDefense;
     
     public String getName(){return name;}
     public void setName(String input){name = input;}
@@ -88,6 +88,12 @@ public class Entity
     
     public void initCurrentStats()
     {
-        
+        currentHealth = baseHealth;
+        currentMana = baseMana;
+        currentStrength = baseStrength;
+        currentMagic = baseMagic;
+        currentAgility = baseAgility;
+        currentDefense = baseDefense;
+        currentMagicDefense = baseMagicDefense;
     }
 }

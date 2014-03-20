@@ -55,4 +55,5 @@ public class Job
             skillsLearned.add(skill);
         }
     }
+    public void levelUp(Player p){}//OVERWRITE THIS
 }

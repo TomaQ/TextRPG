@@ -24,6 +24,7 @@ public class Mage extends Job
         p.setBaseMagic(25);
         p.setBaseStrength(6);
         p.setBaseMagicDefense(15);
+        p.initCurrentStats();
         try {
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
