@@ -29,5 +29,18 @@ public class Mage extends Job
             this.initSkills(p);
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
         
-    }      
+    }
+    
+    @Override
+    public void levelUp(Player p)
+    {
+        p.setBaseHealth((int)(p.getBaseHealth() * 1.2));
+        p.setBaseMana((int)(p.getBaseMana() * 1.1));
+        p.setBaseAgility((int)(p.getBaseAgility() * 1.2));
+        p.setBaseDefense((int)(p.getBaseDefense() * 1.3));
+        p.setBaseMagic((int)(p.getBaseMagic() * 1.1));
+        p.setBaseStrength((int)(p.getBaseStrength() * 1.25));
+        p.setBaseMagicDefense((int)(p.getBaseMagicDefense() * 1.15));
+        p.initCurrentStats();
+    }
 }

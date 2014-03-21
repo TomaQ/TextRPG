@@ -55,5 +55,5 @@ public class Job
             skillsLearned.add(skill);
         }
     }
-    public void levelUp(Player p){}//OVERWRITE THIS
+    public void levelUp(Player p){};//OVERWRITE THIS should make an interface for things like this
 }

@@ -92,6 +92,6 @@ public class Player extends Entity
     public void levelUp()//need more than just this
     {
         level += 1;
-        getJob().levelUp(this);
+        job.levelUp(this);
     }
 }
