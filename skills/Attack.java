@@ -13,9 +13,9 @@ public class Attack extends Skill
         hero = h;
     }
     
-    @Override  
+    @Override
     public int use()
     {
-        return (int)(hero.getBaseStrength() * .3) + 50;
+        return (int)(hero.getCurrentStrength() * .3) + 50;
     }
 }

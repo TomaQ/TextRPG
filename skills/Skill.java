@@ -21,4 +21,5 @@ public class Skill
     public void setManaCost(int i){manaCost = i;}
     
     public int use(){return -1;}//ALL SKILLS MUST OVERRIDE THIS
+    //should make an interface
 }

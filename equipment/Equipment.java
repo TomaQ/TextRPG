@@ -11,7 +11,7 @@ public class Equipment extends Item
     //7 = shield, 8 = offhand, 9 = ring, 10 = hat, 11 = goggles
     
     private int[] equipmentStats; //an array of stats that the euipment modifies
-    //need to set format
+    //need to set format!!
     
     public int getEquipmentType(){return equipmentType;}
     public void setEquipmentType(int e){equipmentType = e;}

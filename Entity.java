@@ -32,7 +32,7 @@ public class Entity
             return 0;
         return currentMana;
     }
-    public void setCurentMana(int input){currentMana = input;}
+    public void setCurrentMana(int input){currentMana = input;}
     public int getBaseMana(){return baseMana;}
     public void setBaseMana(int input){baseMana = input;}
     

@@ -37,9 +37,8 @@ public class TextRPG
      
             p = new Player(nameInput, jobSelector);
 
-            System.out.println("Name: " + p.getName() + "\tJob: " + p.getJobName());
-            System.out.println("Health:" + p.getCurrentHealth() + "\nMana:" + p.getCurrentMana() + "\nStrength:" + p.getCurrentStrength() + "\nMagic:" + p.getCurrentMagic()+ "\nAgility:" + p.getCurrentAgility()+ "\nDefense:" + p.getCurrentDefense()+ "\nMagic Defense:" + p.getCurrentMagicDefense());
-
+            p.printStatus();
+            
             System.out.println("Your new adventure is about to begin!~ Are you ready?(Y/N)");
             
             ans = scan.nextLine();
@@ -55,7 +54,7 @@ public class TextRPG
    
    public static void main(String[] args) throws IOException 
    {
-       final double version = 0.1;
+       final double version = 0.2;
         
        System.out.println("TextRPG! v" + version);
        new TextRPG();

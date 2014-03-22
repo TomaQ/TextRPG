@@ -9,7 +9,7 @@ import textrpg.skills.Skill;
 public final class Battle 
 {
     Scanner scan = new Scanner(System.in);
-    Player hero;
+    Player hero;//not sure if health will recover after battle
     Monster monster;
     
     

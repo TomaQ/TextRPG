@@ -17,6 +17,7 @@ public class Slime extends Monster
         
         super.setGoldWorth(30);
         //super.setLoot(SlimeExtract);
+        super.initCurrentStats();
     }
     
     public int slash()
