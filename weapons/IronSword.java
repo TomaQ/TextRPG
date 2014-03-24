@@ -4,7 +4,7 @@ public class IronSword extends Weapon
 {
     public IronSword()
     {
-        int[] s = {5, 2, 0, 0, 0, 0, 0};//testing not official {str, def, ?, ?, ?, ?, ?}
+        int[] s = {5, 0, 3, 0, 0, 0, 0};//testing not official {str, def, ?, ?, ?, ?, ?}
         super.setGoldWorth(50);
         super.setEquipmentType(1);
         super.setEquipmentStats(s);

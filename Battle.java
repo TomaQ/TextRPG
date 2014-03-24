@@ -4,6 +4,7 @@ package textrpg;
 
 import textrpg.monsters.Monster;
 import java.util.Scanner;
+import textrpg.items.Item;
 import textrpg.skills.Skill;
 
 public final class Battle 
@@ -41,7 +42,7 @@ public final class Battle
     public void playerTurn()//need to organize this like totally better
     {   
         System.out.println("Your turn!");
-        System.out.println("Attack = 1, Skills = 2");//should get an array of skills
+        System.out.println("Attack = 1, Skills = 2, Items = 3");
         int input = scan.nextInt();
         scan.nextLine();
         
@@ -55,7 +56,7 @@ public final class Battle
             monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
         }
-        else
+        else if(input == 2)//see previous
         {
             for(int i = 0; i < hero.getJob().getSkills().length; i++) 
             {
@@ -71,6 +72,20 @@ public final class Battle
             dmg = hero.getJob().getSkills()[skillChosen].use();
             monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
+        }
+        else//you know what to do
+        {
+            for(int i = 0; i < hero.getInventory().size(); i++)
+                System.out.print(hero.getInventory().get(i).getName() + "(" + i + ")" + ", ");
+            System.out.println();
+            
+            System.out.println("Which item will you use?");
+            int itemChosen = Integer.parseInt(scan.nextLine());
+            
+            if(hero.getInventory().get(itemChosen).use()[0] != -1)//if the first index is -1 then you cannot use it
+            {
+                int j = hero.getInventory().get(itemChosen).use()[0];//need to see which stats to modify
+            }
         }
     }
     

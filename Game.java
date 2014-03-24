@@ -90,6 +90,8 @@ public class Game
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
         hero.addInventory(s);
+        Item hp = new HealthPotion();
+        hero.addInventory(hp);
         
         System.out.println("Here's some gear!");
         Weapon iron = new IronSword();
