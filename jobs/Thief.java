@@ -5,7 +5,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import textrpg.Player;
 
-public class Thief extends Job
+public class Thief extends Job implements Levels
 {
     private final String class_name = "Thief";
     

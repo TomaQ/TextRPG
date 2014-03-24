@@ -1,6 +1,6 @@
 package textrpg.weapons;
 
-public final class IronSword extends Weapon
+public class IronSword extends Weapon
 {
     public IronSword()
     {
