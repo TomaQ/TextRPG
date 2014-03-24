@@ -107,7 +107,7 @@ public class Player extends Entity
         System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic()+ "\nAgility:" + getCurrentAgility()+ "\nDefense:" + getCurrentDefense()+ "\nMagic Defense:" + getCurrentMagicDefense());
     }
     
-    public void printEquipment()//need to fix null pointer
+    public void printEquipment()
     {
         System.out.println("Weapons: " + getWeapon().getName() + "/" + getOffHand().getName());
         System.out.println("Chest: " + getChest().getName() + "\tLegs: " + getLegs().getName());
@@ -117,14 +117,133 @@ public class Player extends Entity
     }
     
     @Override    
-    public void initCurrentStats() //NEED TO FINISH THIS!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    public void initCurrentStats()
     {
-        super.setCurrentHealth(super.getBaseHealth());
-        super.setCurrentMana(super.getBaseMana());
-        super.setCurrentStrength(super.getBaseStrength() + weapon.getEquipmentStats()[0]);
-        super.setCurrentMagic(super.getBaseMagic());
-        super.setCurrentAgility(super.getBaseAgility());
-        super.setCurrentDefense(super.getBaseDefense());
-        super.setCurrentMagicDefense(super.getBaseMagicDefense());
+        super.setCurrentHealth(super.getBaseHealth() + calculateBonusHealth());
+        super.setCurrentMana(super.getBaseMana() + calculateBonusMana());
+        super.setCurrentStrength(super.getBaseStrength() + calculateBonusStrength());
+        super.setCurrentMagic(super.getBaseMagic() + calculateBonusMagic());
+        super.setCurrentAgility(super.getBaseAgility() + calculateBonusAgility());
+        super.setCurrentDefense(super.getBaseDefense() + calculateBonusDefense());
+        super.setCurrentMagicDefense(super.getBaseMagicDefense() + calculateBonusMagicDefense());
+    }
+    
+    private int calculateBonusHealth()//calculates the bonus HP you get from equipment
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[0]; //0 is the index of the hp modifier stat
+        bonus += getOffHand().getEquipmentStats()[0];
+        bonus += getChest().getEquipmentStats()[0];
+        bonus += getLegs().getEquipmentStats()[0];
+        bonus += getBracers().getEquipmentStats()[0];
+        bonus += getBoots().getEquipmentStats()[0];
+        bonus += getGloves().getEquipmentStats()[0];
+        bonus += getRing1().getEquipmentStats()[0];
+        bonus += getRing2().getEquipmentStats()[0];
+        bonus += getHat().getEquipmentStats()[0];
+        bonus += getGoggles().getEquipmentStats()[0];
+        return bonus;
+    }
+    
+    private int calculateBonusMana()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[1]; 
+        bonus += getOffHand().getEquipmentStats()[1];
+        bonus += getChest().getEquipmentStats()[1];
+        bonus += getLegs().getEquipmentStats()[1];
+        bonus += getBracers().getEquipmentStats()[1];
+        bonus += getBoots().getEquipmentStats()[1];
+        bonus += getGloves().getEquipmentStats()[1];
+        bonus += getRing1().getEquipmentStats()[1];
+        bonus += getRing2().getEquipmentStats()[1];
+        bonus += getHat().getEquipmentStats()[1];
+        bonus += getGoggles().getEquipmentStats()[1];
+        return bonus;
+    }
+    
+    private int calculateBonusStrength()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[2];
+        bonus += getOffHand().getEquipmentStats()[2];
+        bonus += getChest().getEquipmentStats()[2];
+        bonus += getLegs().getEquipmentStats()[2];
+        bonus += getBracers().getEquipmentStats()[2];
+        bonus += getBoots().getEquipmentStats()[2];
+        bonus += getGloves().getEquipmentStats()[2];
+        bonus += getRing1().getEquipmentStats()[2];
+        bonus += getRing2().getEquipmentStats()[2];
+        bonus += getHat().getEquipmentStats()[2];
+        bonus += getGoggles().getEquipmentStats()[2];
+        return bonus;
+    }
+    
+    private int calculateBonusMagic()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[3];
+        bonus += getOffHand().getEquipmentStats()[3];
+        bonus += getChest().getEquipmentStats()[3];
+        bonus += getLegs().getEquipmentStats()[3];
+        bonus += getBracers().getEquipmentStats()[3];
+        bonus += getBoots().getEquipmentStats()[3];
+        bonus += getGloves().getEquipmentStats()[3];
+        bonus += getRing1().getEquipmentStats()[3];
+        bonus += getRing2().getEquipmentStats()[3];
+        bonus += getHat().getEquipmentStats()[3];
+        bonus += getGoggles().getEquipmentStats()[3];
+        return bonus;
+    }
+    
+    private int calculateBonusAgility()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[4];
+        bonus += getOffHand().getEquipmentStats()[4];
+        bonus += getChest().getEquipmentStats()[4];
+        bonus += getLegs().getEquipmentStats()[4];
+        bonus += getBracers().getEquipmentStats()[4];
+        bonus += getBoots().getEquipmentStats()[4];
+        bonus += getGloves().getEquipmentStats()[4];
+        bonus += getRing1().getEquipmentStats()[4];
+        bonus += getRing2().getEquipmentStats()[4];
+        bonus += getHat().getEquipmentStats()[4];
+        bonus += getGoggles().getEquipmentStats()[4];
+        return bonus;
+    }
+    
+    private int calculateBonusDefense()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[5];
+        bonus += getOffHand().getEquipmentStats()[5];
+        bonus += getChest().getEquipmentStats()[5];
+        bonus += getLegs().getEquipmentStats()[5];
+        bonus += getBracers().getEquipmentStats()[5];
+        bonus += getBoots().getEquipmentStats()[5];
+        bonus += getGloves().getEquipmentStats()[5];
+        bonus += getRing1().getEquipmentStats()[5];
+        bonus += getRing2().getEquipmentStats()[5];
+        bonus += getHat().getEquipmentStats()[5];
+        bonus += getGoggles().getEquipmentStats()[5];
+        return bonus;
+    }
+    
+    private int calculateBonusMagicDefense()
+    {
+        int bonus = 0;
+        bonus += getWeapon().getEquipmentStats()[6];
+        bonus += getOffHand().getEquipmentStats()[6];
+        bonus += getChest().getEquipmentStats()[6];
+        bonus += getLegs().getEquipmentStats()[6];
+        bonus += getBracers().getEquipmentStats()[6];
+        bonus += getBoots().getEquipmentStats()[6];
+        bonus += getGloves().getEquipmentStats()[6];
+        bonus += getRing1().getEquipmentStats()[6];
+        bonus += getRing2().getEquipmentStats()[6];
+        bonus += getHat().getEquipmentStats()[6];
+        bonus += getGoggles().getEquipmentStats()[6];
+        return bonus;
     }
 }

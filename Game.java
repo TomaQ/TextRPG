@@ -1,4 +1,4 @@
-//This is the main game
+//This is where the game runs
 
 package textrpg;
 
@@ -84,7 +84,7 @@ public class Game
         }
     }
     
-    public void startingThingsForTesting(Player hero)
+    private void startingThingsForTesting(Player hero)
     {
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
