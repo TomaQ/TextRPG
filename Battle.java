@@ -27,7 +27,15 @@ public final class Battle
             else{monsterTurn();}
         }
         
-        System.out.println("The battle is like done yo.");
+        //if the player doesn't win then game over!!!!!!
+        System.out.println("The battle is like done yo.");//method for this probably
+        hero.setGold(hero.getGold() + m.getGoldWorth());
+        hero.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
+        for(Item i: m.getLoot())
+        {
+            hero.addInventory(i);
+        }
+        
         Game.printBreak();
     }
     

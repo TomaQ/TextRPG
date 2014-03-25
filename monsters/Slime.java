@@ -1,6 +1,6 @@
 package textrpg.monsters;
 
-import textrpg.items.SlimeExtract;
+import textrpg.items.*;
 
 public class Slime extends Monster
 {
@@ -16,7 +16,11 @@ public class Slime extends Monster
         super.setBaseMagicDefense(2);
         
         super.setGoldWorth(30);
-        //super.setLoot(SlimeExtract);
+        super.setExpWorth(25);
+        
+        Item slimeE = new SlimeExtract();
+        Item[] loot = {slimeE};
+        super.setLoot(loot);
         super.initCurrentStats();
     }
     
