@@ -1,3 +1,5 @@
+//Need to make quests and have objects associated in here n such ya know
+
 package textrpg;
 
 import java.util.ArrayList;
@@ -83,9 +85,9 @@ public class Player extends Entity
     public void printInventory()
     {
         System.out.println("Your inventory:");
-        for(Item i: inventory)
+        for(Item i: inventory)//can use for-loop and at the last iteration delete last 2 chars
         {
-            System.out.print(i.getName() + " ");
+            System.out.print(i.getName() + ", ");
         }
         System.out.println();
     }
@@ -250,5 +252,16 @@ public class Player extends Entity
         bonus += getHat().getEquipmentStats()[6];
         bonus += getGoggles().getEquipmentStats()[6];
         return bonus;
+    }
+    
+    public void useItem(int[] statsModified)//need to fix, currently using a pot inceases max hp/mp/(w/e)(lol)
+    {
+        super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
+        super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
+        super.setCurrentStrength(super.getCurrentStrength() + statsModified[2]);
+        super.setCurrentMagic(super.getCurrentMagic() + statsModified[3]);
+        super.setCurrentAgility(super.getCurrentAgility() + statsModified[4]);
+        super.setCurrentDefense(super.getCurrentDefense() + statsModified[5]);
+        super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
     }
 }

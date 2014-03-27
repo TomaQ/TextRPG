@@ -90,9 +90,15 @@ public final class Battle
             System.out.println("Which item will you use?");
             int itemChosen = Integer.parseInt(scan.nextLine());
             
-            if(hero.getInventory().get(itemChosen).use()[0] != -1)//if the first index is -1 then you cannot use it
+            if(hero.getInventory().get(itemChosen).getItemType() == 1)//if the item type is consumable
             {
-                int j = hero.getInventory().get(itemChosen).use()[0];//need to see which stats to modify
+                //probably a better way to do this
+                int[] statusModified = hero.getInventory().get(itemChosen).use();//need to see which stats to modify
+                hero.useItem(statusModified);
+            }
+            else
+            {
+                hero.getInventory().get(itemChosen).itemError();
             }
         }
     }

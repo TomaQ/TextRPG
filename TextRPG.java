@@ -1,3 +1,6 @@
+/*STD's
+Need to fix magic numbers
+*/
 package textrpg;
 
 import java.io.*;

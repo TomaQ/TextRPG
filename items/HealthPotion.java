@@ -4,7 +4,7 @@ public class HealthPotion extends Item
 {
     public HealthPotion()
     {
-        super.setItemType(1);
+        super.setItemType(1);//is consumable
         super.setGoldWorth(5);
         super.setName("Health Potion");
     }
