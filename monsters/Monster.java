@@ -2,6 +2,7 @@ package textrpg.monsters;
 
 import textrpg.Entity;
 import textrpg.items.*;
+import textrpg.skills.Skill;
 
 public class Monster extends Entity
 {
@@ -19,5 +20,5 @@ public class Monster extends Entity
     public int getExpWorth(){return expWorth;}
     public void setExpWorth(int i){expWorth = i;}
     
-    //public something getSkills(something){something something something}
+    //public Skill[] getSkills(){return blahhh;}
 }

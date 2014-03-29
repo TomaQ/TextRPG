@@ -2,38 +2,47 @@
 
 package textrpg;
 
+import java.util.Random;
 import textrpg.monsters.Monster;
 import java.util.Scanner;
 import textrpg.items.Item;
 import textrpg.skills.Skill;
 
-public final class Battle 
+public final class Battle
 {
     Scanner scan = new Scanner(System.in);
     Player hero;//not sure if health will recover after battle
     Monster monster;
+    int turns;
+    Random rand = new Random();
     
     
     public Battle(Player h, Monster m)
     {
         hero = h;
         monster = m;
+        turns = 1;
+        
         Game.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
         
+        if(moveFirst()){playerTurn();}//need to make it switch to monsters turn if not that's like omg totally like unfair~
+        else{monsterTurn();turns = 2;}
+                    
         while(hero.getCurrentHealth() > 0 && monster.getCurrentHealth() > 0)
         {
-            if(moveFirst()){playerTurn();}//need to make it switch to monsters turn if not that's like omg totally like unfair~
-            else{monsterTurn();}
+            if(turns%2 == 1){monsterTurn();}
+            else{playerTurn();}
+            turns++;
         }
         
         //if the player doesn't win then game over!!!!!!
         System.out.println("The battle is like done yo.");//method for this probably
-        hero.setGold(hero.getGold() + m.getGoldWorth());
-        hero.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
+        h.setGold(hero.getGold() + m.getGoldWorth());
+        h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
         for(Item i: m.getLoot())
         {
-            hero.addInventory(i);
+            h.addInventory(i);
         }
         
         Game.printBreak();
@@ -106,6 +115,7 @@ public final class Battle
     public void monsterTurn()
     {
         System.out.println(monster.getName() + "'s turn!");
+        System.out.println("Zesty is gay!!!");
         //monster.getSkills();
     }
 }
