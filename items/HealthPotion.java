@@ -7,13 +7,15 @@ public class HealthPotion extends Item
         super.setItemType(1);//is consumable
         super.setGoldWorth(5);
         super.setName("Health Potion");
+        
+        int[] i = {50, 0, 0, 0, 0, 0, 0};
+        super.setStatsModified(i);
     }
     
     @Override
     public int[] use()//should make a separate method for use and use text
     {
-        int[] i = {50, 0, 0, 0, 0, 0, 0};//should make a variable in Item class
-        System.out.println("Gained " + i[0] + " Health!");
-        return i;
+        System.out.println("Gained " + super.getStatsModified()[0] + " Health!");
+        return super.getStatsModified();
     }
 }

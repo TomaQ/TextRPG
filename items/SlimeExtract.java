@@ -7,13 +7,15 @@ public class SlimeExtract extends Item
         super.setItemType(2);
         super.setGoldWorth(3);
         super.setName("Slime Extract");
+        
+        int[] i = {-1};
+        super.setStatsModified(i);
     }
     
     @Override
     public int[] use()
     {
         super.itemError();
-        int[] i = {-1};
-        return i;
+        return super.getStatsModified();
     }
 }
