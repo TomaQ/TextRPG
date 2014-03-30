@@ -103,6 +103,7 @@ public final class Battle
             {
                 //probably a better way to do this
                 int[] statusModified = hero.getInventory().get(itemChosen).use();//need to see which stats to modify
+                
                 hero.useItem(statusModified);
             }
             else

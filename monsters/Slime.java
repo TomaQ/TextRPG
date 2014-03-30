@@ -2,7 +2,7 @@ package textrpg.monsters;
 
 import textrpg.items.*;
 
-public class Slime extends Monster
+public class Slime extends Monster //should be resistant to physical attacks!
 {
     public Slime()
     {
