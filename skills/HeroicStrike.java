@@ -11,6 +11,8 @@ public class HeroicStrike extends Skill
         super.setSkillName("Heroic Strike");
         super.setLevelRequirement(1);
         super.setItemsRequired(null);
+        super.setManaCost(20);
+        super.setType(1);
     }
       
     @Override

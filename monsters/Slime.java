@@ -2,7 +2,7 @@ package textrpg.monsters;
 
 import textrpg.items.*;
 
-public class Slime extends Monster
+public class Slime extends Monster //should be resistant to physical attacks!
 {
     public Slime()
     {
@@ -17,6 +17,7 @@ public class Slime extends Monster
         
         super.setGoldWorth(30);
         super.setExpWorth(25);
+        super.setWeakness(2);
         
         Item slimeE = new SlimeExtract();
         Item[] loot = {slimeE};
