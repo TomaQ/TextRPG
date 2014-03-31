@@ -17,6 +17,7 @@ public class Slime extends Monster //should be resistant to physical attacks!
         
         super.setGoldWorth(30);
         super.setExpWorth(25);
+        super.setWeakness(2);
         
         Item slimeE = new SlimeExtract();
         Item[] loot = {slimeE};

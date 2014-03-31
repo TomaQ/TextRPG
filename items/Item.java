@@ -11,6 +11,7 @@ public class Item
     private int[] statsModified;
     
     private String name;
+    private String itemDescription;
     
     public int getItemType(){return itemType;}
     public void setItemType(int t){itemType = t;}
@@ -20,6 +21,9 @@ public class Item
     
     public String getName(){return name;}
     public void setName(String s){name = s;}
+    
+    public String getItemDescription(){return itemDescription;}
+    public void setItemDescription(String s){itemDescription = s;}
     
     public int[] getStatsModified(){return statsModified;}
     public void setStatsModified(int[] i){statsModified = i;}

@@ -7,6 +7,7 @@ public class HealthPotion extends Item
         super.setItemType(1);//is consumable
         super.setGoldWorth(5);
         super.setName("Health Potion");
+        super.setItemDescription("Heals for 50 HP.");
         
         int[] i = {50, 0, 0, 0, 0, 0, 0};
         super.setStatsModified(i);

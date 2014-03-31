@@ -9,7 +9,7 @@ public class Mage extends Job implements Levels
 {
     private final String class_name = "Mage";
     
-    private final String[] initialSkills = {"Attack"};
+    private final String[] initialSkills = {"Attack", "Fireball"};
     
     public Mage(Player p)
     {
