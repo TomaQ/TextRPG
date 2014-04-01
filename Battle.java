@@ -15,6 +15,7 @@ public final class Battle
     Monster monster;
     int turns;
     Random rand = new Random();
+    int ranAway = 0;
     
     
     public Battle(Player h, Monster m)
@@ -38,12 +39,15 @@ public final class Battle
         }
         
         //if the player doesn't win then game over!!!!!!
-        System.out.println("The battle is like done yo.");//method for this probably
-        h.setGold(hero.getGold() + m.getGoldWorth());
-        h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
-        for(Item i: m.getLoot())
+        if(ranAway == 0)//if they didnt run away then they get this stuff
         {
-            h.addInventory(i);
+            System.out.println("The battle is like done yo.");//method for this probably
+            h.setGold(hero.getGold() + m.getGoldWorth());
+            h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
+            for(Item i: m.getLoot())
+            {
+                h.addInventory(i);
+            }
         }
         
         Game.printBreak();
@@ -69,7 +73,7 @@ public final class Battle
         
         do
         {
-            System.out.println("Attack = 1, Skills = 2, Items = 3");
+            System.out.println("Attack = 1, Skills = 2, Items = 3, Run = 4");
             
             int input = scan.nextInt();
             scan.nextLine();
@@ -115,7 +119,7 @@ public final class Battle
                     System.out.println("Not enough mana!");
                 }
             }
-            else//you know what to do
+            else if(input == 3)//you know what to do
             {
                 for(int i = 0; i < hero.getInventory().size(); i++)
                     System.out.print(hero.getInventory().get(i).getName() + "(" + i + ")" + ", ");
@@ -135,6 +139,21 @@ public final class Battle
                 else
                 {
                     hero.getInventory().get(itemChosen).itemError();
+                }
+            }
+            else
+            {
+                if((rand.nextInt(10) + 1) < 7) //generates a number from 1-10 and checks if < 8
+                {                              //should have it check agility and stuff
+                    monster.setCurrentHealth(0);
+                    ranAway = 1;
+                    System.out.println("Ran away safely!");
+                    pass = 1;
+                }
+                else
+                {
+                    System.out.println("Failed to escape!");
+                    pass = 1;
                 }
             }
         

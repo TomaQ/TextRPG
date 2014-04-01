@@ -1,3 +1,5 @@
+//Need to look at json stuff
+
 package textrpg.rooms;
 
 import textrpg.items.*;

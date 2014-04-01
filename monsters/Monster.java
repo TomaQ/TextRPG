@@ -12,6 +12,8 @@ public class Monster extends Entity
     private int weakness;//the elemental weakness the monster has
     //1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
     
+    private int escapable;//if you can't run away then set to 0
+    
     
     public Item[] getLoot(){return loot;}
     public void setLoot(Item[] l){loot = l;}
@@ -24,6 +26,9 @@ public class Monster extends Entity
     
     public int getWeakness(){return weakness;}
     public void setWeakness(int i){weakness = i;}
+    
+    public int getEscapable(){return escapable;}
+    public void setEscapable(int i){escapable = i;}
     
     //public Skill[] getSkills(){return blahhh;}
 }
