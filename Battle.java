@@ -131,9 +131,8 @@ public final class Battle
                 if(hero.getInventory().get(itemChosen).getItemType() == 1)//if the item type is consumable
                 {
                     //probably a better way to do this
-                    int[] statusModified = hero.getInventory().get(itemChosen).use();//need to see which stats to modify
 
-                    hero.useItem(statusModified);
+                    hero.useItem(hero.getInventory().get(itemChosen).use());
                     pass = 1;//PASSED!
                 }
                 else

@@ -9,7 +9,7 @@ public class HealthPotion extends Item
         super.setName("Health Potion");
         super.setItemDescription("Heals for 50 HP.");
         
-        int[] i = {50, 0, 0, 0, 0, 0, 0};
+        int[] i = {50, 0, 0, 0, 0, 0, 0, 0};
         super.setStatsModified(i);
     }
     

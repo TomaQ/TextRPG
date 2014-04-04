@@ -127,7 +127,9 @@ public class Player extends Entity
     public void initCurrentStats()
     {
         super.setCurrentHealth(super.getBaseHealth() + calculateBonusHealth());
+        super.setMaxHealth(super.getCurrentHealth());
         super.setCurrentMana(super.getBaseMana() + calculateBonusMana());
+        super.setMaxMana(super.getCurrentMana());
         super.setCurrentStrength(super.getBaseStrength() + calculateBonusStrength());
         super.setCurrentMagic(super.getBaseMagic() + calculateBonusMagic());
         super.setCurrentAgility(super.getBaseAgility() + calculateBonusAgility());
@@ -254,10 +256,31 @@ public class Player extends Entity
         return bonus;
     }
     
-    public void useItem(int[] statsModified)//need to fix, currently using a pot inceases max hp/mp/(w/e)(lol)
+    public void useItem(int[] statsModified)
     {
-        super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
-        super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
+        if(statsModified[7] == 1)//if it can increase max hp or mp, can probably make if-else better
+        {
+            super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
+        }
+        else
+        {
+            if(super.getCurrentHealth() + statsModified[0] > super.getMaxHealth())
+                super.setCurrentHealth(super.getMaxHealth());
+            else
+                super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
+        }
+        
+        if(statsModified[7] == 1)//if it can increase max hp or mp, can probably make if-else better
+        {
+            super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
+        }
+        else
+        {
+            if(super.getCurrentMana() + statsModified[1] > super.getMaxMana())
+                super.setCurrentMana(super.getMaxMana());
+            else
+                super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
+        }
         super.setCurrentStrength(super.getCurrentStrength() + statsModified[2]);
         super.setCurrentMagic(super.getCurrentMagic() + statsModified[3]);
         super.setCurrentAgility(super.getCurrentAgility() + statsModified[4]);

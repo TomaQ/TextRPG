@@ -1,5 +1,6 @@
 /*STD's
 Need to fix magic numbers
+Need to fix formating
 */
 package textrpg;
 

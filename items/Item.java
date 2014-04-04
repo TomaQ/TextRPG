@@ -7,8 +7,13 @@ public class Item
     //2 = key items/quest items/materials
     //should work on this.....
     
+    public final int[] no_stats_modified = {0, 0, 0, 0, 0, 0, 0, 0};
+    
     private int goldWorth;
-    private int[] statsModified;
+    private int[] statsModified = new int[8];
+    //the stats the item modifies
+    //hp, mana, str, mag, agi, def, mdef, (1 or 0)
+    //if index 7 is 1 then it can increase the hp or mana over the max else it can't
     
     private String name;
     private String itemDescription;

@@ -5,8 +5,8 @@ package textrpg;
 public class Entity
 {
     private String name;
-    private int baseHealth, currentHealth;
-    private int baseMana, currentMana;
+    private int baseHealth, currentHealth, maxHealth;
+    private int baseMana, currentMana, maxMana;
     private int baseStrength, currentStrength;
     private int baseMagic, currentMagic;
     private int baseAgility, currentAgility;
@@ -25,6 +25,8 @@ public class Entity
     public void setCurrentHealth(int input){currentHealth = input;} 
     public int getBaseHealth(){return baseHealth;}
     public void setBaseHealth(int input){baseHealth = input;}
+    public int getMaxHealth(){return maxHealth;}
+    public void setMaxHealth(int input){maxHealth = input;}
     
     public int getCurrentMana()
     {
@@ -35,6 +37,8 @@ public class Entity
     public void setCurrentMana(int input){currentMana = input;}
     public int getBaseMana(){return baseMana;}
     public void setBaseMana(int input){baseMana = input;}
+    public int getMaxMana(){return maxMana;}
+    public void setMaxMana(int input){maxMana = input;}
     
     public int getCurrentStrength()
     {

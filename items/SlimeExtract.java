@@ -9,7 +9,7 @@ public class SlimeExtract extends Item
         super.setName("Slime Extract");
         super.setItemDescription("The goo from a slime.");
         
-        int[] i = {-1};
+        int[] i = super.no_stats_modified;
         super.setStatsModified(i);
     }
     
