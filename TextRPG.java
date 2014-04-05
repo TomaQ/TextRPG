@@ -50,11 +50,15 @@ public class TextRPG
         new Game(p);
    }
 
-   public static void continueGame() throws IOException
-   {
-       System.out.println("This doesn't work atm lol.");
-       newGame();
-   }
+    public static void continueGame() throws IOException
+    {
+        String heroName;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Hi bro, call your hero? Oh...remind me, what's his name?");
+        heroName = scan.nextLine();
+        Player player = Game.loadTheGame(heroName);
+        new Game(player);
+    }
    
    public static void main(String[] args) throws IOException 
    {

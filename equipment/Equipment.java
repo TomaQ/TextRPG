@@ -4,7 +4,9 @@ package textrpg.equipment;
 
 import textrpg.items.Item;
 
-public class Equipment extends Item
+import java.io.Serializable;
+
+public class Equipment extends Item implements Serializable
 {
     private int equipmentType; //the type of equipment it is
     //1 = weapon, 2 = chest, 3 = legs, 4 = bracers, 5 = boots, 6 = gloves

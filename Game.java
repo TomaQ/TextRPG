@@ -2,6 +2,8 @@
 
 package textrpg;
 
+import java.io.*;
+import java.util.Date;
 import java.util.Scanner;
 import textrpg.equipment.*;
 import textrpg.items.*;
@@ -77,6 +79,8 @@ public class Game
                 break;
             case "status": hero.printStatus();  
                 break;
+            case "save": saveTheGame(hero);
+                break;
             case "equipment": hero.printEquipment();
                 break;
             default: System.out.println("Command not recognized.");   
@@ -99,5 +103,37 @@ public class Game
         hero.setWeapon(iron);
         hero.setChest(bronze);
         
+    }
+
+    public static void saveTheGame(Player hero){
+        String fileName = "player" + hero.getName() + ".dat";
+        Date now = new Date(System.currentTimeMillis());
+        ObjectOutputStream out;
+        try{
+            out = new ObjectOutputStream(new FileOutputStream(fileName));
+            //out.writeObject(now);
+            out.writeObject(hero);
+            System.out.println("Saved at: " + now.toString());
+        }catch (FileNotFoundException ex){
+
+        }catch (IOException ex){ex.printStackTrace();}
+
+    }
+
+    public static Player loadTheGame(String heroName){
+        String fileName = "player" + heroName + ".dat";
+        ObjectInputStream in;
+        Player player = null;
+        try {
+            in = new ObjectInputStream(new FileInputStream(fileName));
+            player = (Player) in.readObject();
+        }catch (FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+        }
+        return player;
     }
 }

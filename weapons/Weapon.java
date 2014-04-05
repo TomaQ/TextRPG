@@ -2,7 +2,9 @@ package textrpg.weapons;
 
 import textrpg.equipment.Equipment;
 
-public class Weapon extends Equipment
+import java.io.Serializable;
+
+public class Weapon extends Equipment implements Serializable
 {
     private int weaponType;
     private int weaponDmg;
