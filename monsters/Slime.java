@@ -15,7 +15,7 @@ public class Slime extends Monster //should be resistant to physical attacks!
         super.setBaseDefense(6);
         super.setBaseMagicDefense(2);
         
-        super.setGoldWorth(30);
+        super.setGoldWorth();
         super.setExpWorth(25);
         super.setWeakness(2);
         super.setEscapable(1);
