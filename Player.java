@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.List;
 import textrpg.equipment.*;
 import textrpg.jobs.*;
+import textrpg.rooms.Room;
 import textrpg.weapons.*;
 import textrpg.items.*;
 
 public class Player extends Entity implements Serializable
 {
+    private Room location;
     private Job job;
 
     private Weapon weapon = new NoneW();
@@ -36,9 +38,10 @@ public class Player extends Entity implements Serializable
 
     public Player(){level = 1;}
 
-    public Player(String n, int j)
+    public Player(String n, int j, Room startingRoom)
     {
         super.setName(n);
+        location = startingRoom;
         new Job(this, j);
     }
 
@@ -108,6 +111,14 @@ public class Player extends Entity implements Serializable
 
     public int getGold(){return gold;}
     public void setGold(int i){gold = i;}
+
+    public Room getLocation() {
+        return location;
+    }
+
+    public void setLocation(Room location) {
+        this.location = location;
+    }
 
     public void printStatus()
     {

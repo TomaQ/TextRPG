@@ -38,7 +38,7 @@ public class ScenarioA {
     }
 
     private void setRoomsDescription(){
-        startingRoom.setRoomDescription("You are at training ground, near some village. Your adventure its begin!");
+        startingRoom.setRoomDescription("You are at the training ground, near some village. Your adventure starts!");
         village.setRoomDescription("Gods forgotten place, near the SHADOW GROVE");
         wood.setRoomDescription("Impregnated by rot and evilness air disturbs your mind...\nAnd it seems that you aren't alone here!");
         lake.setRoomDescription("A warm breeze encircles your face ... and you fall in love with place");

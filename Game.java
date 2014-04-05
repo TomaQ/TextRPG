@@ -28,7 +28,7 @@ public class Game
         
         //for(Room r: textrpg.rooms.Room.class.get)//maybe have a constant that is all of the room names
         
-        currentRoom = new StartingRoom();//generates the starting room, for testing atm
+        currentRoom = hero.getLocation();//generates the starting room, for testing atm
         //need player to know which room they're in
         currentRoom.enterRoomText();//need to print every time they enter a new room
                
@@ -50,23 +50,27 @@ public class Game
     
     public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
-        switch(userInput)
+        switch(userInput.trim())
         {
             case "b": Slime m = new Slime();
                 new Battle(hero, m);
                 break;
             case "help": System.out.println("'quit' to quit");
                 break;
-            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these, also need
-                else{Room.noExit();}                                                           //to parse spaces
-                break;
-            case "s": if(currentRoom.getSExit() != null){currentRoom = currentRoom.getSExit();}
+            case "n": if(currentRoom.getNExit() != null){currentRoom = hero.getLocation().getNExit();
+                                                    hero.setLocation(currentRoom); currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;
-            case "e": if(currentRoom.getEExit() != null){currentRoom = currentRoom.getEExit();}
+            case "s": if(currentRoom.getSExit() != null){currentRoom = hero.getLocation().getSExit();
+                                                    hero.setLocation(currentRoom); currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;
-            case "w": if(currentRoom.getWExit() != null){currentRoom = currentRoom.getWExit();}
+            case "e": if(currentRoom.getEExit() != null){currentRoom = hero.getLocation().getEExit();
+                                                    hero.setLocation(currentRoom); currentRoom.enterRoomText();}
+                else{Room.noExit();}
+                break;
+            case "w": if(currentRoom.getWExit() != null){currentRoom =hero.getLocation().getWExit();
+                                                    hero.setLocation(currentRoom); currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;    
             case "exits": currentRoom.getExits();
