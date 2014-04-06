@@ -1,6 +1,8 @@
 package textrpg.items;
 
-public class Item 
+import java.io.Serializable;
+
+public class Item implements Serializable
 {
     private int itemType; //the type of item it is
     //1 = consumable item(pots, elixers, food, and such that modifies stats or states)

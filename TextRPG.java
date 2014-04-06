@@ -4,6 +4,8 @@ Need to fix formating
 */
 package textrpg;
 
+import textrpg.rooms.ScenarioA;
+
 import java.io.*;
 import java.util.Scanner;
 
@@ -28,7 +30,6 @@ public class TextRPG
         String nameInput;    
         int jobSelector;
         String ans = "n";
-        
         Player p = null;
         
         while(!"y".equalsIgnoreCase(ans))
@@ -38,8 +39,8 @@ public class TextRPG
             System.out.println("What is your job? (Warrior = 1, Mage = 2, Thief = 3)"); //array of jobs later?
             jobSelector = scan.nextInt();
             scan.nextLine(); //blank readline for int(maybe convert string to int)
-     
-            p = new Player(nameInput, jobSelector);
+
+            p = new Player(nameInput, jobSelector, new ScenarioA().getStartingRoom());
 
             p.printStatus();
             
@@ -50,11 +51,15 @@ public class TextRPG
         new Game(p);
    }
 
-   public static void continueGame() throws IOException
-   {
-       System.out.println("This doesn't work atm lol.");
-       newGame();
-   }
+    public static void continueGame() throws IOException
+    {
+        String heroName;
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Hi bro, call your hero? Oh...remind me, what's his name?");
+        heroName = scan.nextLine();
+        Player player = Game.loadTheGame(heroName);
+        new Game(player);
+    }
    
    public static void main(String[] args) throws IOException 
    {

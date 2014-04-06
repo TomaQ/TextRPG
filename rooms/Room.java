@@ -41,13 +41,13 @@ public class Room
             else
                 System.out.print("There are exits to the ");
             if(nExit != null)
-                System.out.print("north");
+                System.out.print(" north");
             if(sExit != null)
-                System.out.print("south");
+                System.out.print(" south");
             if(eExit != null)
-                System.out.print("east");
+                System.out.print(" east");
             if(wExit != null)
-                System.out.print("west");
+                System.out.print(" west");
             System.out.println(".");
         }
     }

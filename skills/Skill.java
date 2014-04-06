@@ -1,6 +1,8 @@
 package textrpg.skills;
 
-public class Skill 
+import java.io.Serializable;
+
+public class Skill implements Serializable
 {
     private String name;
     private int levelRequirement;

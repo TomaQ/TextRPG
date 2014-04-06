@@ -4,8 +4,12 @@ import textrpg.Entity;
 import textrpg.items.*;
 import textrpg.skills.Skill;
 
+/*I'm sure, that monster's character should be stored
+* in database, and some object will generated monsters
+* on the base of some pattern.*/
 public class Monster extends Entity
 {
+    private int level;
     private Item[] loot;
     private int goldWorth;
     private int expWorth;
@@ -17,9 +21,13 @@ public class Monster extends Entity
     
     public Item[] getLoot(){return loot;}
     public void setLoot(Item[] l){loot = l;}
-    
-    public int getGoldWorth(){return goldWorth;}//usually called in a statement multiplied by a random decimal 
-    public void setGoldWorth(int g){goldWorth = g;}
+
+    public int getGoldWorth(){return goldWorth;}//usually called in a statement multiplied by a random decimal
+    public void setGoldWorth(){}
+    public void setGoldWorth(int g){goldWorth = g;}//I think this will be needed in the future, when added bonus coins to room's bosses
+    public int countGoldWorth(){
+        return (int)Math.random()*level + level;//sketch for formula of calculation golden coins from monster
+    }
     
     public int getExpWorth(){return expWorth;}
     public void setExpWorth(int i){expWorth = i;}
@@ -29,6 +37,9 @@ public class Monster extends Entity
     
     public int getEscapable(){return escapable;}
     public void setEscapable(int i){escapable = i;}
-    
+
+    public int getLevel() {return level;}
+    public void setLevel(int level) {this.level = level;}
+
     //public Skill[] getSkills(){return blahhh;}
 }
