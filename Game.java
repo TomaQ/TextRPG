@@ -23,14 +23,10 @@ public class Game
     
     public Game(Player hero)
     {
-        //load all rooms here right now?? hmm hmmmmmmmmm......
         printBreak();
-        
-        //for(Room r: textrpg.rooms.Room.class.get)//maybe have a constant that is all of the room names
-        
-        currentRoom = hero.getLocation();//generates the starting room, for testing atm
-        //need player to know which room they're in
-        currentRoom.enterRoomText();//need to print every time they enter a new room
+
+        currentRoom = hero.getLocation();
+        currentRoom.enterRoomText();
                
         startingThingsForTesting(hero);//all of the testing stuff goes here
         
@@ -48,7 +44,7 @@ public class Game
         System.out.println(lineBreak);
     }
     
-    public final void command(Player hero)//checks what to do from the users input, need to parse spaces
+    public final void command(Player hero)
     { 
         switch(userInput.trim())
         {
@@ -111,7 +107,7 @@ public class Game
 
     public static void saveTheGame(Player hero){
         String fileName = "player" + hero.getName() + ".dat";
-        Date now = new Date(System.currentTimeMillis());
+        Date now = new Date(System.currentTimeMillis());//for including date and time(I'm not sure that it should be)
         ObjectOutputStream out;
         try{
             out = new ObjectOutputStream(new FileOutputStream(fileName));

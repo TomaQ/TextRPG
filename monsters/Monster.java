@@ -4,6 +4,9 @@ import textrpg.Entity;
 import textrpg.items.*;
 import textrpg.skills.Skill;
 
+/*I'm sure, that monster's character should be stored
+* in database, and some object will generated monsters
+* on the base of some pattern.*/
 public class Monster extends Entity
 {
     private int level;
@@ -23,7 +26,7 @@ public class Monster extends Entity
     public void setGoldWorth(){}
     public void setGoldWorth(int g){goldWorth = g;}//I think this will be needed in the future, when added bonus coins to room's bosses
     public int countGoldWorth(){
-        return (int)Math.random()*level + 1;//sketch for formula of calculation golden coins from monster
+        return (int)Math.random()*level + level;//sketch for formula of calculation golden coins from monster
     }
     
     public int getExpWorth(){return expWorth;}
