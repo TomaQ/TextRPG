@@ -9,11 +9,11 @@ public class Thief extends Job implements Levels
 {
     private final String class_name = "Thief";
     
-    private final String[] initialSkills = {"Attack"};
+    private final String[] initialSkills = {"Attack", "Backstab"};
     
     public Thief(Player p)
     {
-        availableSkills  = initialSkills;
+        availableSkills  = initialSkills;//this is wrong...
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         

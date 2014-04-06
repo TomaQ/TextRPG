@@ -13,7 +13,7 @@ public class Warrior extends Job implements Levels
     
     public Warrior(Player p)//need way to check for new available skills to be learnable
     {
-        availableSkills  = initialSkills;
+        availableSkills  = initialSkills;//this is wrong also
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         

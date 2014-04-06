@@ -13,7 +13,7 @@ public class Mage extends Job implements Levels
     
     public Mage(Player p)
     {
-        availableSkills  = initialSkills;
+        availableSkills  = initialSkills;//wrong!!
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
