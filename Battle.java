@@ -41,13 +41,18 @@ public final class Battle
         //if the player doesn't win then game over!!!!!!
         if(ranAway == 0)//if they didnt run away then they get this stuff
         {
-            System.out.println("The battle is like done yo.");//method for this probably
             h.setGold(hero.getGold() + m.getGoldWorth());
             h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
+            String lootName = "";
             for(Item i: m.getLoot())
             {
                 h.addInventory(i);
+                lootName += i.getName() + ", ";
             }
+            
+            lootName = lootName.substring(0, lootName.length()-2);//deletes the last comma
+            System.out.println(m.getName() + " defeated! Gold:" + m.getGoldWorth() + " Exp:" + m.getExpWorth());
+            System.out.println("Loot: " + lootName);
         }
         
         Game.printBreak();
