@@ -15,7 +15,7 @@ public final class Battle
     Monster monster;
     int turns;
     Random rand = new Random();
-    int ranAway = 0;
+    boolean ranAway = false; //flag to see if the player ran away
     
     
     public Battle(Player h, Monster m)
@@ -39,7 +39,7 @@ public final class Battle
         }
         
         //if the player doesn't win then game over!!!!!!
-        if(ranAway == 0)//if they didnt run away then they get this stuff
+        if(ranAway == true)//if they didnt run away then they get this stuff
         {
             h.setGold(hero.getGold() + m.getGoldWorth());
             h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
@@ -68,7 +68,8 @@ public final class Battle
     
     public void playerTurn()//need to organize this like totally better
     {
-        System.out.println("HP: " + hero.getCurrentHealth() + " MP: " + hero.getCurrentMana());
+        System.out.println(hero.getName() + " - "+ "HP: " + hero.getCurrentHealth() + " MP: " + hero.getCurrentMana());
+        System.out.println(monster.getName() + " - "+ "HP: " + monster.getCurrentHealth());
         decidePlayerAction();  
     }
     
@@ -150,7 +151,7 @@ public final class Battle
                 if((rand.nextInt(10) + 1) < 7) //generates a number from 1-10 and checks if < 8
                 {                              //should have it check agility and stuff
                     monster.setCurrentHealth(0);
-                    ranAway = 1;
+                    ranAway = true;
                     System.out.println("Ran away safely!");
                     pass = 1;
                 }
