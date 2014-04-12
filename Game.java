@@ -8,10 +8,17 @@ import textrpg.items.*;
 import textrpg.monsters.Slime;
 import textrpg.rooms.*;
 import textrpg.weapons.*;
+
 import com.google.gson.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class Game 
 {
+    
     Scanner scan = new Scanner(System.in);
     
     static String lineBreak = "==========================";
@@ -20,12 +27,23 @@ public class Game
     
     //loadRooms() maybe
     
-    public Game(Player hero)
+    public Game(Player hero) throws IOException
     {
-        //load all rooms here right now?? hmm hmmmmmmmmm......
-        printBreak();
+        File dir = new File("src/textrpg");
+        File testFile = new File(dir, "testfile.data");
+        if(!testFile.exists())
+            testFile.createNewFile();
+        FileWriter fw = new FileWriter(testFile);
+        fw.write("PeepQQQ");
+        //BufferedReader bfr = new BufferedReader(new FileReader(testFile));
+        //System.out.println(bfr.readLine());
         
-        //for(Room r: textrpg.rooms.Room.class.get)//maybe have a constant that is all of the room names
+        currentRoom = new StartingRoom();
+        Gson gson = new Gson();
+        fw.write(gson.toJson(currentRoom));
+        fw.close();
+        
+        printBreak();
         
         currentRoom = new StartingRoom();//generates the starting room, for testing atm
         //need player to know which room they're in
@@ -85,7 +103,7 @@ public class Game
         }
     }
     
-    private void startingThingsForTesting(Player hero)
+    private void startingThingsForTesting(Player hero)//method for testing purposes
     {
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
