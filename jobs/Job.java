@@ -38,11 +38,13 @@ public class Job
     }
     public void printSkills()//prints all of the skills learned
     {
+        String skil = "";
         for(int i = 0; i < skillsLearned.size(); i++)
         {
-            System.out.print(skillsLearned.get(i).getSkillName() + ", ");
+            skil += (skillsLearned.get(i).getSkillName() + ", ");
         }
-        System.out.println();
+        skil = skil.substring(0, skil.length() - 2);
+        System.out.println(skil);
     }
     
     //initializes all of the skills that are learned at level 1

@@ -85,11 +85,13 @@ public class Player extends Entity
     public void printInventory()
     {
         System.out.println("Your inventory:");
+        String inven = "";
         for(Item i: inventory)//can use for-loop and at the last iteration delete last 2 chars
         {
-            System.out.print(i.getName() + ", ");
+            inven += i.getName() + ", ";
         }
-        System.out.println();
+        inven = inven.substring(0, inven.length() - 2);
+        System.out.println(inven);
     }
     
     public int getCurrentExp(){return currentExp;}

@@ -51,7 +51,7 @@ public class Game
     { 
         switch(userInput)
         {
-            case "b": Slime m = new Slime();
+            case "b": Slime m = new Slime();//temporary
                 new Battle(hero, m);
                 break;
             case "help": System.out.println("'quit' to quit");
