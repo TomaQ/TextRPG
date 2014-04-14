@@ -9,10 +9,10 @@ public class Room
 {
     private String roomName;
     private String roomDescription;
-    private Room nExit = null;
-    private Room sExit = null;
-    private Room eExit = null;
-    private Room wExit = null;
+    private int nExit = null;
+    private int sExit = null;
+    private int eExit = null;
+    private int wExit = null;
     
     private Item[] roomLoot = null;
     private Monster[] monsterEncounters;
@@ -30,24 +30,27 @@ public class Room
     
     public void getExits()//tells you the exits that are available from the current room NEED TO FIX FORMATTTTT
     {
-        if(nExit == null && sExit == null && eExit == null && wExit == null)
+        if(getNExit() == null && getSExit() == null && getEExit() == null && getWExit() == null)
         {
             System.out.println("There are no exits!");
         }
         else
         {
+            String sExits = "";//the string of exits
             if(oneExit() == true)
                 System.out.print("There is one exit to the ");
             else
                 System.out.print("There are exits to the ");
-            if(nExit != null)
-                System.out.print("north");
-            if(sExit != null)
-                System.out.print("south");
-            if(eExit != null)
-                System.out.print("east");
-            if(wExit != null)
-                System.out.print("west");
+            if(getNExit() != null)
+                sExits += "north, ";
+            if(getSExit() != null)
+                sExits += "south, ";
+            if(getEExit() != null)
+                sExits += "east, ";
+            if(getWExit() != null)
+                sExits += "west, ";
+            sExits = sExits.substring(0, sExits.length() - 2);
+            System.out.print(sExits);
             System.out.println(".");
         }
     }
@@ -57,7 +60,7 @@ public class Room
     public Room getEExit(){return eExit;}
     public Room getWExit(){return wExit;}
     
-    public void setExits(Room n, Room s, Room e, Room w)
+    public void setExits(int n, int s, int e, int w)
     {
         nExit = n;
         sExit = s;
@@ -68,19 +71,19 @@ public class Room
     public boolean oneExit()//returns true if there is only one exit
     {
         int j = 0;
-        if(nExit != null)
+        if(getNExit() != null)
             j++;
-        if(sExit != null)
+        if(getSExit() != null)
             j++;
-        if(eExit != null)
+        if(getEExit() != null)
             j++;
-        if(wExit != null)
+        if(getWExit() != null)
             j++;
         if(j == 1)
             return true;
         return false;
-    }
-    public void enterRoomText()
+    } 
+   public void enterRoomText()
     {
         System.out.println("You entered " + getRoomName());
         System.out.println(getRoomDescription());
