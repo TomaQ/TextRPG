@@ -30,19 +30,19 @@ public class Game
     
     public Game(Player hero) throws IOException
     {
-        File dir = new File("src/textrpg");
-        File testFile = new File(dir, "testfile.data");
+        /*File dir = new File("src/textrpg/data");
+        File testFile = new File(dir, "rooms.dat");
         if(!testFile.exists())
             testFile.createNewFile();
         FileWriter fw = new FileWriter(testFile);
-        fw.write("PeepQQQ");
+        //fw.write("PeepQQQ");
         //BufferedReader bfr = new BufferedReader(new FileReader(testFile));
         //System.out.println(bfr.readLine());
         
         currentRoom = new StartingRoom();
         Gson gson = new Gson();
         fw.write(gson.toJson(currentRoom));
-        fw.close();
+        fw.close();*/
         
         printBreak();
         
@@ -66,7 +66,7 @@ public class Game
         System.out.println(lineBreak);
     }
     
-    public final void command(Player hero)//checks what to do from the users input, need to parse spaces
+    public final void command(Player hero) throws IOException//checks what to do from the users input, need to parse spaces
     { 
         switch(userInput)
         {
