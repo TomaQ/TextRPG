@@ -25,10 +25,8 @@ public class Job
         //do stuff here with if's to check job and stuff
     }
     
-    public String getJobName()
-    {
-        return jobName;
-    }
+    public String getJobName(){return jobName;}
+    
     public Skill[] getSkills()//returns all of the skills learned as objects
     {
         Skill[] s = new Skill[skillsLearned.size()];

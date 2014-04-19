@@ -33,13 +33,13 @@ public final class Battle
         while(hero.getCurrentHealth() > 0 && monster.getCurrentHealth() > 0)
         {
             System.out.println("-----");
-            if(turns%2 == 1){monsterTurn();}
+            if(turns % 2 == 1){monsterTurn();}
             else{playerTurn();}
             turns++;
         }
         
         //if the player doesn't win then game over!!!!!!
-        if(ranAway == true)//if they didnt run away then they get this stuff
+        if(ranAway == false)//if they didnt run away then they get this stuff
         {
             h.setGold(hero.getGold() + m.getGoldWorth());
             h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
@@ -60,10 +60,7 @@ public final class Battle
     
     public boolean moveFirst()//calculates who gets the first turn based on agility
     {
-        if(hero.getCurrentAgility() > monster.getCurrentAgility())
-            return true;
-        else
-            return false;
+        return hero.getCurrentAgility() > monster.getCurrentAgility();
     }
     
     public void playerTurn()//need to organize this like totally better
