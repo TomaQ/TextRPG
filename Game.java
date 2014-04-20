@@ -9,17 +9,8 @@ import textrpg.monsters.Slime;
 import textrpg.rooms.*;
 import textrpg.weapons.*;
 
-import com.google.gson.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-
-
 public class Game 
 {
-    
     Scanner scan = new Scanner(System.in);
     
     static String lineBreak = "==========================";
@@ -28,25 +19,17 @@ public class Game
     
     //loadRooms() maybe
     
-    public Game(Player hero) throws IOException
+    public Game(Player hero)
     {
-        /*File dir = new File("src/textrpg/data");
-        File testFile = new File(dir, "rooms.dat");
-        if(!testFile.exists())
-            testFile.createNewFile();
-        FileWriter fw = new FileWriter(testFile);
-        //fw.write("PeepQQQ");
-        //BufferedReader bfr = new BufferedReader(new FileReader(testFile));
-        //System.out.println(bfr.readLine());
         
-        currentRoom = new StartingRoom();
-        Gson gson = new Gson();
-        fw.write(gson.toJson(currentRoom));
-        fw.close();*/
+        //load rooms
+        //set room exits
         
         printBreak();
         
-        currentRoom = new StartingRoom();//generates the starting room, for testing atm
+        Room prRoom = new PowerRangerRoom(null, null, null, null);
+        
+        currentRoom = new StartingRoom(prRoom, null, null, null);//generates the starting room, for testing atm
         //need player to know which room they're in
         currentRoom.enterRoomText();//need to print every time they enter a new room
                
@@ -66,14 +49,14 @@ public class Game
         System.out.println(lineBreak);
     }
     
-    public final void command(Player hero) throws IOException//checks what to do from the users input, need to parse spaces
+    public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
         switch(userInput)
         {
             case "b": Slime m = new Slime();//temporary
                 new Battle(hero, m);
                 break;
-            case "help": System.out.println("'quit' to quit");
+            case "help": System.out.println("'quit' to quit");//println(printCommands()); <= need to make~
                 break;
             case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these, also need
                 else{Room.noExit();}                                                           //to parse spaces
