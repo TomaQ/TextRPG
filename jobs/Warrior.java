@@ -34,7 +34,6 @@ public class Warrior extends Job implements Levels
     @Override
     public void levelUp(Player p)
     {
-        p.setCurrentExp(0);
         p.setNextLevelExp((int)(p.getNextLevelExp()*1.2));
         
         p.setBaseHealth((int)(p.getBaseHealth() * 1.2));

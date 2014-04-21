@@ -33,8 +33,10 @@ public final class Battle
         while(hero.getCurrentHealth() > 0 && monster.getCurrentHealth() > 0)
         {
             System.out.println("-----");
+            
             if(turns % 2 == 1){monsterTurn();}
             else{playerTurn();}
+            
             turns++;
         }
         
@@ -42,7 +44,6 @@ public final class Battle
         if(ranAway == false)//if they didnt run away then they get this stuff
         {
             h.setGold(hero.getGold() + m.getGoldWorth());
-            h.setCurrentExp(hero.getCurrentExp() + m.getExpWorth());//need a way to check if it's ever over
             String lootName = "";
             for(Item i: m.getLoot())
             {
@@ -53,6 +54,7 @@ public final class Battle
             lootName = lootName.substring(0, lootName.length()-2);//deletes the last comma
             System.out.println(m.getName() + " defeated! Gold:" + m.getGoldWorth() + " Exp:" + m.getExpWorth());
             System.out.println("Loot: " + lootName);
+            h.setCurrentExp(h.getCurrentExp() + m.getExpWorth());
         }
         
         Game.printBreak();

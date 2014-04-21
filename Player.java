@@ -29,11 +29,9 @@ public class Player extends Entity
     
     private int level;
     private int currentExp;
-    private int nextLevelExp;//exp needed to reach the next level
+    private int nextLevelExp = 27; //exp needed to reach the next level - Temporary number
     
     private int gold;
-    
-    public Player(){}
     
     public Player(String n, int j)
     {
@@ -96,14 +94,26 @@ public class Player extends Entity
     }
     
     public int getCurrentExp(){return currentExp;}
-    public void setCurrentExp(int i){currentExp = i;}//need to check if it's ever over
+    public void setCurrentExp(int i)
+    {
+        if(nextLevelExp < (currentExp + i))
+        {
+            currentExp = (currentExp + i) - nextLevelExp;
+            levelUp();
+        }
+        else
+            currentExp = i;
+    }
+    
     public int getNextLevelExp(){return nextLevelExp;}
     public void setNextLevelExp(int i){nextLevelExp = i;}
     
     public int getLevel(){return level;}
     public void levelUp()//need more than just this
-    {
+    {  
         level += 1;
+        System.out.println("You reached level " + level + "!");
+        
         job.levelUp(this);
         initCurrentStats();
     }
