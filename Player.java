@@ -33,10 +33,11 @@ public class Player extends Entity
     
     private int gold;
     
-    public Player(){level = 1;}
+    public Player(){}
     
     public Player(String n, int j)
     {
+        level = 1;
         super.setName(n);
         new Job(this, j);
     }
@@ -112,7 +113,7 @@ public class Player extends Entity
     
     public void printStatus()
     {
-        System.out.println("Name: " + getName() + "\tJob: " + getJobName());
+        System.out.println("Name: " + getName() + "\tJob: " + getJobName() + "\tLevel:" + getLevel());
         System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic()+ "\nAgility:" + getCurrentAgility()+ "\nDefense:" + getCurrentDefense()+ "\nMagic Defense:" + getCurrentMagicDefense());
     }
     
@@ -283,6 +284,7 @@ public class Player extends Entity
             else
                 super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
         }
+        
         super.setCurrentStrength(super.getCurrentStrength() + statsModified[2]);
         super.setCurrentMagic(super.getCurrentMagic() + statsModified[3]);
         super.setCurrentAgility(super.getCurrentAgility() + statsModified[4]);

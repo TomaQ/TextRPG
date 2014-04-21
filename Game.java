@@ -30,7 +30,9 @@ public class Game
         Room prRoom = new PowerRangerRoom(null, null, null, null);
         
         currentRoom = new StartingRoom(prRoom, null, null, null);//generates the starting room, for testing atm
+        
         //need player to know which room they're in
+        
         currentRoom.enterRoomText();//need to print every time they enter a new room
                
         startingThingsForTesting(hero);//all of the testing stuff goes here
