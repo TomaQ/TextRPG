@@ -10,7 +10,7 @@ public class StartingRoom extends Room
         super.setRoomName("Starting Room");
         super.setRoomDescription("You are in a room, it feels like a starting room. Lol. You notice a potion sitting on a table next to you.");
         
-        Item pot = new HealthPotion();
+        HealthPotion pot = new HealthPotion();
         super.getRoomLoot().add(pot);
     }
 }

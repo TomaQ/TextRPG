@@ -48,9 +48,10 @@ public class Job
     //initializes all of the skills that are learned at level 1
     public void initSkills(Player hero) throws ClassNotFoundException, InstantiationException, NoSuchMethodException, IllegalAccessException, IllegalArgumentException, InvocationTargetException
     {
-        for (String s : availableSkills) {
-            Class clazz = Class.forName(skills_package_path + s);
-            Constructor constructor = clazz.getConstructor(Player.class);
+        for (String s : availableSkills) 
+        {
+            Class skillz = Class.forName(skills_package_path + s);
+            Constructor constructor = skillz.getConstructor(Player.class);
             Skill skill = (Skill)constructor.newInstance(hero);
             skillsLearned.add(skill);
         }

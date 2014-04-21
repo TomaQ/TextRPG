@@ -54,8 +54,14 @@ public class Game
     public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
         int i = userInput.indexOf(' ');
-        String firstUserInput = userInput.substring(0, i);
-        String restofUserInput = userInput.substring(i+1, userInput.length());
+        String firstUserInput, restofUserInput = "";
+        if(i > 0)// if there's a space then parse it
+        {
+            firstUserInput = userInput.substring(0, i);
+            restofUserInput = userInput.substring(i+1, userInput.length());
+        }
+        else
+            firstUserInput = userInput;
         
         switch(firstUserInput)
         {
@@ -119,15 +125,25 @@ public class Game
     
     public void takeCommand(String rest, Player hero)//figures out what to take
     {
+        boolean pass = false;
         for(int i = 0; i < currentRoom.getRoomLoot().size(); i++)
         {
-            for(int j = 0; j < currentRoom.getRoomLoot().get(i).getTags().length; j++)
+            for (String tag : currentRoom.getRoomLoot().get(i).getTags()) 
             {
-                if(currentRoom.getRoomLoot().get(i).getTags()[j].equals(rest))
+                if (tag.equals(rest)) 
                 {
                     hero.addInventory(currentRoom.getRoomLoot().get(i));
-                    currentRoom.getRoomLoot().remove(currentRoom.getRoomLoot().get(i));
+                    currentRoom.getRoomLoot().remove(i);
+                    //vvv breaks here vvv
+                    System.out.println("Took " + currentRoom.getRoomLoot().get(i) + ".");
+                    System.out.println("4");
+                    pass = true;
+                    System.out.println("5");
                 }
+            }
+            if(!pass)
+            {
+                System.out.println("There's no item here called that.");
             }
         }
     }
