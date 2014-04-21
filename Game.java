@@ -132,19 +132,18 @@ public class Game
             {
                 if (tag.equals(rest)) 
                 {
-                    hero.addInventory(currentRoom.getRoomLoot().get(i));
-                    currentRoom.getRoomLoot().remove(i);
-                    //vvv breaks here vvv
-                    System.out.println("Took " + currentRoom.getRoomLoot().get(i) + ".");
-                    System.out.println("4");
+                    Item temp = currentRoom.getRoomLoot().get(i);
+                    
+                    hero.addInventory(temp);
+                    currentRoom.getRoomLoot().remove(temp);
+                    System.out.println("Took " + temp.getName() + ".");
                     pass = true;
-                    System.out.println("5");
                 }
             }
-            if(!pass)
-            {
-                System.out.println("There's no item here called that.");
-            }
+        }
+        if(!pass)
+        {
+            System.out.println("There's no item here called that.");
         }
     }
 }
