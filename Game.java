@@ -120,19 +120,19 @@ public class Game
     
     public void printCommands()
     {
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take");
     }
     
     public void takeCommand(String rest, Player hero)//figures out what to take
     {
         boolean pass = false;
-        for(int i = 0; i < currentRoom.getRoomLoot().size(); i++)
+        for(int i = 0; i < currentRoom.getRoomLoot().size(); i++)//for some reason using nested for each loops crashes here
         {
             for (String tag : currentRoom.getRoomLoot().get(i).getTags()) 
             {
                 if (tag.equals(rest)) 
                 {
-                    Item temp = currentRoom.getRoomLoot().get(i);
+                    Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
                     
                     hero.addInventory(temp);
                     currentRoom.getRoomLoot().remove(temp);
@@ -141,7 +141,7 @@ public class Game
                 }
             }
         }
-        if(!pass)
+        if(!pass) //if there was no item let them know
         {
             System.out.println("There's no item here called that.");
         }
