@@ -2,9 +2,9 @@ package textrpg.rooms;
 
 public class PowerRangerRoom extends Room
 {
-    public PowerRangerRoom()
+    public PowerRangerRoom(Room n, Room s, Room e, Room w)
     {
-        super.setExits(0, 0, 0, 0);
+        super.setExits(n, s, e, w);
         super.setRoomName("Power Ranger Room");
         super.setRoomDescription("Mighty morphing power rangers!");
     }

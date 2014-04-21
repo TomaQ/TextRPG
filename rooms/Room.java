@@ -2,28 +2,22 @@
 
 package textrpg.rooms;
 
-import java.io.IOException;
-import textrpg.DataHandler;
 import textrpg.items.*;
 import textrpg.monsters.*;
 
 public class Room
 {
-    private int id;
     
     private String roomName;
     private String roomDescription;
-    private int nExit = 0;
-    private int sExit = 0;
-    private int eExit = 0;
-    private int wExit = 0;
+    private Room nExit = null;
+    private Room sExit = null;
+    private Room eExit = null;
+    private Room wExit = null;
     
     private Item[] roomLoot = null;
     private Monster[] monsterEncounters;
     private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
-    
-    public int getId(){return id;}
-    public void setId(int i){id = i;}
     
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
@@ -35,7 +29,7 @@ public class Room
     public void setRoomLoot(Item[] i){roomLoot = i;}//have to pass an array of items
     
     
-    public void getExits() throws IOException//tells you the exits that are available from the current room NEED TO FIX FORMATTTTT
+    public void getExits()//tells you the exits that are available from the current room NEED TO FIX FORMATTTTT
     {
         if(getNExit() == null && getSExit() == null && getEExit() == null && getWExit() == null)
         {
@@ -56,30 +50,31 @@ public class Room
                 sExits += "east, ";
             if(getWExit() != null)
                 sExits += "west, ";
+            
             sExits = sExits.substring(0, sExits.length() - 2);
             System.out.print(sExits);
             System.out.println(".");
         }
     }
     
-    public Room getNExit() throws IOException
+    public Room getNExit()
     {
-        return DataHandler.getRoom(nExit);
+        return nExit;
     }
-    public Room getSExit() throws IOException
+    public Room getSExit()
     {
-        return DataHandler.getRoom(sExit);
+        return sExit;
     }
-    public Room getEExit() throws IOException
+    public Room getEExit()
     {
-        return DataHandler.getRoom(eExit);
+        return eExit;
     }
-    public Room getWExit() throws IOException
+    public Room getWExit()
     {
-        return DataHandler.getRoom(wExit);
+        return wExit;
     }
     
-    public void setExits(int n, int s, int e, int w)
+    public void setExits(Room n, Room s, Room e, Room w)
     {
         nExit = n;
         sExit = s;
@@ -87,8 +82,8 @@ public class Room
         wExit = w;
     }
     
-    public boolean oneExit() throws IOException//returns true if there is only one exit
-    {                                          //can make these ints intead of checking room
+    public boolean oneExit()//returns true if there is only one exit
+    {                                    //can make these ints intead of checking room (?)
         int j = 0;
         if(getNExit() != null)
             j++;
