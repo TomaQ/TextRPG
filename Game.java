@@ -53,7 +53,11 @@ public class Game
     
     public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
-        switch(userInput)
+        int i = userInput.indexOf(' ');
+        String firstUserInput = userInput.substring(0, i);
+        String restofUserInput = userInput.substring(i+1, userInput.length());
+        
+        switch(firstUserInput)
         {
             case "b": Slime m = new Slime();//temporary
                 new Battle(hero, m);
@@ -84,6 +88,8 @@ public class Game
                 break;
             case "equipment": hero.printEquipment();
                 break;
+            case "take": takeCommand(restofUserInput, hero);
+                break;
             default: System.out.println("Command not recognized.");   
                 break;
         }
@@ -109,5 +115,20 @@ public class Game
     public void printCommands()
     {
         System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment");
+    }
+    
+    public void takeCommand(String rest, Player hero)//figures out what to take
+    {
+        for(int i = 0; i < currentRoom.getRoomLoot().size(); i++)
+        {
+            for(int j = 0; j < currentRoom.getRoomLoot().get(i).getTags().length; j++)
+            {
+                if(currentRoom.getRoomLoot().get(i).getTags()[j].equals(rest))
+                {
+                    hero.addInventory(currentRoom.getRoomLoot().get(i));
+                    currentRoom.getRoomLoot().remove(currentRoom.getRoomLoot().get(i));
+                }
+            }
+        }
     }
 }
