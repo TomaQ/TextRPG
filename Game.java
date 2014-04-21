@@ -58,7 +58,7 @@ public class Game
             case "b": Slime m = new Slime();//temporary
                 new Battle(hero, m);
                 break;
-            case "help": System.out.println("'quit' to quit");//println(printCommands()); <= need to make~
+            case "help": printCommands();
                 break;
             case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these, also need
                 else{Room.noExit();}                                                           //to parse spaces
@@ -104,5 +104,10 @@ public class Game
         hero.setWeapon(iron);
         hero.setChest(bronze);
         
+    }
+    
+    public void printCommands()
+    {
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment");
     }
 }

@@ -106,12 +106,13 @@ public final class Battle
                 System.out.println("Which skill will you use?");
                 int skillChosen = scan.nextInt();
                 scan.nextLine();//maybe i should just cast ints...
+                
                 if(hero.getCurrentMana() >= hero.getJob().getSkills()[skillChosen].getManaCost())
                 {    
                     dmg = hero.getJob().getSkills()[skillChosen].use();
                     
                     if(monster.getWeakness() == hero.getJob().getSkills()[skillChosen].getType())
-                        dmg = (int)(dmg * 1.5);
+                        dmg = (int)(dmg * 1.5);//number uncertain about I am
                     
                     monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
                     hero.setCurrentMana(hero.getCurrentMana() - hero.getJob().getSkills()[skillChosen].getManaCost());//uses up mana
