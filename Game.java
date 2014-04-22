@@ -53,7 +53,17 @@ public class Game
     
     public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
-        switch(userInput)
+        int i = userInput.indexOf(' ');
+        String firstUserInput, restofUserInput = "";
+        if(i > 0)// if there's a space then parse it
+        {
+            firstUserInput = userInput.substring(0, i);
+            restofUserInput = userInput.substring(i+1, userInput.length());
+        }
+        else
+            firstUserInput = userInput;
+        
+        switch(firstUserInput)
         {
             case "b": Slime m = new Slime();//temporary
                 new Battle(hero, m);
@@ -84,6 +94,8 @@ public class Game
                 break;
             case "equipment": hero.printEquipment();
                 break;
+            case "take": takeCommand(restofUserInput, hero);
+                break;
             default: System.out.println("Command not recognized.");   
                 break;
         }
@@ -108,6 +120,30 @@ public class Game
     
     public void printCommands()
     {
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take");
+    }
+    
+    public void takeCommand(String rest, Player hero)//figures out what to take
+    {
+        boolean pass = false;
+        for(int i = 0; i < currentRoom.getRoomLoot().size(); i++)//for some reason using nested for each loops crashes here
+        {
+            for (String tag : currentRoom.getRoomLoot().get(i).getTags()) 
+            {
+                if (tag.equals(rest)) 
+                {
+                    Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
+                    
+                    hero.addInventory(temp);
+                    currentRoom.getRoomLoot().remove(temp);
+                    System.out.println("Took " + temp.getName() + ".");
+                    pass = true;
+                }
+            }
+        }
+        if(!pass) //if there was no item let them know
+        {
+            System.out.println("There's no item here called that.");
+        }
     }
 }

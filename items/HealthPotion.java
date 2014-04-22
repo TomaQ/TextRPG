@@ -11,6 +11,9 @@ public class HealthPotion extends Item
         
         int[] i = {50, 0, 0, 0, 0, 0, 0, 0};
         super.setStatsModified(i);
+        
+        String[] t = {"pot", "health pot", "health potion", "potion"};
+        super.setTags(t);
     }
     
     @Override

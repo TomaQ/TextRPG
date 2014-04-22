@@ -9,6 +9,9 @@ public class Item
     
     public final int[] no_stats_modified = {0, 0, 0, 0, 0, 0, 0, 0};
     
+    private String[] tags = null;//these are tags that the item can be refered to
+    //say there is a HealthPotion in the room , if someone wants to take it they would type "take pot" or "take 'tag'" etc.
+    
     private int goldWorth;
     private int[] statsModified = new int[8];
     //the stats the item modifies
@@ -32,6 +35,9 @@ public class Item
     
     public int[] getStatsModified(){return statsModified;}
     public void setStatsModified(int[] i){statsModified = i;}
+    
+    public String[] getTags(){return tags;}
+    public void setTags(String[] t){tags = t;}
     
     public int[] use(){int[] i = {-1};return i;}//NEED TO OVERWRITE
     

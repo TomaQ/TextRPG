@@ -2,6 +2,8 @@
 
 package textrpg.rooms;
 
+import java.util.ArrayList;
+import java.util.List;
 import textrpg.items.*;
 import textrpg.monsters.*;
 
@@ -15,7 +17,7 @@ public class Room
     private Room eExit = null;
     private Room wExit = null;
     
-    private Item[] roomLoot = null;
+    List<Item> roomLoot = new ArrayList<>();
     private Monster[] monsterEncounters;
     private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
     
@@ -25,9 +27,7 @@ public class Room
     public String getRoomDescription(){return roomDescription;}
     public void setRoomDescription(String n){roomDescription = n;}
     
-    public Item[] getRoomLoot(){return roomLoot;}//returns an array of items
-    public void setRoomLoot(Item[] i){roomLoot = i;}//have to pass an array of items
-    
+    public List<Item> getRoomLoot(){return roomLoot;}//returns a list of items
     
     public void getExits()//tells you the exits that are available from the current room NEED TO FIX FORMATTTTT
     {
