@@ -1,10 +1,11 @@
 /*STD's
 Need to fix magic numbers
-Need to fix formating
+Need to fix formating of code
 Need to fix user invalid input bugs
 
-Change text if play takes items?
-Inventory counter for items
+Player commands parsing work
+
+Change text if play takes items from room?
 */
 package textrpg;
 

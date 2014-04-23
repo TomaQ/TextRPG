@@ -27,8 +27,12 @@ public class Game
         
         printBreak();
         
-        Room prRoom = new PowerRangerRoom(null, null, null, null);
-        currentRoom = new StartingRoom(prRoom, null, null, null);//generates the starting room, for testing atm
+        Room prRoom = new PowerRangerRoom(null, null, null, null);//new method for now and such
+        Room startRoom = new StartingRoom(null, null, null, null);//there has to be a better way to do this...
+        prRoom.setExits(null, startRoom, null, null);
+        startRoom.setExits(prRoom, null, null, null);
+        
+        currentRoom = startRoom;//for testing atm
         
         //need player to know which room they're in
         
@@ -69,16 +73,16 @@ public class Game
                 break;
             case "help": printCommands();
                 break;
-            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();}//methods for these, also need
+            case "n": if(currentRoom.getNExit() != null){currentRoom = currentRoom.getNExit();currentRoom.enterRoomText();}//methods for these, also need
                 else{Room.noExit();}                                                           //to parse spaces
                 break;
-            case "s": if(currentRoom.getSExit() != null){currentRoom = currentRoom.getSExit();}
+            case "s": if(currentRoom.getSExit() != null){currentRoom = currentRoom.getSExit();currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;
-            case "e": if(currentRoom.getEExit() != null){currentRoom = currentRoom.getEExit();}
+            case "e": if(currentRoom.getEExit() != null){currentRoom = currentRoom.getEExit();currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;
-            case "w": if(currentRoom.getWExit() != null){currentRoom = currentRoom.getWExit();}
+            case "w": if(currentRoom.getWExit() != null){currentRoom = currentRoom.getWExit();currentRoom.enterRoomText();}
                 else{Room.noExit();}
                 break;    
             case "exits": currentRoom.getExits();
@@ -119,7 +123,9 @@ public class Game
     
     public void printCommands()
     {
+        printBreak();
         System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take");
+        printBreak();
     }
     
     public void takeCommand(String rest, Player hero)//figures out what to take
