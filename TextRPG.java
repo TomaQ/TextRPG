@@ -1,11 +1,15 @@
-/*STD's
-Need to fix magic numbers
-Need to fix formating of code
-Need to fix user invalid input bugs
+/*TODO:
+need to fix magic numbers
+need to fix formating of code
+need to fix user invalid input bugs
 
-Player commands parsing work
+player commands parsing
 
-Change text if play takes items from room?
+change text if play takes items from room?
+add random gold and item drops from mobs
+add talking to npcs
+add shops
+add learning new skills while leveling up
 */
 package textrpg;
 
