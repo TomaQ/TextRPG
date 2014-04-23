@@ -85,11 +85,27 @@ public class Player extends Entity
     {
         System.out.println("Your inventory:");
         String inven = "";//the inventory string
+        String[][] invenCount = {{"", ""}};
+        
         for(Item i: inventory)
         {
-            inven += i.getName() + ", ";
+            for(int j = 0; j < invenCount.length; j++)//can also use a map here instead
+            {
+                if(invenCount[j][0].equals(i.getName()))
+                    invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
+                else
+                {
+                    invenCount[j][0] = i.getName();
+                    invenCount[j][1] = "1";
+                }
+            }
+            //inven += i.getName() + ", ";
         }
-        inven = inven.substring(0, inven.length() - 2);
+        for(int i = 0; i < invenCount.length; i++)
+        {
+            inven += invenCount[i][0] + "(" + invenCount[i][1] + ")";
+        }
+        //inven = inven.substring(0, inven.length() - 2);
         System.out.println(inven);
     }
     
