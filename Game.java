@@ -56,8 +56,10 @@ public class Game
     
     public final void command(Player hero)//checks what to do from the users input, need to parse spaces
     { 
+        userInput = userInput.toLowerCase();
         int i = userInput.indexOf(' ');
         String firstUserInput, restofUserInput = "";
+        
         if(i > 0)// if there's a space then parse it
         {
             firstUserInput = userInput.substring(0, i);
