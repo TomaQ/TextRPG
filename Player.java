@@ -84,29 +84,27 @@ public class Player extends Entity
     public void printInventory()
     {
         System.out.println("Your inventory:");
-        String inven = "";//the inventory string
-        String[][] invenCount = new String[100][2];//only prints first 100
-        int k = 0;///TEST
-        for(Item i: inventory)
+        String inven = "";//the inventory string that gets printed out
+        String[][] invenCount = new String[100][2];//a 2d array of the item name and the quantity of each, only prints first 100
+        
+        for(int i = 0; i < inventory.size(); i++)
         {
-            for(int j = 0; j < k; j++)//can also use a map here instead
+            for(int j = 0; j-1 < i; j++)//should use a map here instead lol
             {
-                if(invenCount[j][0] == null)
+                if(invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName()))//if the names match
                 {
-                    invenCount[j][0] = i.getName();
-                    invenCount[j][1] = "1";
-                }
-                if(invenCount[j][0].equals(i.getName()))
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
-                else
+                    break; //dont need to check rest of array if similar
+                }
+                else if(invenCount[j][0] == null)
                 {
-                    invenCount[j][0] = i.getName();
+                    invenCount[j][0] = inventory.get(i).getName();
                     invenCount[j][1] = "1";
-                } 
+                    break; //dont need to check the rest of array if inserted
+                }
             }
-            k++;//TEST
         }
-        for (int i = 0; i < invenCount.length; i++) 
+        for (int i = 0; i < invenCount.length; i++) //prints the inventory and counter if > 1
         {
             if(invenCount[i][0] != null)
             {
@@ -116,7 +114,7 @@ public class Player extends Entity
                     inven += invenCount[i][0] + ", ";
             }
         }
-        if(inven.length() > 2)
+        if(inven.length() > 2) //formatting
             inven = inven.substring(0, inven.length() - 2);
         
         System.out.println(inven);
