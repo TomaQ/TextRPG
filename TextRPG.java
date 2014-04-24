@@ -75,7 +75,6 @@ public class TextRPG
                 {
                     jobSelector = scan.nextInt();
                     scan.nextLine(); //blank readline for int(maybe convert string to int)
-                    //loop = false;
                 }
                 catch(InputMismatchException e)
                 {
