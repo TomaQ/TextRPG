@@ -75,6 +75,7 @@ public final class Battle
     public void decidePlayerAction()
     {
         int pass = 0;//set to 1 if the player makes a valid move
+        //boolean loop = true;
         
         do
         {
@@ -169,5 +170,6 @@ public final class Battle
     {
         System.out.println(monster.getName() + "'s turn!");
         //monster.getSkills();
+        System.out.println("The " + monster.getName() + " looks displeased.");
     }
 }
