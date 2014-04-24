@@ -126,7 +126,7 @@ public class Game
     public void printCommands()
     {
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, quit");
         printBreak();
     }
     
