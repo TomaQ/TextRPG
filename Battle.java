@@ -78,7 +78,6 @@ public final class Battle
     public void decidePlayerAction()
     {
         pass = false;//set to 1 if the player makes a valid move
-        //boolean loop = true;
         
         boolean loop = true;
         
@@ -106,8 +105,8 @@ public final class Battle
                     }
                     else if(input == 3)
                     {
-                        playerItem();
-                        loop = false;
+                        if(playerItem())
+                            loop = false;
                     }
                     else if(input == 4)
                     {
@@ -143,61 +142,115 @@ public final class Battle
     
     public void playerSkill(int dmg)//player uses a skill
     {
+        String skillz = "";
         for(int i = 0; i < hero.getJob().getSkills().length; i++) 
         {
-            if(!hero.getJob().getSkills()[i].getSkillName().equals("Attack"))//Need to remove getSkills from adding Attack  
-                System.out.print(hero.getJob().getSkills()[i].getSkillName() + "(" + i + ")" + ", ");
+            if(!hero.getJob().getSkills()[i].getSkillName().equals("Attack"))//Need to remove getSkills from adding Attack
+            {
+                skillz += hero.getJob().getSkills()[i].getSkillName() + "(" + i + ")" + ", ";
+            }
         }
         
-        System.out.println();//print statement above
+        skillz = skillz.substring(0, skillz.length() -2);
+        System.out.println(skillz);
 
         System.out.println("Which skill will you use?");
-        int skillChosen = scan.nextInt();
-        scan.nextLine();//maybe i should just cast ints...
-              
-        if(hero.getCurrentMana() >= hero.getJob().getSkills()[skillChosen].getManaCost())
-        {    
-            dmg = hero.getJob().getSkills()[skillChosen].use();
-
-            if (monster.getWeakness() == hero.getJob().getSkills()[skillChosen].getType()) {
-                dmg = (int) (dmg * 1.5);//number uncertain about I am
-            }
-            monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
-            hero.setCurrentMana(hero.getCurrentMana() - hero.getJob().getSkills()[skillChosen].getManaCost());//uses up mana
-
-            System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
-            pass = true;//PASSED!
-        }
         
-        else
+        int skillChosen = -1;
+        boolean loop = true;
+        while(loop)
         {
-            System.out.println("Not enough mana!");
+            try
+            {
+                skillChosen = scan.nextInt();
+                scan.nextLine();//maybe i should just cast ints...
+                if(skillChosen < hero.getJob().getSkills().length && skillChosen >= 0)
+                {
+                    loop = false;
+                }
+                else
+                {
+                    TextRPG.invalidInput();
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                TextRPG.invalidInput();
+                scan.next();
+            }
         }
+            if(hero.getCurrentMana() >= hero.getJob().getSkills()[skillChosen].getManaCost())
+            {    
+                dmg = hero.getJob().getSkills()[skillChosen].use();
+
+                if (monster.getWeakness() == hero.getJob().getSkills()[skillChosen].getType()) 
+                {
+                    dmg = (int) (dmg * 1.5);//number uncertain about I am
+                }
+                monster.setCurrentHealth(monster.getCurrentHealth() - dmg);
+                hero.setCurrentMana(hero.getCurrentMana() - hero.getJob().getSkills()[skillChosen].getManaCost());//uses up mana
+
+                System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
+                pass = true;//PASSED!
+            }
+
+            else
+            {
+                System.out.println("Not enough mana!");
+            }
     }
     
-    public void playerItem() 
+    public boolean playerItem() 
     {
+        String inven = "";
         for (int i = 0; i < hero.getInventory().size(); i++) 
         {
-            System.out.print(hero.getInventory().get(i).getName() + "(" + i + ")" + ", ");
+            inven += hero.getInventory().get(i).getName() + "(" + i + ")" + ", ";
         }
+        if(inven.length() > 0)
+            inven = inven.substring(0, inven.length() -2);
         
-        System.out.println();
+        System.out.println(inven);
 
         System.out.println("Which item will you use?");
-        int itemChosen = Integer.parseInt(scan.nextLine());
-
+        
+        boolean loop = true;
+        int itemChosen = -1;
+        
+        while(loop)
+        {
+            try
+            {            
+                itemChosen = scan.nextInt();
+                scan.nextLine();
+                if(itemChosen < hero.getInventory().size() && itemChosen >= 0)
+                {
+                    loop = false;
+                }
+                else
+                {
+                    TextRPG.invalidInput();
+                }
+            }
+            catch(InputMismatchException e)
+            {
+                TextRPG.invalidInput();
+                scan.next();
+            }
+        }
         if (hero.getInventory().get(itemChosen).getItemType() == 1)//if the item type is consumable
         {
             //probably a better way to do this
 
             hero.useItem(hero.getInventory().get(itemChosen).use());
             pass = true;//PASSED!
+            return true;
         } 
         
         else 
         {
             hero.getInventory().get(itemChosen).itemError();
+            return false;
         }
     }
     

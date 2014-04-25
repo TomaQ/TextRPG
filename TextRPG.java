@@ -3,6 +3,7 @@ need to fix magic numbers
 need to fix formating of code
 need to fix user invalid input bugs
 need to remove item if consumable
+need to fix choosing attack in skills method
 
 player commands parsing
 

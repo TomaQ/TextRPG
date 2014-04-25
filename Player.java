@@ -83,6 +83,7 @@ public class Player extends Entity
     
     public void printInventory()
     {
+        Game.printBreak();
         System.out.println("Your inventory:");
         String inven = "";//the inventory string that gets printed out
         String[][] invenCount = new String[100][2];//a 2d array of the item name and the quantity of each, only prints first 100
@@ -150,17 +151,19 @@ public class Player extends Entity
     
     public void printStatus()
     {
+        Game.printBreak();
         System.out.println("Name: " + getName() + "\tJob: " + getJobName() + "\tLevel:" + getLevel());
         System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic()+ "\nAgility:" + getCurrentAgility()+ "\nDefense:" + getCurrentDefense()+ "\nMagic Defense:" + getCurrentMagicDefense());
     }
     
     public void printEquipment()
     {
+        Game.printBreak();
         System.out.println("Weapons: " + getWeapon().getName() + "/" + getOffHand().getName());
         System.out.println("Chest: " + getChest().getName() + "\tLegs: " + getLegs().getName());
         System.out.println("Bracers: " + getBracers().getName() + "\tBoots: " + getBoots().getName());
         System.out.println("Gloves: " + getGloves().getName() + "\tRings: " + getRing1().getName() + "/" + getRing2().getName());
-        System.out.println("Hat: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
+        System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
     
     @Override    
