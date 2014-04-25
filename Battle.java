@@ -1,4 +1,5 @@
 //This class handles all of the battle functions needed for a standard battle
+//The players health and mana reset after every battle
 
 package textrpg;
 
