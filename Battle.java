@@ -165,8 +165,8 @@ public final class Battle
             {
                 skillChosen = scan.nextInt();
                 scan.nextLine();//maybe i should just cast ints...
-                if(skillChosen < hero.getJob().getSkills().length && skillChosen >= 0)
-                {
+                if(skillChosen < hero.getJob().getSkills().length && skillChosen >= 0 && !hero.getJob().getSkills()[skillChosen].getSkillName().equals("Attack"))
+                {//^^ lol ^^
                     loop = false;
                 }
                 else
