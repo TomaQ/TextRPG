@@ -3,6 +3,7 @@ package textrpg.jobs;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import textrpg.Game;
 import textrpg.Player;
 import textrpg.skills.Skill;
 
@@ -36,6 +37,7 @@ public class Job
     }
     public void printSkills()//prints all of the skills learned
     {
+        Game.printBreak();
         String skil = "";
         for(int i = 0; i < skillsLearned.size(); i++)
         {
