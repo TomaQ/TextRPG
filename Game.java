@@ -14,7 +14,7 @@ public class Game {
 
     static String lineBreak = "==========================";
     Room currentRoom = null; //the current room the player is in
-    String userInput = ""; 
+    String userInput = "";
 
     //loadRooms() maybe
     public Game(Player hero) {
@@ -43,26 +43,26 @@ public class Game {
         System.out.println("Bye!!");
     }
 
-    public static final void printBreak(){//prints a LINE_BREAKERRR!
-    
+    public static final void printBreak() {//prints a LINE_BREAKERRR!
+
         System.out.println(lineBreak);
     }
 
-    public final void command(Player hero){//checks what to do from the users input
-    
+    public final void command(Player hero) {//checks what to do from the users input
+
         userInput = userInput.toLowerCase();
         int i = userInput.indexOf(' '); //gets the space in the command
         String firstUserInput, restofUserInput = "";
 
-        if (i > 0){// if there's a space then parse it
-        
+        if (i > 0) {// if there's a space then parse it
+
             firstUserInput = userInput.substring(0, i);
             restofUserInput = userInput.substring(i + 1, userInput.length());
         }
         else {
             firstUserInput = userInput;
         }
-        
+
         firstUserInput = parseUserInput(firstUserInput);
 
         switch (firstUserInput) { //this will be better later....
@@ -132,14 +132,15 @@ public class Game {
                 break;
             case "equip":
                 equipCommand(restofUserInput, hero);
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
         }
     }
 
-    private void startingThingsForTesting(Player hero){//method for testing purposes
-    
+    private void startingThingsForTesting(Player hero) {//method for testing purposes
+
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
@@ -150,30 +151,39 @@ public class Game {
         System.out.println("Here's some gear!");
         Weapon iron = new IronSword();
         Equipment bronze = new BronzeChest();
-        hero.setWeapon(iron);
+        hero.getInventory().add(iron);
         hero.setChest(bronze);
 
     }
-    
-    public String parseUserInput(String input){ //formats for shortcuts, need to make an array later of acceptable commands....
+
+    public String parseUserInput(String input) { //formats for shortcuts, need to make an array later of acceptable commands....
         switch (input) {
-            case "north": input = "n";
+            case "north":
+                input = "n";
                 break;
-            case "south": input = "s";
+            case "south":
+                input = "s";
                 break;
-            case "east": input = "e";
+            case "east":
+                input = "e";
                 break;
-            case "west": input = "w";
+            case "west":
+                input = "w";
                 break;
-            case "exit": input = "exits"; 
+            case "exit":
+                input = "exits";
                 break;
-            case "battle": input = "b";
+            case "battle":
+                input = "b";
                 break;
-            case "inventory": input = "i";
+            case "inventory":
+                input = "i";
                 break;
-            case "search" : input = "look";
+            case "search":
+                input = "look";
                 break;
-            case "stats": input = "status";
+            case "stats":
+                input = "status";
                 break;
         }
         return input;
@@ -185,8 +195,8 @@ public class Game {
         printBreak();
     }
 
-    public void takeCommand(String rest, Player hero){//figures out what to take
-    
+    public void takeCommand(String rest, Player hero) {//figures out what to take
+
         boolean pass = false;
         for (int i = 0; i < currentRoom.getRoomLoot().size(); i++)//for some reason using nested for each loops crashes here
         {
@@ -201,18 +211,19 @@ public class Game {
                 }
             }
         }
-        if (!pass){ //if there was no item let them know
+        if (!pass) { //if there was no item let them know
             System.out.println("There's no item here called that.");
         }
     }
-    
+
     public void equipCommand(String input, Player hero) {
         boolean pass = false;
-
+        
         for (Item i : hero.getInventory()) {
-            if (input.equals(i.getName())) {
-                if (i.getClass() == Equipment.class) {
-                    pass = true;
+            if ((i.getName().toLowerCase().equals(input))) {
+                System.out.println(i.getClass().getSuperclass().toString());
+                if (i.getClass().toString().equals("class textrpg.weapons.Weapon") || i.getClass().toString().equals("class textrpg.equipment.Equipment")) {
+                    pass = true; //^^^ i dont like that line ^^^
 
                     Equipment temp = (Equipment) i;//look at docs for weapon types
                     hero.addInventory(temp);
@@ -251,8 +262,12 @@ public class Game {
                         case 11:
                             hero.setGoggles((Equipment) i);
                             break;
-
                     }
+                    System.out.println("Equiped " + i.getName());
+                }
+                else {
+                    System.out.println("You can't equip that!");
+                    pass = true;
                 }
 
             }
