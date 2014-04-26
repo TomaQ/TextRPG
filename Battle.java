@@ -213,10 +213,15 @@ public final class Battle {
                 scan.next();
             }
         }
-        if (hero.getInventory().get(itemChosen).getItemType() == 1) {//if the item type is consumable
+        Item chosenItem = hero.getInventory().get(itemChosen);
+        if (chosenItem.getItemType() == 1) {//if the item type is consumable
 
             //probably a better way to do this
             hero.useItem(hero.getInventory().get(itemChosen).use());
+            if (chosenItem.isConsumable()) {
+                hero.getInventory().remove(chosenItem);
+            }
+
             pass = true;//PASSED!
             return true;
         }

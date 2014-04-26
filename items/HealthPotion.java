@@ -14,6 +14,8 @@ public class HealthPotion extends Item
         
         String[] t = {"pot", "health pot", "health potion", "potion"};
         super.setTags(t);
+        
+        super.setConsumable(true);
     }
     
     @Override

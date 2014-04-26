@@ -11,6 +11,8 @@ public class SlimeExtract extends Item
         
         int[] i = super.no_stats_modified;
         super.setStatsModified(i);
+        
+        super.setConsumable(false);
     }
     
     @Override

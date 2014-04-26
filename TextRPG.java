@@ -1,7 +1,6 @@
 /*TODO:
  need to fix magic numbers
  need to fix formating of code
- need to remove item if consumable
  need to comment code
  need to add way to equip things 
 
@@ -25,7 +24,7 @@ public class TextRPG {
         int ans = 0;
         Scanner scan = new Scanner(System.in);
         boolean loop = true;
-
+        
         while (loop) {
             try {
                 ans = scan.nextInt();
