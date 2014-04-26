@@ -14,18 +14,18 @@ public class Game {
 
     static String lineBreak = "==========================";
     Room currentRoom = null; //the current room the player is in
-    String userInput = "";
+    String userInput = ""; 
 
     //loadRooms() maybe
     public Game(Player hero) {
 
-        //load rooms
-        //set room exits
+        //load rooms here
+        //set room exits somewhere
         printBreak();
 
         Room prRoom = new PowerRangerRoom(null, null, null, null);//new method for now and such
-        Room startRoom = new StartingRoom(null, null, null, null);//there has to be a better way to do this...
-        prRoom.setExits(null, startRoom, null, null);
+        Room startRoom = new StartingRoom(null, null, null, null);//there's a better way to do this...
+        prRoom.setExits(null, startRoom, null, null); //dont look at me!
         startRoom.setExits(prRoom, null, null, null);
 
         currentRoom = startRoom;//for testing atm
@@ -48,10 +48,10 @@ public class Game {
         System.out.println(lineBreak);
     }
 
-    public final void command(Player hero){//checks what to do from the users input, need to parse spaces
+    public final void command(Player hero){//checks what to do from the users input
     
         userInput = userInput.toLowerCase();
-        int i = userInput.indexOf(' ');
+        int i = userInput.indexOf(' '); //gets the space in the command
         String firstUserInput, restofUserInput = "";
 
         if (i > 0){// if there's a space then parse it
@@ -63,9 +63,9 @@ public class Game {
             firstUserInput = userInput;
         }
         
-        parseUserInput(firstUserInput);
+        firstUserInput = parseUserInput(firstUserInput);
 
-        switch (firstUserInput) {
+        switch (firstUserInput) { //this will be better later....
             case "b":
                 Slime m = new Slime();//temporary
                 new Battle(hero, m);
@@ -153,7 +153,7 @@ public class Game {
 
     }
     
-    public void parseUserInput(String input){ //formats for shortcuts
+    public String parseUserInput(String input){ //formats for shortcuts, need to make an array later of acceptable commands....
         switch (input) {
             case "north": input = "n";
                 break;
@@ -174,9 +174,10 @@ public class Game {
             case "stats": input = "status";
                 break;
         }
+        return input;
     }
 
-    public void printCommands() {
+    public void printCommands() { //prints all of the available commands
         printBreak();
         System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, quit");
         printBreak();
