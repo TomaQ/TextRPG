@@ -3,8 +3,7 @@
  need to fix formating of code
  need to remove item if consumable
  need to comment code
-
- player commands parsing
+ need to add way to equip things 
 
  change text if play takes items from room?
  add random gold and item drops from mobs
