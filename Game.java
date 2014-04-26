@@ -130,6 +130,8 @@ public class Game {
             case "take":
                 takeCommand(restofUserInput, hero);
                 break;
+            case "equip":
+                equipCommand(restofUserInput, hero);
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -200,8 +202,64 @@ public class Game {
             }
         }
         if (!pass){ //if there was no item let them know
-        
             System.out.println("There's no item here called that.");
         }
+    }
+    
+    public void equipCommand(String input, Player hero) {
+        boolean pass = false;
+
+        for (Item i : hero.getInventory()) {
+            if (input.equals(i.getName())) {
+                if (i.getClass() == Equipment.class) {
+                    pass = true;
+
+                    Equipment temp = (Equipment) i;//look at docs for weapon types
+                    hero.addInventory(temp);
+
+                    switch (i.getItemType()) {
+                        case 1:
+                            hero.setWeapon((Weapon) i);
+                            break;
+                        case 2:
+                            hero.setChest((Equipment) i);
+                            break;
+                        case 3:
+                            hero.setLegs((Equipment) i);
+                            break;
+                        case 4:
+                            hero.setBracers((Equipment) i);
+                            break;
+                        case 5:
+                            hero.setBoots((Equipment) i);
+                            break;
+                        case 6:
+                            hero.setGloves((Equipment) i);
+                            break;
+                        case 7:
+                            hero.setOffHand((Weapon) i);
+                            break;
+                        case 8:
+                            hero.setOffHand((Weapon) i);
+                            break;
+                        case 9:
+                            hero.setRing((Equipment) i);
+                            break;
+                        case 10:
+                            hero.setHat((Equipment) i);
+                            break;
+                        case 11:
+                            hero.setGoggles((Equipment) i);
+                            break;
+
+                    }
+                }
+
+            }
+        }
+        if (!pass) {
+            System.out.println("There's no item here called that.");
+        }
+
     }
 }
