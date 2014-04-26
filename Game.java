@@ -62,6 +62,8 @@ public class Game {
         else {
             firstUserInput = userInput;
         }
+        
+        parseUserInput(firstUserInput);
 
         switch (firstUserInput) {
             case "b":
@@ -113,7 +115,7 @@ public class Game {
             case "look":
                 System.out.println(currentRoom.getRoomDescription());
                 break;
-            case "inventory":
+            case "i":
                 hero.printInventory();
                 break;
             case "skills":
@@ -149,6 +151,29 @@ public class Game {
         hero.setWeapon(iron);
         hero.setChest(bronze);
 
+    }
+    
+    public void parseUserInput(String input){ //formats for shortcuts
+        switch (input) {
+            case "north": input = "n";
+                break;
+            case "south": input = "s";
+                break;
+            case "east": input = "e";
+                break;
+            case "west": input = "w";
+                break;
+            case "exit": input = "exits"; 
+                break;
+            case "battle": input = "b";
+                break;
+            case "inventory": input = "i";
+                break;
+            case "search" : input = "look";
+                break;
+            case "stats": input = "status";
+                break;
+        }
     }
 
     public void printCommands() {
