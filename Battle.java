@@ -39,19 +39,15 @@ public final class Battle {
         while (hero.getCurrentHealth() > 0 && monster.getCurrentHealth() > 0) {
             System.out.println("-----");
 
-            if (turns % 2 == 1) {
-                monsterTurn();
-            }
-            else {
-                playerTurn();
-            }
+            if (turns % 2 == 1) {monsterTurn();}
+            else {playerTurn();}
 
             turns++;
         }
 
         //if the player doesn't win then game over!!!!!!
-        if (ranAway == false)//if they didnt run away then they get this stuff
-        {
+        if (ranAway == false){//if they didnt run away then they get this stuff
+        
             h.setGold(hero.getGold() + m.getGoldWorth());
             String lootName = "";
             for (Item i : m.getLoot()) {

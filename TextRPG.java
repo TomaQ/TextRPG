@@ -99,7 +99,7 @@ public class TextRPG {
     }
 
     public static void main(String[] args) throws IOException {
-        final double version = 0.2;
+        final double version = 0.3;
 
         System.out.println("TextRPG! v" + version);
         new TextRPG();
