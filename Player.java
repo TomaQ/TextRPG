@@ -20,8 +20,7 @@ public class Player extends Entity {
     private Equipment bracers = new NoneE();
     private Equipment boots = new NoneE();
     private Equipment gloves = new NoneE();
-    private Equipment ring1 = new NoneE();
-    private Equipment ring2 = new NoneE();
+    private Equipment ring = new NoneE();
     private Equipment hat = new NoneE();
     private Equipment goggles = new NoneE();//not sure if i want these...
 
@@ -62,11 +61,8 @@ public class Player extends Entity {
     public Equipment getGloves(){return gloves;}
     public void setGloves(Equipment e){gloves = e;initCurrentStats();}
     
-    public Equipment getRing1(){return ring1;}
-    public void setRing1(Equipment e){ring1 = e;initCurrentStats();}
-    
-    public Equipment getRing2(){return ring2;}
-    public void setRing2(Equipment e){ring2 = e;initCurrentStats();}
+    public Equipment getRing(){return ring;}
+    public void setRing(Equipment e){ring = e;initCurrentStats();}
     
     public Equipment getHat(){return hat;}
     public void setHat(Equipment e){hat = e;initCurrentStats();}
@@ -158,7 +154,7 @@ public class Player extends Entity {
         System.out.println("Weapons: " + getWeapon().getName() + "/" + getOffHand().getName());
         System.out.println("Chest: " + getChest().getName() + "\tLegs: " + getLegs().getName());
         System.out.println("Bracers: " + getBracers().getName() + "\tBoots: " + getBoots().getName());
-        System.out.println("Gloves: " + getGloves().getName() + "\tRings: " + getRing1().getName() + "/" + getRing2().getName());
+        System.out.println("Gloves: " + getGloves().getName() + "\tRing: " + getRing().getName());
         System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
     
@@ -185,8 +181,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[0];
         bonus += getBoots().getEquipmentStats()[0];
         bonus += getGloves().getEquipmentStats()[0];
-        bonus += getRing1().getEquipmentStats()[0];
-        bonus += getRing2().getEquipmentStats()[0];
+        bonus += getRing().getEquipmentStats()[0];
         bonus += getHat().getEquipmentStats()[0];
         bonus += getGoggles().getEquipmentStats()[0];
         return bonus;
@@ -201,8 +196,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[1];
         bonus += getBoots().getEquipmentStats()[1];
         bonus += getGloves().getEquipmentStats()[1];
-        bonus += getRing1().getEquipmentStats()[1];
-        bonus += getRing2().getEquipmentStats()[1];
+        bonus += getRing().getEquipmentStats()[1];
         bonus += getHat().getEquipmentStats()[1];
         bonus += getGoggles().getEquipmentStats()[1];
         return bonus;
@@ -217,8 +211,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[2];
         bonus += getBoots().getEquipmentStats()[2];
         bonus += getGloves().getEquipmentStats()[2];
-        bonus += getRing1().getEquipmentStats()[2];
-        bonus += getRing2().getEquipmentStats()[2];
+        bonus += getRing().getEquipmentStats()[2];
         bonus += getHat().getEquipmentStats()[2];
         bonus += getGoggles().getEquipmentStats()[2];
         return bonus;
@@ -233,8 +226,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[3];
         bonus += getBoots().getEquipmentStats()[3];
         bonus += getGloves().getEquipmentStats()[3];
-        bonus += getRing1().getEquipmentStats()[3];
-        bonus += getRing2().getEquipmentStats()[3];
+        bonus += getRing().getEquipmentStats()[3];
         bonus += getHat().getEquipmentStats()[3];
         bonus += getGoggles().getEquipmentStats()[3];
         return bonus;
@@ -249,8 +241,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[4];
         bonus += getBoots().getEquipmentStats()[4];
         bonus += getGloves().getEquipmentStats()[4];
-        bonus += getRing1().getEquipmentStats()[4];
-        bonus += getRing2().getEquipmentStats()[4];
+        bonus += getRing().getEquipmentStats()[4];
         bonus += getHat().getEquipmentStats()[4];
         bonus += getGoggles().getEquipmentStats()[4];
         return bonus;
@@ -265,8 +256,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[5];
         bonus += getBoots().getEquipmentStats()[5];
         bonus += getGloves().getEquipmentStats()[5];
-        bonus += getRing1().getEquipmentStats()[5];
-        bonus += getRing2().getEquipmentStats()[5];
+        bonus += getRing().getEquipmentStats()[5];
         bonus += getHat().getEquipmentStats()[5];
         bonus += getGoggles().getEquipmentStats()[5];
         return bonus;
@@ -281,8 +271,7 @@ public class Player extends Entity {
         bonus += getBracers().getEquipmentStats()[6];
         bonus += getBoots().getEquipmentStats()[6];
         bonus += getGloves().getEquipmentStats()[6];
-        bonus += getRing1().getEquipmentStats()[6];
-        bonus += getRing2().getEquipmentStats()[6];
+        bonus += getRing().getEquipmentStats()[6];
         bonus += getHat().getEquipmentStats()[6];
         bonus += getGoggles().getEquipmentStats()[6];
         return bonus;
