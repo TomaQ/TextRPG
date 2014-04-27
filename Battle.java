@@ -85,6 +85,7 @@ public final class Battle {
             System.out.println("Attack = 1, Skills = 2, Items = 3, Run = 4");
             while (loop) {
                 try {
+                    System.out.print(">");
                     int input = scan.nextInt();
                     scan.nextLine();
 
