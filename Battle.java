@@ -95,8 +95,8 @@ public final class Battle {
                         loop = false;
                     }
                     else if (input == 2) {
-                        playerSkill(dmg);
-                        loop = false;
+                        if(playerSkill(dmg))
+                            loop = false;
                     }
                     else if (input == 3) {
                         if (playerItem()) {
@@ -132,7 +132,7 @@ public final class Battle {
         pass = true;//PASSED!
     }
 
-    public void playerSkill(int dmg) {//player uses a skill
+    public boolean playerSkill(int dmg) {//player uses a skill
 
         String skillz = "";
         for (int i = 0; i < hero.getJob().getSkills().length; i++) {
@@ -176,9 +176,11 @@ public final class Battle {
 
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
             pass = true;//PASSED!
+            return true;
         }
         else {
             System.out.println("Not enough mana!");
+            return false;
         }
     }
 
