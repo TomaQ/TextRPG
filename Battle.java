@@ -71,13 +71,13 @@ public final class Battle {
 
     public void playerTurn() {//need to organize this like totally better
 
-        System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + " MP: " + hero.getCurrentMana());
+        System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + "/" + hero.getMaxHealth() + " MP: " + hero.getCurrentMana() + "/" + hero.getMaxMana());
         System.out.println(monster.getName() + " - " + "HP: " + monster.getCurrentHealth());
         decidePlayerAction();
     }
 
     public void decidePlayerAction() {
-        pass = false;//set to 1 if the player makes a valid move
+        pass = false;//set to true if the player makes a valid move
 
         boolean loop = true;
 
