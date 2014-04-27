@@ -30,9 +30,9 @@ public class Player extends Entity {
     private int currentExp;
     private int nextLevelExp = 27; //exp needed to reach the next level - Temporary number
 
-    private int gold;
+    private int gold = 0;
 
-    public Player(String n, int j) {
+    public Player(String n, int j) { //sets the level to 1 and initializes the players job
         level = 1;
         super.setName(n);
         new Job(this, j);
@@ -70,11 +70,11 @@ public class Player extends Entity {
     public Equipment getGoggles(){return goggles;}
     public void setGoggles(Equipment e){goggles = e;initCurrentStats();}
     
-    public List<Item> getInventory(){return inventory;}
+    public List<Item> getInventory(){return inventory;}//used for removing and looping
     public void addInventory(Item i){inventory.add(i);}
     
     public Job getJob(){return job;}
-    public void setJob(Job j){job = j;}
+    public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
     
     public void printInventory() {
         
@@ -85,13 +85,13 @@ public class Player extends Entity {
 
         for (int i = 0; i < inventory.size(); i++) {
             for (int j = 0; j - 1 < i; j++)//should use a map here instead lol
-            {
+            {   //short circuits here
                 if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())){//if the names match
                 
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
                     break; //dont need to check rest of array if similar
                 }
-                else if (invenCount[j][0] == null) {
+                else if (invenCount[j][0] == null) { //if it doesnt find the item then it adds it to the string
                     invenCount[j][0] = inventory.get(i).getName();
                     invenCount[j][1] = "1";
                     break; //dont need to check the rest of array if inserted
@@ -137,7 +137,7 @@ public class Player extends Entity {
         System.out.println("You reached level " + level + "!");
 
         job.levelUp(this);
-        initCurrentStats();
+        initCurrentStats(); //need to set currect stats since they changed
     }
     
     public int getGold(){return gold;}
