@@ -134,6 +134,9 @@ public class Game {
             case "equip":
                 equipCommand(restofUserInput, hero);
                 break;
+            case "talk":
+                currentRoom.getNPCsInRoom()[0].printDefaultDialogue(); //TEMP!!!
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -192,7 +195,7 @@ public class Game {
 
     public void printCommands() { //prints all of the available commands
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, quit");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, quit");
         printBreak();
     }
 
