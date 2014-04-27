@@ -1,7 +1,7 @@
 /*TODO:
  need to fix magic numbers
  need to fix formating of code
- need to comment code
+ need to comment code more
 
  change text if play takes items from room?
  add random gold and item drops from mobs

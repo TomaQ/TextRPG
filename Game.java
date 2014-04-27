@@ -36,6 +36,7 @@ public class Game {
         startingThingsForTesting(hero);//all of the testing stuff goes here
 
         while (!userInput.equals("quit")) {
+            System.out.print(">");
             userInput = scan.nextLine();
             command(hero);
         }
