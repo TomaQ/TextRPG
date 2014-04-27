@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import textrpg.items.*;
 import textrpg.monsters.*;
+import textrpg.npcs.NPC;
 
 public class Room
 {
@@ -20,6 +21,8 @@ public class Room
     List<Item> roomLoot = new ArrayList<>();
     private Monster[] monsterEncounters;
     private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
+    
+    private NPC[] npcsInRoom;
     
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
@@ -110,4 +113,7 @@ public class Room
     
     public int[] getMonsterEncounterChance(){return monsterEncounterChance;}
     public void setMonsterEncounterChance(int[] i){monsterEncounterChance = i;}
+    
+    public NPC[] getNPCsInRoom(){return npcsInRoom;}
+    public void setNPCsInRoom(NPC[] n){npcsInRoom = n;}
 }
