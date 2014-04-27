@@ -2,7 +2,6 @@
  need to fix magic numbers
  need to fix formating of code
  need to comment code
- need to add way to equip things 
 
  change text if play takes items from room?
  add random gold and item drops from mobs

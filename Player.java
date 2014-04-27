@@ -80,8 +80,8 @@ public class Player extends Entity {
         
         Game.printBreak();
         System.out.println("Your inventory:");
-        String inven = "";//the inventory string that gets printed out
-        String[][] invenCount = new String[100][2];//a 2d array of the item name and the quantity of each, only prints first 100
+        String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
+        String[][] invenCount = new String[inventory.size()][2];//a 2d array of the item name and the quantity of each
 
         for (int i = 0; i < inventory.size(); i++) {
             for (int j = 0; j - 1 < i; j++)//should use a map here instead lol
