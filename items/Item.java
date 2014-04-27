@@ -18,6 +18,8 @@ public class Item
     //hp, mana, str, mag, agi, def, mdef, (1 or 0)
     //if index 7 is 1 then it can increase the hp or mana over the max else it can't
     
+    private boolean consumable;
+    
     private String name;
     private String itemDescription;
     
@@ -38,6 +40,9 @@ public class Item
     
     public String[] getTags(){return tags;}
     public void setTags(String[] t){tags = t;}
+    
+    public boolean isConsumable(){return consumable;}
+    public void setConsumable(boolean b){consumable = b;}
     
     public int[] use(){int[] i = {-1};return i;}//NEED TO OVERWRITE
     

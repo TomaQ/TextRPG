@@ -9,10 +9,10 @@ import textrpg.jobs.*;
 import textrpg.weapons.*;
 import textrpg.items.*;
 
-public class Player extends Entity
-{
+public class Player extends Entity {
+
     private Job job;
-    
+
     private Weapon weapon = new NoneW();
     private Weapon offHand = new NoneW(); //shield or offhand goes here
     private Equipment chest = new NoneE();
@@ -20,21 +20,19 @@ public class Player extends Entity
     private Equipment bracers = new NoneE();
     private Equipment boots = new NoneE();
     private Equipment gloves = new NoneE();
-    private Equipment ring1 = new NoneE();
-    private Equipment ring2 = new NoneE();
+    private Equipment ring = new NoneE();
     private Equipment hat = new NoneE();
     private Equipment goggles = new NoneE();//not sure if i want these...
-    
+
     private List<Item> inventory = new ArrayList<>();
-    
+
     private int level;
     private int currentExp;
     private int nextLevelExp = 27; //exp needed to reach the next level - Temporary number
-    
+
     private int gold;
-    
-    public Player(String n, int j)
-    {
+
+    public Player(String n, int j) {
         level = 1;
         super.setName(n);
         new Job(this, j);
@@ -63,11 +61,8 @@ public class Player extends Entity
     public Equipment getGloves(){return gloves;}
     public void setGloves(Equipment e){gloves = e;initCurrentStats();}
     
-    public Equipment getRing1(){return ring1;}
-    public void setRing1(Equipment e){ring1 = e;initCurrentStats();}
-    
-    public Equipment getRing2(){return ring2;}
-    public void setRing2(Equipment e){ring2 = e;initCurrentStats();}
+    public Equipment getRing(){return ring;}
+    public void setRing(Equipment e){ring = e;initCurrentStats();}
     
     public Equipment getHat(){return hat;}
     public void setHat(Equipment e){hat = e;initCurrentStats();}
@@ -81,67 +76,66 @@ public class Player extends Entity
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;}
     
-    public void printInventory()
-    {
+    public void printInventory() {
+        
         Game.printBreak();
         System.out.println("Your inventory:");
         String inven = "";//the inventory string that gets printed out
         String[][] invenCount = new String[100][2];//a 2d array of the item name and the quantity of each, only prints first 100
-        
-        for(int i = 0; i < inventory.size(); i++)
-        {
-            for(int j = 0; j-1 < i; j++)//should use a map here instead lol
+
+        for (int i = 0; i < inventory.size(); i++) {
+            for (int j = 0; j - 1 < i; j++)//should use a map here instead lol
             {
-                if(invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName()))//if the names match
-                {
+                if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())){//if the names match
+                
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
                     break; //dont need to check rest of array if similar
                 }
-                else if(invenCount[j][0] == null)
-                {
+                else if (invenCount[j][0] == null) {
                     invenCount[j][0] = inventory.get(i).getName();
                     invenCount[j][1] = "1";
                     break; //dont need to check the rest of array if inserted
                 }
             }
         }
-        for (int i = 0; i < invenCount.length; i++) //prints the inventory and counter if > 1
-        {
-            if(invenCount[i][0] != null)
-            {
-                if(Integer.valueOf(invenCount[i][1]) > 1)
+        for (int i = 0; i < invenCount.length; i++){ //prints the inventory and counter if > 1
+       
+            if (invenCount[i][0] != null) {
+                if (Integer.valueOf(invenCount[i][1]) > 1) {
                     inven += invenCount[i][0] + "(" + invenCount[i][1] + "), ";
-                else
+                }
+                else {
                     inven += invenCount[i][0] + ", ";
+                }
             }
         }
-        if(inven.length() > 2) //formatting
+        if (inven.length() > 2) {//formatting
             inven = inven.substring(0, inven.length() - 2);
-        
+        }
+
         System.out.println(inven);
     }
     
     public int getCurrentExp(){return currentExp;}
-    public void setCurrentExp(int i)
-    {
-        if(nextLevelExp < (currentExp + i))
-        {
+    public void setCurrentExp(int i) {
+        if (nextLevelExp < (currentExp + i)) {
             currentExp = (currentExp + i) - nextLevelExp;
             levelUp();
         }
-        else
+        else {
             currentExp = i;
+        }
     }
     
     public int getNextLevelExp(){return nextLevelExp;}
     public void setNextLevelExp(int i){nextLevelExp = i;}
     
     public int getLevel(){return level;}
-    public void levelUp()//need more than just this
-    {  
+    public void levelUp(){
+    
         level += 1;
         System.out.println("You reached level " + level + "!");
-        
+
         job.levelUp(this);
         initCurrentStats();
     }
@@ -149,26 +143,23 @@ public class Player extends Entity
     public int getGold(){return gold;}
     public void setGold(int i){gold = i;}
     
-    public void printStatus()
-    {
+    public void printStatus() {
         Game.printBreak();
         System.out.println("Name: " + getName() + "\tJob: " + getJobName() + "\tLevel:" + getLevel());
-        System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic()+ "\nAgility:" + getCurrentAgility()+ "\nDefense:" + getCurrentDefense()+ "\nMagic Defense:" + getCurrentMagicDefense());
+        System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic() + "\nAgility:" + getCurrentAgility() + "\nDefense:" + getCurrentDefense() + "\nMagic Defense:" + getCurrentMagicDefense());
     }
-    
-    public void printEquipment()
-    {
+
+    public void printEquipment() {
         Game.printBreak();
         System.out.println("Weapons: " + getWeapon().getName() + "/" + getOffHand().getName());
         System.out.println("Chest: " + getChest().getName() + "\tLegs: " + getLegs().getName());
         System.out.println("Bracers: " + getBracers().getName() + "\tBoots: " + getBoots().getName());
-        System.out.println("Gloves: " + getGloves().getName() + "\tRings: " + getRing1().getName() + "/" + getRing2().getName());
+        System.out.println("Gloves: " + getGloves().getName() + "\tRing: " + getRing().getName());
         System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
     
-    @Override    
-    public void initCurrentStats()
-    {
+    @Override
+    public void initCurrentStats() {
         super.setCurrentHealth(super.getBaseHealth() + calculateBonusHealth());
         super.setMaxHealth(super.getCurrentHealth());
         super.setCurrentMana(super.getBaseMana() + calculateBonusMana());
@@ -179,7 +170,7 @@ public class Player extends Entity
         super.setCurrentDefense(super.getBaseDefense() + calculateBonusDefense());
         super.setCurrentMagicDefense(super.getBaseMagicDefense() + calculateBonusMagicDefense());
     }
-    
+
     private int calculateBonusHealth()//calculates the bonus HP you get from equipment
     {
         int bonus = 0;
@@ -190,32 +181,28 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[0];
         bonus += getBoots().getEquipmentStats()[0];
         bonus += getGloves().getEquipmentStats()[0];
-        bonus += getRing1().getEquipmentStats()[0];
-        bonus += getRing2().getEquipmentStats()[0];
+        bonus += getRing().getEquipmentStats()[0];
         bonus += getHat().getEquipmentStats()[0];
         bonus += getGoggles().getEquipmentStats()[0];
         return bonus;
     }
-    
-    private int calculateBonusMana()
-    {
+
+    private int calculateBonusMana() {
         int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[1]; 
+        bonus += getWeapon().getEquipmentStats()[1];
         bonus += getOffHand().getEquipmentStats()[1];
         bonus += getChest().getEquipmentStats()[1];
         bonus += getLegs().getEquipmentStats()[1];
         bonus += getBracers().getEquipmentStats()[1];
         bonus += getBoots().getEquipmentStats()[1];
         bonus += getGloves().getEquipmentStats()[1];
-        bonus += getRing1().getEquipmentStats()[1];
-        bonus += getRing2().getEquipmentStats()[1];
+        bonus += getRing().getEquipmentStats()[1];
         bonus += getHat().getEquipmentStats()[1];
         bonus += getGoggles().getEquipmentStats()[1];
         return bonus;
     }
-    
-    private int calculateBonusStrength()
-    {
+
+    private int calculateBonusStrength() {
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[2];
         bonus += getOffHand().getEquipmentStats()[2];
@@ -224,15 +211,13 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[2];
         bonus += getBoots().getEquipmentStats()[2];
         bonus += getGloves().getEquipmentStats()[2];
-        bonus += getRing1().getEquipmentStats()[2];
-        bonus += getRing2().getEquipmentStats()[2];
+        bonus += getRing().getEquipmentStats()[2];
         bonus += getHat().getEquipmentStats()[2];
         bonus += getGoggles().getEquipmentStats()[2];
         return bonus;
     }
-    
-    private int calculateBonusMagic()
-    {
+
+    private int calculateBonusMagic() {
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[3];
         bonus += getOffHand().getEquipmentStats()[3];
@@ -241,15 +226,13 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[3];
         bonus += getBoots().getEquipmentStats()[3];
         bonus += getGloves().getEquipmentStats()[3];
-        bonus += getRing1().getEquipmentStats()[3];
-        bonus += getRing2().getEquipmentStats()[3];
+        bonus += getRing().getEquipmentStats()[3];
         bonus += getHat().getEquipmentStats()[3];
         bonus += getGoggles().getEquipmentStats()[3];
         return bonus;
     }
-    
-    private int calculateBonusAgility()
-    {
+
+    private int calculateBonusAgility() {
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[4];
         bonus += getOffHand().getEquipmentStats()[4];
@@ -258,15 +241,13 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[4];
         bonus += getBoots().getEquipmentStats()[4];
         bonus += getGloves().getEquipmentStats()[4];
-        bonus += getRing1().getEquipmentStats()[4];
-        bonus += getRing2().getEquipmentStats()[4];
+        bonus += getRing().getEquipmentStats()[4];
         bonus += getHat().getEquipmentStats()[4];
         bonus += getGoggles().getEquipmentStats()[4];
         return bonus;
     }
-    
-    private int calculateBonusDefense()
-    {
+
+    private int calculateBonusDefense() {
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[5];
         bonus += getOffHand().getEquipmentStats()[5];
@@ -275,15 +256,13 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[5];
         bonus += getBoots().getEquipmentStats()[5];
         bonus += getGloves().getEquipmentStats()[5];
-        bonus += getRing1().getEquipmentStats()[5];
-        bonus += getRing2().getEquipmentStats()[5];
+        bonus += getRing().getEquipmentStats()[5];
         bonus += getHat().getEquipmentStats()[5];
         bonus += getGoggles().getEquipmentStats()[5];
         return bonus;
     }
-    
-    private int calculateBonusMagicDefense()
-    {
+
+    private int calculateBonusMagicDefense() {
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[6];
         bonus += getOffHand().getEquipmentStats()[6];
@@ -292,8 +271,7 @@ public class Player extends Entity
         bonus += getBracers().getEquipmentStats()[6];
         bonus += getBoots().getEquipmentStats()[6];
         bonus += getGloves().getEquipmentStats()[6];
-        bonus += getRing1().getEquipmentStats()[6];
-        bonus += getRing2().getEquipmentStats()[6];
+        bonus += getRing().getEquipmentStats()[6];
         bonus += getHat().getEquipmentStats()[6];
         bonus += getGoggles().getEquipmentStats()[6];
         return bonus;
@@ -301,24 +279,22 @@ public class Player extends Entity
     
     public void useItem(int[] statsModified)
     {
-        if(statsModified[7] == 1)//if it can increase max hp or mp, can probably make if-else better
-        {
+        if(statsModified[7] == 1){//if it can increase max hp or mp, can probably make if-else better
+        
             super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
         }
-        else
-        {
+        else{
             if(super.getCurrentHealth() + statsModified[0] > super.getMaxHealth())
                 super.setCurrentHealth(super.getMaxHealth());
             else
                 super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
         }
         
-        if(statsModified[7] == 1)//if it can increase max hp or mp, can probably make if-else better
-        {
+        if(statsModified[7] == 1){//if it can increase max hp or mp, can probably make if-else better
+        
             super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
         }
-        else
-        {
+        else{
             if(super.getCurrentMana() + statsModified[1] > super.getMaxMana())
                 super.setCurrentMana(super.getMaxMana());
             else
