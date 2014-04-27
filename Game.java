@@ -191,7 +191,7 @@ public class Game {
 
     public void printCommands() { //prints all of the available commands
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, quit");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, quit");
         printBreak();
     }
 
@@ -218,49 +218,62 @@ public class Game {
 
     public void equipCommand(String input, Player hero) {
         boolean pass = false;
+        Equipment temp = null;
+        Equipment j = null; //the item that we searched for
         
         for (Item i : hero.getInventory()) {
             if ((i.getName().toLowerCase().equals(input))) {
-                System.out.println(i.getClass().getSuperclass().toString());
-                if (i.getClass().toString().equals("class textrpg.weapons.Weapon") || i.getClass().toString().equals("class textrpg.equipment.Equipment")) {
+                if (i.getClass().getSuperclass().equals(Equipment.class) || i.getClass().getSuperclass().equals(Weapon.class)) {
                     pass = true; //^^^ i dont like that line ^^^
-
-                    Equipment temp = (Equipment) i;//look at docs for weapon types
-                    hero.addInventory(temp);
-
-                    switch (i.getItemType()) {
+                    j = (Equipment)i;//need to access equipmentType method
+                    
+                    //look at docs for weapon types
+                    switch (j.getEquipmentType()) {
                         case 1:
+                            temp = hero.getWeapon();
                             hero.setWeapon((Weapon) i);
                             break;
                         case 2:
+                            temp = hero.getChest();
                             hero.setChest((Equipment) i);
                             break;
                         case 3:
+                            temp = hero.getLegs();
                             hero.setLegs((Equipment) i);
                             break;
                         case 4:
+                            temp = hero.getBracers();
                             hero.setBracers((Equipment) i);
                             break;
                         case 5:
+                            temp = hero.getBoots();
                             hero.setBoots((Equipment) i);
                             break;
                         case 6:
+                            temp = hero.getGloves();
                             hero.setGloves((Equipment) i);
                             break;
                         case 7:
+                            temp = hero.getOffHand();
                             hero.setOffHand((Weapon) i);
                             break;
                         case 8:
+                            temp = hero.getOffHand();
                             hero.setOffHand((Weapon) i);
                             break;
                         case 9:
+                            temp = hero.getRing();
                             hero.setRing((Equipment) i);
                             break;
                         case 10:
+                            temp = hero.getHat();
                             hero.setHat((Equipment) i);
                             break;
                         case 11:
+                            temp = hero.getGoggles();
                             hero.setGoggles((Equipment) i);
+                            break;
+                        default: System.out.println(i.getItemType());
                             break;
                     }
                     System.out.println("Equiped " + i.getName());
@@ -269,11 +282,16 @@ public class Game {
                     System.out.println("You can't equip that!");
                     pass = true;
                 }
-
             }
         }
+        
+        hero.getInventory().remove(j); //removes the item from the inventory
+        
         if (!pass) {
             System.out.println("There's no item here called that.");
+        }
+        else if(temp != null && !temp.getName().equals("None")){ //switch the equipment from inventory
+            hero.addInventory(temp);
         }
 
     }
