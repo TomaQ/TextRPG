@@ -1,8 +1,7 @@
 /*TODO:
  need to fix magic numbers
  need to fix formating of code
- need to comment code
- need to add way to equip things 
+ need to comment code more
 
  change text if play takes items from room?
  add random gold and item drops from mobs
@@ -48,7 +47,7 @@ public class TextRPG {
 
     public static void newGame() throws IOException {
         Scanner scan = new Scanner(System.in);
-        String nameInput;
+        String nameInput = "";
         int jobSelector;
         String ans = "n";
 
@@ -58,9 +57,18 @@ public class TextRPG {
 
         while (!"y".equalsIgnoreCase(ans)) {
             jobSelector = 0;//resets to 0 everytime it loops
-
-            System.out.println("What is your name?"); //maybe make all strings variables? later or something
-            nameInput = scan.nextLine();
+            
+            boolean nameLoop = true;
+            do {
+                System.out.println("What is your name?"); //maybe make all strings variables? later or something
+                nameInput = scan.nextLine();
+                if(nameInput.length() < 2 || nameInput.length() > 15){
+                    System.out.println("Please enter a name between 2-15 characters");
+                }
+                else{
+                    nameLoop = false;
+                }
+            } while (nameLoop);
 
             System.out.println("What is your job? (Warrior = 1, Mage = 2, Thief = 3)"); //array of jobs later?
             while (loop) {

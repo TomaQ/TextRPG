@@ -5,6 +5,7 @@ import java.util.Scanner;
 import textrpg.equipment.*;
 import textrpg.items.*;
 import textrpg.monsters.Slime;
+import textrpg.npcs.NPC;
 import textrpg.rooms.*;
 import textrpg.weapons.*;
 
@@ -36,6 +37,7 @@ public class Game {
         startingThingsForTesting(hero);//all of the testing stuff goes here
 
         while (!userInput.equals("quit")) {
+            System.out.print(">");
             userInput = scan.nextLine();
             command(hero);
         }
@@ -133,6 +135,9 @@ public class Game {
             case "equip":
                 equipCommand(restofUserInput, hero);
                 break;
+            case "talk":
+                talkCommand(restofUserInput);
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -191,7 +196,7 @@ public class Game {
 
     public void printCommands() { //prints all of the available commands
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, quit");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, quit");
         printBreak();
     }
 
@@ -294,5 +299,30 @@ public class Game {
             hero.addInventory(temp);
         }
 
+    }
+
+    public void talkCommand(String input) {
+        if (currentRoom.getNPCsInRoom() != null) {
+            boolean pass = false;
+            
+            if (input.trim().equals("")) {
+                currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
+            }
+            else {
+                for (NPC n : currentRoom.getNPCsInRoom()) {
+                    if (n.getName().equalsIgnoreCase(input)) {
+                        n.printDefaultDialogue();
+                        pass = true;
+                    }
+                }
+                if (!pass) {
+                    System.out.println("There isn't anyone called that here.");
+                }
+            }
+
+        }
+        else {
+            System.out.println("No one's here!");
+        }
     }
 }

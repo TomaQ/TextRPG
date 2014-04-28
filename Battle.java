@@ -71,13 +71,13 @@ public final class Battle {
 
     public void playerTurn() {//need to organize this like totally better
 
-        System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + " MP: " + hero.getCurrentMana());
+        System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + "/" + hero.getMaxHealth() + " MP: " + hero.getCurrentMana() + "/" + hero.getMaxMana());
         System.out.println(monster.getName() + " - " + "HP: " + monster.getCurrentHealth());
         decidePlayerAction();
     }
 
     public void decidePlayerAction() {
-        pass = false;//set to 1 if the player makes a valid move
+        pass = false;//set to true if the player makes a valid move
 
         boolean loop = true;
 
@@ -85,6 +85,7 @@ public final class Battle {
             System.out.println("Attack = 1, Skills = 2, Items = 3, Run = 4");
             while (loop) {
                 try {
+                    System.out.print(">");
                     int input = scan.nextInt();
                     scan.nextLine();
 
@@ -95,8 +96,8 @@ public final class Battle {
                         loop = false;
                     }
                     else if (input == 2) {
-                        playerSkill(dmg);
-                        loop = false;
+                        if(playerSkill(dmg))
+                            loop = false;
                     }
                     else if (input == 3) {
                         if (playerItem()) {
@@ -132,7 +133,7 @@ public final class Battle {
         pass = true;//PASSED!
     }
 
-    public void playerSkill(int dmg) {//player uses a skill
+    public boolean playerSkill(int dmg) {//player uses a skill
 
         String skillz = "";
         for (int i = 0; i < hero.getJob().getSkills().length; i++) {
@@ -176,9 +177,11 @@ public final class Battle {
 
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
             pass = true;//PASSED!
+            return true;
         }
         else {
             System.out.println("Not enough mana!");
+            return false;
         }
     }
 
