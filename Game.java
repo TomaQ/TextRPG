@@ -5,6 +5,7 @@ import java.util.Scanner;
 import textrpg.equipment.*;
 import textrpg.items.*;
 import textrpg.monsters.Slime;
+import textrpg.npcs.NPC;
 import textrpg.rooms.*;
 import textrpg.weapons.*;
 
@@ -302,9 +303,23 @@ public class Game {
 
     public void talkCommand(String input) {
         if (currentRoom.getNPCsInRoom() != null) {
+            boolean pass = false;
+            
             if (input.trim().equals("")) {
                 currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
             }
+            else {
+                for (NPC n : currentRoom.getNPCsInRoom()) {
+                    if (n.getName().equalsIgnoreCase(input)) {
+                        n.printDefaultDialogue();
+                        pass = true;
+                    }
+                }
+                if (!pass) {
+                    System.out.println("There isn't anyone called that here.");
+                }
+            }
+
         }
         else {
             System.out.println("No one's here!");
