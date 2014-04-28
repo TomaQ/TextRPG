@@ -8,7 +8,7 @@ public class NPC extends Entity{
     
     public void printDefaultDialogue()
     {
-        System.out.println(super.getName() + ":" + defaultDialogue);
+        System.out.println(super.getName() + ": " + defaultDialogue);
     }
     public void setDefaultDialogueDialogue(String s){defaultDialogue = s;}
     

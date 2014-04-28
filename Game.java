@@ -135,7 +135,7 @@ public class Game {
                 equipCommand(restofUserInput, hero);
                 break;
             case "talk":
-                currentRoom.getNPCsInRoom()[0].printDefaultDialogue(); //TEMP!!!
+                talkCommand(restofUserInput);
                 break;
             default:
                 System.out.println("Command not recognized.");
@@ -298,5 +298,16 @@ public class Game {
             hero.addInventory(temp);
         }
 
+    }
+
+    public void talkCommand(String input) {
+        if (currentRoom.getNPCsInRoom() != null) {
+            if (input.trim().equals("")) {
+                currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
+            }
+        }
+        else {
+            System.out.println("No one's here!");
+        }
     }
 }
