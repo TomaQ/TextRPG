@@ -19,17 +19,18 @@ public class TextRPG {
     public TextRPG() throws IOException {
         System.out.println("New Game = 1, Continue = 2");
 
-        int ans = 0;
+        int ans = 0; //The variable for choosing a menu choice
         Scanner scan = new Scanner(System.in);
         boolean loop = true;
 
+        //Gets the user's input for the menu choice
         while (loop) {
             try {
                 ans = scan.nextInt();
                 scan.nextLine();
             }
             catch (InputMismatchException e) {
-                scan.next();
+                scan.next(); //Need to 'eat' the line
             }
 
             if (ans == 1) {
@@ -38,13 +39,15 @@ public class TextRPG {
             }
             else if (ans == 2) {
                 continueGame();
+                loop = false;
             }
             else {
-                invalidInput();
+                TextRPG.invalidInput();
             }
         }
     }
 
+    //Starts a new game
     public static void newGame() throws IOException {
         Scanner scan = new Scanner(System.in);
         String nameInput = "";
@@ -55,6 +58,7 @@ public class TextRPG {
 
         Player p = null;
 
+        //If the player enters 'Y' or 'y' then it exits out of character creation
         while (!"y".equalsIgnoreCase(ans)) {
             jobSelector = 0;//resets to 0 everytime it loops
 
@@ -74,7 +78,7 @@ public class TextRPG {
             while (loop) {
                 try {
                     jobSelector = scan.nextInt();
-                    scan.nextLine(); //blank readline for int(maybe convert string to int)
+                    scan.nextLine();
                 }
                 catch (InputMismatchException e) {
                     scan.next();
@@ -87,6 +91,7 @@ public class TextRPG {
                 }
             }
 
+            //Creates a new player with the selected name and job
             p = new Player(nameInput, jobSelector);
 
             p.printStatus();
@@ -94,24 +99,26 @@ public class TextRPG {
             System.out.println("Your new adventure is about to begin!~ Are you ready?(Y/y)");
 
             ans = scan.nextLine();
-            loop = true;
+            loop = true; //If user doesn't say yes then need to reset the job selector loop
         }
-        new Game(p);
+        new Game(p); //Creates a new game with the newly created player
     }
 
+    //Currently under construction
     public static void continueGame() throws IOException {
         System.out.println("This doesn't work atm lol.");
         newGame();
+    }
+
+    //This is the global InputMismatch method 
+    public static void invalidInput() {
+        System.out.println("Invalid input.");
     }
 
     public static void main(String[] args) throws IOException {
         final double version = 0.3;
 
         System.out.println("TextRPG! v" + version);
-        new TextRPG();
-    }
-
-    public static void invalidInput() {
-        System.out.println("Invalid input.");
+        new TextRPG(); //Starts the game
     }
 }
