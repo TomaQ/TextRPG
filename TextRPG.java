@@ -5,7 +5,6 @@
 
  change text if play takes items from room?
  add random gold and item drops from mobs
- add talking to npcs
  add shops
  add learning new skills while leveling up
  */
@@ -23,12 +22,13 @@ public class TextRPG {
         int ans = 0;
         Scanner scan = new Scanner(System.in);
         boolean loop = true;
-        
+
         while (loop) {
             try {
                 ans = scan.nextInt();
                 scan.nextLine();
-            } catch (InputMismatchException e) {
+            }
+            catch (InputMismatchException e) {
                 scan.next();
             }
 
@@ -57,15 +57,15 @@ public class TextRPG {
 
         while (!"y".equalsIgnoreCase(ans)) {
             jobSelector = 0;//resets to 0 everytime it loops
-            
+
             boolean nameLoop = true;
             do {
                 System.out.println("What is your name?"); //maybe make all strings variables? later or something
                 nameInput = scan.nextLine();
-                if(nameInput.length() < 2 || nameInput.length() > 15){
+                if (nameInput.length() < 2 || nameInput.length() > 15) {
                     System.out.println("Please enter a name between 2-15 characters");
                 }
-                else{
+                else {
                     nameLoop = false;
                 }
             } while (nameLoop);
@@ -75,7 +75,7 @@ public class TextRPG {
                 try {
                     jobSelector = scan.nextInt();
                     scan.nextLine(); //blank readline for int(maybe convert string to int)
-                } 
+                }
                 catch (InputMismatchException e) {
                     scan.next();
                 }
