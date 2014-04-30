@@ -54,8 +54,12 @@ public final class Battle {
                 h.addInventory(i);
                 lootName += i.getName() + ", ";
             }
-
-            lootName = lootName.substring(0, lootName.length() - 2);//deletes the last comma
+            if(lootName.length() > 2){
+                lootName = lootName.substring(0, lootName.length() - 2);//deletes the last comma
+            }
+            else{
+                lootName = "None";
+            }
             System.out.println(m.getName() + " defeated! Gold:" + m.getGoldWorth() + " Exp:" + m.getExpWorth());
             System.out.println("Loot: " + lootName);
             h.setCurrentExp(h.getCurrentExp() + m.getExpWorth());

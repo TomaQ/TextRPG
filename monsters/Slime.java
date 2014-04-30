@@ -21,8 +21,13 @@ public class Slime extends Monster //should be resistant to physical attacks!
         super.setEscapable(1);
         
         Item slimeE = new SlimeExtract();
-        Item[] loot = {slimeE};
-        super.setLoot(loot);
+        super.getLoot().add(slimeE);
+        
+        int[] chance = {80};//needs to map to same index
+        super.setLootChance(chance);
+        
+        super.setRandomLoot();
+        
         super.initCurrentStats();
     }
     
