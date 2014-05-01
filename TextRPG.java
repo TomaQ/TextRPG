@@ -4,7 +4,6 @@
  need to comment code more
 
  change text if play takes items from room?
- add random gold and item drops from mobs
  add shops
  add learning new skills while leveling up
  */

@@ -25,7 +25,12 @@ public class Monster extends Entity
     public void setLootChance(int[] i){lootChance = i;}
     
     public int getGoldWorth(){return goldWorth;}//usually called in a statement multiplied by a random decimal 
-    public void setGoldWorth(int g){goldWorth = g;}
+    public void setGoldWorth(int g){
+        Random rand = new Random();
+        int gMin = (int)(g*.7);
+        int gMax = (int)(g*1.2);
+        goldWorth = rand.nextInt(gMax - gMin +1) + gMin; //generates a number from g*.7 - g*1.2 (70% - 120% of g)
+    }
     
     public int getExpWorth(){return expWorth;}
     public void setExpWorth(int i){expWorth = i;}
