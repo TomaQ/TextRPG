@@ -1,12 +1,3 @@
-/*TODO:
- need to fix magic numbers
- need to fix formating of code
- need to comment code more
-
- change text if play takes items from room?
- add shops
- add learning new skills while leveling up
- */
 package textrpg;
 
 import java.io.*;
