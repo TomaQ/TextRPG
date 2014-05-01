@@ -86,9 +86,9 @@ public final class Battle {
         boolean loop = true;
 
         do {
-            System.out.println("Attack = 1, Skills = 2, Items = 3, Run = 4");
             while (loop) {
                 try {
+                    System.out.println("Attack = 1, Skills = 2, Items = 3, Run = 4");
                     System.out.print(">");
                     int input = scan.nextInt();
                     scan.nextLine();
@@ -121,7 +121,7 @@ public final class Battle {
                 }
             }
 
-        } while (pass != true);
+        } while (!pass);
     }
 
     public void playerAttack(int dmg) {//player uses attack
