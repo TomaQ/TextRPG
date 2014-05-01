@@ -44,7 +44,11 @@ public class Item
     public boolean isConsumable(){return consumable;}
     public void setConsumable(boolean b){consumable = b;}
     
-    public int[] use(){int[] i = {-1};return i;}//NEED TO OVERWRITE
+    public int[] use()//Overwrite if you can use the item
+    {
+        this.itemError();
+        return no_stats_modified;
+    }
     
     protected String itemErrorString = "You cannot use this item!";
     public void itemError()
