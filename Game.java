@@ -140,6 +140,7 @@ public class Game {
                 break;
             case "shop":
                 currentRoom.getShop().enter(hero); //MAY CRASH NEED TO FIX ONLY TEMP
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;

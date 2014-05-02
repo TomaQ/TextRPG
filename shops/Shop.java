@@ -25,12 +25,15 @@ public class Shop {
                 case "1":
                     buy(hero);
                     break;
+                case "3":
+                    break;
                 default:
                     TextRPG.invalidInput();
                     break;
             }
         }
     }
+    
     private void buy(Player hero) {
         System.out.println("What will you buy?");
 
