@@ -14,10 +14,11 @@ public class Shop {
     public Item[] getInventory(){return inventory;}
     public void setInventory(Item[] i){inventory = i;}
     
-    private void enter(Player hero) {
+    public void enter(Player hero) {
         String input = "n"; //should it be a string?
         while (!input.equals("3")) {
             System.out.println("Buy - 1, Sell - 2, Leave - 3");
+            System.out.print(">");
             input = scan.nextLine();
 
             switch (input) {
@@ -43,6 +44,7 @@ public class Shop {
 
         int chosen = -1;
         try {
+            System.out.print(">");
             chosen = scan.nextInt();
             scan.nextLine();
         }

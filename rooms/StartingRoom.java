@@ -1,6 +1,8 @@
 package textrpg.rooms;
 
 import textrpg.items.*;
+import textrpg.shops.GeneralShop;
+import textrpg.shops.Shop;
 
 public class StartingRoom extends Room
 {    
@@ -12,5 +14,8 @@ public class StartingRoom extends Room
         
         HealthPotion pot = new HealthPotion();
         super.getRoomLoot().add(pot);
+        
+        Shop store = new GeneralShop();
+        super.setShop(store);
     }
 }
