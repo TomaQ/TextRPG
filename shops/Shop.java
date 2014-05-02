@@ -11,8 +11,10 @@ public class Shop {
     Item[] inventory; //Shop should always have items
     Scanner scan = new Scanner(System.in);
 
-    public Shop(Player hero) {
-
+    public Item[] getInventory(){return inventory;}
+    public void setInventory(Item[] i){inventory = i;}
+    
+    private void enter(Player hero) {
         String input = "n"; //should it be a string?
         while (!input.equals("3")) {
             System.out.println("Buy - 1, Sell - 2, Leave - 3");
@@ -27,9 +29,7 @@ public class Shop {
                     break;
             }
         }
-
     }
-
     private void buy(Player hero) {
         System.out.println("What will you buy?");
 
@@ -47,11 +47,11 @@ public class Shop {
             scan.nextLine();
         }
         catch (InputMismatchException e) {
-            TextRPG.invalidInput();
+            TextRPG.invalidInput(); //do i need this here?
             scan.next();
         }
 
-        if (chosen != -1) {
+        if (chosen != -1) { //need to check if its not out of bounds
             if (inventory[chosen].getGoldWorth() <= hero.getGold()) {
                 hero.getInventory().add(inventory[chosen]);
                 hero.setGold(hero.getGold() - inventory[chosen].getGoldWorth());
