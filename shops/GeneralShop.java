@@ -1,6 +1,5 @@
 package textrpg.shops;
 
-import textrpg.Player;
 import textrpg.items.*;
 
 public class GeneralShop extends Shop {

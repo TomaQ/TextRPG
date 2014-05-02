@@ -199,7 +199,7 @@ public class Game {
 
     public void printCommands() { //prints all of the available commands
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, quit");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, shop, quit");
         printBreak();
     }
 

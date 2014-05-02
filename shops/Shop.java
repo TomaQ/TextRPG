@@ -25,6 +25,9 @@ public class Shop {
                 case "1":
                     buy(hero);
                     break;
+                case "2":
+                    sell(hero);
+                    break;
                 case "3":
                     break;
                 default:
@@ -69,5 +72,18 @@ public class Shop {
         else {
             TextRPG.invalidInput();
         }
+    }
+    
+    private void sell(Player hero) {
+        System.out.println("What do you want to sell?");
+        String inven = "";
+
+        for (int i = 0; i < hero.getInventory().size(); i++) {
+            inven += hero.getInventory().get(i).getName() + "(" + i + "), ";
+        }
+        if(inven.length() > 2)
+            inven = inven.substring(0, (inven.length() - 2));
+        
+        System.out.println(inven);
     }
 }
