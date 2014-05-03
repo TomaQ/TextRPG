@@ -73,7 +73,7 @@ public class Shop {
             TextRPG.invalidInput();
         }
     }
-    
+
     private void sell(Player hero) {
         System.out.println("What do you want to sell?");
         String inven = "";
@@ -81,9 +81,29 @@ public class Shop {
         for (int i = 0; i < hero.getInventory().size(); i++) {
             inven += hero.getInventory().get(i).getName() + "(" + i + "), ";
         }
-        if(inven.length() > 2)
+        if (inven.length() > 2) {
             inven = inven.substring(0, (inven.length() - 2));
-        
+        }
         System.out.println(inven);
+
+        int chosen = -1;
+        try{
+            System.out.print(">");
+            chosen = scan.nextInt();
+            scan.nextLine();
+        }
+        catch(InputMismatchException e){
+            TextRPG.invalidInput();
+            scan.next();
+        }
+    
+        if (chosen != -1) { //need to check if its not out of bounds
+            hero.getInventory().remove(chosen);
+            hero.setGold(hero.getGold() + inventory[chosen].getGoldWorth());
+            System.out.println("Sold " + inventory[chosen].getName() + ".");
+        }
+        else {
+            TextRPG.invalidInput();
+        }
     }
 }
