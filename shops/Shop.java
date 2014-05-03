@@ -53,8 +53,7 @@ public class Shop {
             System.out.print(">");
             chosen = scan.nextInt();
             scan.nextLine();
-        }
-        catch (InputMismatchException e) {
+        } catch (InputMismatchException e) {
             TextRPG.invalidInput(); //do i need this here?
             scan.next();
         }
@@ -76,17 +75,34 @@ public class Shop {
 
     private void sell(Player hero) {
         System.out.println("What do you want to sell?");
-        
+
         String[][] inven = hero.getCountedInventory();
-        
-        for(int i = 0; i < inven.length; i++){
-            System.out.println("[" + i + "]" + inven[i][0] + "(" + inven[i][1]+ ")" + ", ");
+
+        String formattedInven = "";
+        for (int i = 0; i < inven.length; i++) {
+            if (inven[i][0] != null) {
+                if (Integer.valueOf(inven[i][1]) > 1) {
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")" + ", ";
+                }
+                else {
+                    formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                }
+            }
         }
 
-        System.out.println(inven);
+        if (formattedInven.length() > 2) {
+            formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
+        }
+
+        if (formattedInven.length() > 1) {
+            System.out.println(formattedInven);
+        }
+        else {
+            System.out.println("Inventory empty.");
+        }
 
         int chosen = -1;
-        try{
+        try {
             System.out.print(">");
             chosen = scan.nextInt();
             scan.nextLine();
