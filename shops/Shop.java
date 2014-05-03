@@ -59,7 +59,7 @@ public class Shop {
             scan.next();
         }
 
-        if (chosen < inventory.length && chosen > -1) { //need to check if its not out of bounds
+        if (chosen != -1) { //need to check if its not out of bounds
             if (inventory[chosen].getGoldWorth() <= hero.getGold()) {
                 hero.getInventory().add(inventory[chosen]);
                 hero.setGold(hero.getGold() - inventory[chosen].getGoldWorth());
@@ -76,14 +76,13 @@ public class Shop {
 
     private void sell(Player hero) {
         System.out.println("What do you want to sell?");
-        String inven = "";
+        
+        String[][] inven = hero.getCountedInventory();
+        
+        for(int i = 0; i < inven.length; i++){
+            System.out.println("[" + i + "]" + inven[i][0] + "(" + inven[i][1]+ ")" + ", ");
+        }
 
-        for (int i = 0; i < hero.getInventory().size(); i++) {
-            inven += hero.getInventory().get(i).getName() + "(" + i + "), ";
-        }
-        if (inven.length() > 2) {
-            inven = inven.substring(0, (inven.length() - 2));
-        }
         System.out.println(inven);
 
         int chosen = -1;
