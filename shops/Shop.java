@@ -59,7 +59,7 @@ public class Shop {
             scan.next();
         }
 
-        if (chosen != -1) { //need to check if its not out of bounds
+        if (chosen < inventory.length && chosen > -1) { //need to check if its not out of bounds
             if (inventory[chosen].getGoldWorth() <= hero.getGold()) {
                 hero.getInventory().add(inventory[chosen]);
                 hero.setGold(hero.getGold() - inventory[chosen].getGoldWorth());
@@ -97,7 +97,7 @@ public class Shop {
             scan.next();
         }
     
-        if (chosen != -1) { //need to check if its not out of bounds
+        if (chosen < inventory.length && chosen > -1) { //need to check if its not out of bounds
             hero.getInventory().remove(chosen);
             hero.setGold(hero.getGold() + inventory[chosen].getGoldWorth());
             System.out.println("Sold " + inventory[chosen].getName() + ".");
