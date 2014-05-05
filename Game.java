@@ -139,7 +139,12 @@ public class Game {
                 talkCommand(restofUserInput);
                 break;
             case "shop":
-                currentRoom.getShop().enter(hero); //MAY CRASH NEED TO FIX ONLY TEMP
+                if (currentRoom.getShop() != null) {
+                    currentRoom.getShop().enter(hero);
+                }
+                else {
+                    System.out.println("There isn't a shop here.");
+                }
                 break;
             default:
                 System.out.println("Command not recognized.");

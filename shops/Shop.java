@@ -85,22 +85,25 @@ public class Shop {
         System.out.println("What do you want to sell?");
 
         String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
-
+        
         //Prints the items the hero has to sell with in the format [index to chose]"Item name"(quantity)
         String formattedInven = "";
+        int j = 0;
         for (int i = 0; i < inven.length; i++) {
             if (inven[i][0] != null) {
                 if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
                     formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")" + ", ";
+                    j++;
                 }
                 else {
                     formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                    j++;
                 }
             }
         }
 
         if (formattedInven.length() > 2) {
-            System.out.println(formattedInven + "[" + hero.getInventory().size() + "]exit");
+            System.out.println(formattedInven + "[" + j + "]exit");
         }
         else {
             System.out.println("Inventory empty. [0]exit");
@@ -121,12 +124,12 @@ public class Shop {
         }
     
         //Sells the item
-        if (!hero.getInventory().isEmpty() && chosen < hero.getInventory().size() && chosen > -1) {
+        if (!hero.getInventory().isEmpty() && chosen < j && chosen > -1) {
             hero.setGold(hero.getGold() + hero.getInventory().get(chosen).getGoldWorth());
             System.out.println("Sold " + hero.getInventory().get(chosen).getName() + ".");
             hero.getInventory().remove(chosen);
         }
-        else if(chosen == hero.getInventory().size()){} //Exit's the sell transaction
+        else if(chosen == j){} //Exit's the sell transaction
         else {
             TextRPG.invalidInput();
         }

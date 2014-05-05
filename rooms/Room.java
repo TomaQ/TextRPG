@@ -24,7 +24,7 @@ public class Room
     private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
     
     private NPC[] npcsInRoom;
-    private Shop store = new Shop(); //only one shop per room
+    private Shop store; //only one shop per room
     
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
