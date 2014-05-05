@@ -138,6 +138,14 @@ public class Game {
             case "talk":
                 talkCommand(restofUserInput);
                 break;
+            case "shop":
+                if (currentRoom.getShop() != null) {
+                    currentRoom.getShop().enter(hero);
+                }
+                else {
+                    System.out.println("There isn't a shop here.");
+                }
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -196,7 +204,7 @@ public class Game {
 
     public void printCommands() { //prints all of the available commands
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, quit");
+        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, shop, quit");
         printBreak();
     }
 

@@ -76,18 +76,14 @@ public class Player extends Entity {
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
     
-    public void printInventory() {
-        
-        Game.printBreak();
-        System.out.println("Your inventory:");
-        String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
+    public String[][] getCountedInventory() {
         String[][] invenCount = new String[inventory.size()][2];//a 2d array of the item name and the quantity of each
 
         for (int i = 0; i < inventory.size(); i++) {
             for (int j = 0; j - 1 < i; j++)//should use a map here instead lol
             {   //short circuits here
-                if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())){//if the names match
-                
+                if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())) {//if the names match
+
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
                     break; //dont need to check rest of array if similar
                 }
@@ -98,6 +94,16 @@ public class Player extends Entity {
                 }
             }
         }
+        return invenCount;
+    }
+    
+    public void printInventory() {
+        
+        Game.printBreak();
+        System.out.println("Your inventory:");
+        String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
+        String[][] invenCount = this.getCountedInventory();
+        
         for (int i = 0; i < invenCount.length; i++){ //prints the inventory and counter if > 1
        
             if (invenCount[i][0] != null) {
