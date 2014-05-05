@@ -12,8 +12,9 @@ public class Shop {
     Scanner scan = new Scanner(System.in);
 
     public Item[] getInventory(){return inventory;}
+
     public void setInventory(Item[] i){inventory = i;}
-    
+
     public void enter(Player hero) {
         String input = "n"; //should it be a string?
         while (!input.equals("3")) {
@@ -37,7 +38,7 @@ public class Shop {
             }
         }
     }
-    
+
     private void buy(Player hero) {
         System.out.println("What will you buy?");
 
@@ -75,7 +76,8 @@ public class Shop {
                 System.out.println("Not enough gold!");
             }
         }
-        else if(chosen == inventory.length){}//Exits the buying transaction
+        else if (chosen == inventory.length) {
+        }//Exits the buying transaction
         else {
             TextRPG.invalidInput();
         }
@@ -85,10 +87,10 @@ public class Shop {
         System.out.println("What do you want to sell?");
 
         String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
-        
+
         //Prints the items the hero has to sell with in the format [index to chose]"Item name"(quantity)
         String formattedInven = "";
-        int j = 0;
+        int j = 0; //The index for the exit and unique item length
         for (int i = 0; i < inven.length; i++) {
             if (inven[i][0] != null) {
                 if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
@@ -122,14 +124,15 @@ public class Shop {
                 scan.next();
             }
         }
-    
+
         //Sells the item
         if (!hero.getInventory().isEmpty() && chosen < j && chosen > -1) {
             hero.setGold(hero.getGold() + hero.getInventory().get(chosen).getGoldWorth());
             System.out.println("Sold " + hero.getInventory().get(chosen).getName() + ".");
             hero.getInventory().remove(chosen);
         }
-        else if(chosen == j){} //Exit's the sell transaction
+        else if (chosen == j) {
+        } //Exit's the sell transaction
         else {
             TextRPG.invalidInput();
         }
