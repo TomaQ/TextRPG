@@ -42,11 +42,10 @@ public class Shop {
 
         String inven = "";
         for (int i = 0; i < inventory.length; i++) {
-            inven += inventory[i].getName() + "(" + i + "), ";
+            inven += "[" + i + "]" + inventory[i].getName() + ", ";
         }
 
-        inven = inven.substring(0, (inven.length() - 2));
-        System.out.println(inven + " [" + inventory.length + "]exit");
+        System.out.println(inven + "[" + inventory.length + "]exit");
 
         int chosen = -1;
         boolean loop = true;
@@ -96,8 +95,7 @@ public class Shop {
         }
 
         if (formattedInven.length() > 2) {
-            formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
-            System.out.println(formattedInven + " [" + hero.getInventory().size() + "]exit");
+            System.out.println(formattedInven + "[" + hero.getInventory().size() + "]exit");
         }
         else {
             System.out.println("Inventory empty. [0]exit");
