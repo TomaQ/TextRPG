@@ -46,16 +46,20 @@ public class Shop {
         }
 
         inven = inven.substring(0, (inven.length() - 2));
-        System.out.println(inven);
+        System.out.println(inven + " [" + inventory.length + "]exit");
 
         int chosen = -1;
-        try {
-            System.out.print(">");
-            chosen = scan.nextInt();
-            scan.nextLine();
-        } catch (InputMismatchException e) {
-            TextRPG.invalidInput(); //do i need this here?
-            scan.next();
+        boolean loop = true;
+        while (loop) {
+            try {
+                System.out.print(">");
+                chosen = scan.nextInt();
+                scan.nextLine();
+                loop = false;
+            } catch (InputMismatchException e) {
+                TextRPG.invalidInput(); //do i need this here?
+                scan.next();
+            }
         }
 
         if (chosen > -1 && chosen < inventory.length) {
@@ -68,6 +72,7 @@ public class Shop {
                 System.out.println("Not enough gold!");
             }
         }
+        else if(chosen == inventory.length){}
         else {
             TextRPG.invalidInput();
         }
@@ -92,28 +97,32 @@ public class Shop {
 
         if (formattedInven.length() > 2) {
             formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
-            System.out.println(formattedInven);
+            System.out.println(formattedInven + " [" + hero.getInventory().size() + "]exit");
         }
         else {
-            System.out.println("Inventory empty.");
+            System.out.println("Inventory empty. [0]exit");
         }
 
         int chosen = -1;
-        try {
-            System.out.print(">");
-            chosen = scan.nextInt();
-            scan.nextLine();
-        }
-        catch(InputMismatchException e){
-            TextRPG.invalidInput();
-            scan.next();
+        boolean loop = true;
+        while (loop) {
+            try {
+                System.out.print(">");
+                chosen = scan.nextInt();
+                scan.nextLine();
+                loop = false;
+            } catch (InputMismatchException e) {
+                TextRPG.invalidInput();
+                scan.next();
+            }
         }
     
-        if (chosen < inventory.length && chosen > -1) { //need to check if its not out of bounds
+        if (!hero.getInventory().isEmpty() && chosen < hero.getInventory().size() && chosen > -1) {
+            hero.setGold(hero.getGold() + hero.getInventory().get(chosen).getGoldWorth());
+            System.out.println("Sold " + hero.getInventory().get(chosen).getName() + ".");
             hero.getInventory().remove(chosen);
-            hero.setGold(hero.getGold() + inventory[chosen].getGoldWorth());
-            System.out.println("Sold " + inventory[chosen].getName() + ".");
         }
+        else if(chosen == hero.getInventory().size()){}
         else {
             TextRPG.invalidInput();
         }
