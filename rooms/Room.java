@@ -29,7 +29,13 @@ public class Room
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
      
-    public String getRoomDescription(){return roomDescription;}
+    public String getRoomDescription() {
+        String temp = roomDescription;
+        for(int i = 0; i < roomLoot.size(); i++){
+            temp += " " + roomLoot.get(i).getItemRoomDescription();
+        }
+        return temp;
+    }
     public void setRoomDescription(String n){roomDescription = n;}
     
     public List<Item> getRoomLoot(){return roomLoot;}//returns a list of items

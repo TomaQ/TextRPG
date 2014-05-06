@@ -22,6 +22,7 @@ public class Item
     
     private String name;
     private String itemDescription;
+    private String itemRoomDescription;
     
     public int getItemType(){return itemType;}
     public void setItemType(int t){itemType = t;}
@@ -34,6 +35,9 @@ public class Item
     
     public String getItemDescription(){return itemDescription;}
     public void setItemDescription(String s){itemDescription = s;}
+    
+    public String getItemRoomDescription(){return itemRoomDescription;}
+    public void setItemRoomDescription(String s){itemRoomDescription = s;}
     
     public int[] getStatsModified(){return statsModified;}
     public void setStatsModified(int[] i){statsModified = i;}
