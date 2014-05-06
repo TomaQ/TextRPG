@@ -75,6 +75,8 @@ public class Game {
             case "help":
                 printCommands();
                 break;
+            case "quit":
+                break;
             case "n":
                 if (currentRoom.getNExit() != null) {
                     currentRoom = currentRoom.getNExit();
@@ -201,10 +203,23 @@ public class Game {
         }
         return input;
     }
-
-    public void printCommands() { //prints all of the available commands
+    
+    //Prints all of the available commands
+    public void printCommands() {
         printBreak();
-        System.out.println("Commands: n, s, e, w, b, exits, look, inventory, skills, status, equipment, take, equip, talk, shop, quit");
+        System.out.println("north, south, east, west - Moves you arround to different rooms.");
+        System.out.println("battle - Starts a testing fight against a slime.");
+        System.out.println("look - Tells you the room description.");
+        System.out.println("inventory - Tells you all of the items that you have on yourself.");
+        System.out.println("exits - Tells you where all of the exits are in the room.");
+        System.out.println("skills - Tells you all of the skills that you know.");
+        System.out.println("status - Tells your stats, name, and class.");
+        System.out.println("equipment - Tells you the current equipment that you're wearing.");
+        System.out.println("take - Takes an item from something or somewhere. Usage is take 'object' where object is what you want to take.");
+        System.out.println("equip - Equips something to youreself. Usage is equip 'object' where object is what you want to equip to yourself.");
+        System.out.println("talk - Talks to someone, including yourself! Usage is talk 'person' where person is who you want to talk to. If you don't specify someone then it will talk to whoever it deems is most important.");
+        System.out.println("shop - Enters the shop if there is currently one in the room.");
+        System.out.println("quit - Quits the game.");
         printBreak();
     }
 
