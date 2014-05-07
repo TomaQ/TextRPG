@@ -12,21 +12,20 @@ import textrpg.weapons.*;
 public class Game {
 
     Scanner scan = new Scanner(System.in);
+    static String lineBreak = "=========================="; //String for breaking up likes, might get rid of
 
-    static String lineBreak = "==========================";
     Room currentRoom = null; //the current room the player is in
-    String userInput = "";
+    String userInput = ""; //does this need to be global?
 
     //loadRooms() maybe
     public Game(Player hero) {
-
-        //load rooms here
-        //set room exits somewhere
+        //Eventually there'll be a database that stores all of the rooms and other things
         printBreak();
 
-        Room prRoom = new PowerRangerRoom(null, null, null, null);//new method for now and such
+        //This block is temp for now since rooms are just objects sitting in a class right now
+        Room prRoom = new PowerRangerRoom(null, null, null, null);
         Room startRoom = new StartingRoom(null, null, null, null);//there's a better way to do this...
-        prRoom.setExits(null, startRoom, null, null); //dont look at me!
+        prRoom.setExits(null, startRoom, null, null);
         startRoom.setExits(prRoom, null, null, null);
 
         currentRoom = startRoom;//for testing atm
@@ -36,6 +35,7 @@ public class Game {
 
         startingThingsForTesting(hero);//all of the testing stuff goes here
 
+        //This is the main loop for the game
         while (!userInput.equals("quit")) {
             System.out.print(">");
             userInput = scan.nextLine();
@@ -46,12 +46,10 @@ public class Game {
     }
 
     public static final void printBreak() {//prints a LINE_BREAKERRR!
-
         System.out.println(lineBreak);
     }
 
-    public final void command(Player hero) {//checks what to do from the users input
-
+    private void command(Player hero) {//checks what to do from the users input
         userInput = userInput.toLowerCase();
         int i = userInput.indexOf(' '); //gets the space in the command
         String firstUserInput, restofUserInput = "";
@@ -154,8 +152,7 @@ public class Game {
         }
     }
 
-    private void startingThingsForTesting(Player hero) {//method for testing purposes
-
+    private void startingThingsForTesting(Player hero) {//method for testing purpose
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
@@ -168,10 +165,9 @@ public class Game {
         Equipment bronze = new BronzeChest();
         hero.getInventory().add(iron);
         hero.setChest(bronze);
-
     }
 
-    public String parseUserInput(String input) { //formats for shortcuts, need to make an array later of acceptable commands....
+    private String parseUserInput(String input) { //formats for shortcuts, need to make an array later of acceptable commands....
         switch (input) {
             case "north":
                 input = "n";
@@ -205,7 +201,7 @@ public class Game {
     }
     
     //Prints all of the available commands
-    public void printCommands() {
+    private void printCommands() {
         printBreak();
         System.out.println("north, south, east, west - Moves you arround to different rooms.");
         System.out.println("battle - Starts a testing fight against a slime.");
@@ -223,11 +219,9 @@ public class Game {
         printBreak();
     }
 
-    public void takeCommand(String rest, Player hero) {//figures out what to take
-
+    private void takeCommand(String rest, Player hero) {//figures out what to take
         boolean pass = false;
-        for (int i = 0; i < currentRoom.getRoomLoot().size(); i++)//for some reason using nested for each loops crashes here
-        {
+        for (int i = 0; i < currentRoom.getRoomLoot().size(); i++) {//for some reason using nested for each loops crashes here
             for (String tag : currentRoom.getRoomLoot().get(i).getTags()) {
                 if (tag.equals(rest)) {
                     Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
@@ -244,7 +238,7 @@ public class Game {
         }
     }
 
-    public void equipCommand(String input, Player hero) {
+    private void equipCommand(String input, Player hero) {
         boolean pass = false;
         Equipment temp = null;
         Equipment j = null; //the item that we searched for
@@ -255,7 +249,7 @@ public class Game {
                     pass = true; //^^^ i dont like that line ^^^
                     j = (Equipment)i;//need to access equipmentType method
                     
-                    //look at docs for weapon types
+                    //look at docs for weapon types (when I write them...)
                     switch (j.getEquipmentType()) {
                         case 1:
                             temp = hero.getWeapon();
@@ -321,14 +315,14 @@ public class Game {
         else if(temp != null && !temp.getName().equals("None")){ //switch the equipment from inventory
             hero.addInventory(temp);
         }
-
     }
 
-    public void talkCommand(String input) {
+    //Talks to an NPC, 
+    private void talkCommand(String input) {
         if (currentRoom.getNPCsInRoom() != null) {
             boolean pass = false;
             
-            if (input.trim().equals("")) {
+            if (input.trim().equals("")) { //If the player doesn't specify someone
                 currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
             }
             else {
@@ -342,7 +336,6 @@ public class Game {
                     System.out.println("There isn't anyone called that here.");
                 }
             }
-
         }
         else {
             System.out.println("No one's here!");
