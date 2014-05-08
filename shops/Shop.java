@@ -40,12 +40,12 @@ public class Shop {
     }
 
     private void buy(Player hero) {
-        System.out.println("What will you buy?");
+        System.out.println("What will you buy? Current Gold:" + hero.getGold());
 
         //Prints the inventory of the shop
         String inven = "";
         for (int i = 0; i < inventory.length; i++) {
-            inven += "[" + i + "]" + inventory[i].getName() + ", ";
+            inven += "[" + i + "]" + inventory[i].getName() + "(" + inventory[i].getGoldWorth() +  "g), ";
         }
 
         System.out.println(inven + "[" + inventory.length + "]exit");
@@ -84,7 +84,7 @@ public class Shop {
     }
 
     private void sell(Player hero) {
-        System.out.println("What do you want to sell?");
+        System.out.println("What do you want to sell? Current Gold:" + hero.getGold());
 
         String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
 
@@ -94,11 +94,11 @@ public class Shop {
         for (int i = 0; i < inven.length; i++) {
             if (inven[i][0] != null) {
                 if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")" + ", ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")(" + hero.getCountedInventoryItems()[i].getGoldWorth() + "g), ";
                     j++;
                 }
                 else {
-                    formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + hero.getCountedInventoryItems()[i].getGoldWorth() + "g), ";
                     j++;
                 }
             }
