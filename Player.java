@@ -76,12 +76,13 @@ public class Player extends Entity {
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
     
+    //Returns a 2d array of the item name and the quantity of each
     public String[][] getCountedInventory() {
-        String[][] invenCount = new String[inventory.size()][2];//a 2d array of the item name and the quantity of each
+        String[][] invenCount = new String[inventory.size()][2];
 
         for (int i = 0; i < inventory.size(); i++) {
-            for (int j = 0; j - 1 < i; j++)//should use a map here instead lol
-            {   //short circuits here
+            for (int j = 0; j - 1 < i; j++) {//should use a map here instead lol
+                //short circuits here
                 if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())) {//if the names match
 
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
@@ -91,6 +92,24 @@ public class Player extends Entity {
                     invenCount[j][0] = inventory.get(i).getName();
                     invenCount[j][1] = "1";
                     break; //dont need to check the rest of array if inserted
+                }
+            }
+        }
+        return invenCount;
+    }
+    
+    //Returns the players inventory without duplicates
+    public Item[] getCountedInventoryItems() {
+        Item[] invenCount = new Item[inventory.size()];
+
+        for (int i = 0; i < inventory.size(); i++) {
+            for(int j = 0; j - 1 < i; j++) {
+                if(invenCount[j] != null && invenCount[j] == inventory.get(i)) {
+                    invenCount[i] = inventory.get(j);
+                    break;
+                }
+                else if(invenCount[j] == null){
+                    invenCount[j] = inventory.get(i);
                 }
             }
         }

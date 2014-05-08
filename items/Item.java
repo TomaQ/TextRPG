@@ -30,6 +30,8 @@ public class Item
     public int getGoldWorth(){return goldWorth;}
     public void setGoldWorth(int g){goldWorth = g;}
     
+    public int getSellingPrice(){return goldWorth/2;}
+    
     public String getName(){return name;}
     public void setName(String s){name = s;}
     
