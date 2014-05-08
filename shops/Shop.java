@@ -94,11 +94,11 @@ public class Shop {
         for (int i = 0; i < inven.length; i++) {
             if (inven[i][0] != null) {
                 if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")(" + hero.getCountedInventoryItems()[i].getGoldWorth() + "g), ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")(" + hero.getCountedInventoryItems()[i].getSellingPrice() + "g), ";
                     j++;
                 }
                 else {
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + hero.getCountedInventoryItems()[i].getGoldWorth() + "g), ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + hero.getCountedInventoryItems()[i].getSellingPrice() + "g), ";
                     j++;
                 }
             }
@@ -119,7 +119,8 @@ public class Shop {
                 chosen = scan.nextInt();
                 scan.nextLine();
                 loop = false;
-            } catch (InputMismatchException e) {
+            }
+            catch (InputMismatchException e) {
                 TextRPG.invalidInput();
                 scan.next();
             }
@@ -127,7 +128,7 @@ public class Shop {
 
         //Sells the item
         if (!hero.getInventory().isEmpty() && chosen < j && chosen > -1) {
-            hero.setGold(hero.getGold() + hero.getInventory().get(chosen).getGoldWorth());
+            hero.setGold(hero.getGold() + hero.getInventory().get(chosen).getSellingPrice());
             System.out.println("Sold " + hero.getInventory().get(chosen).getName() + ".");
             hero.getInventory().remove(chosen);
         }
