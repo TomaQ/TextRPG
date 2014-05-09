@@ -2,11 +2,11 @@ package textrpg.skills;
 
 import textrpg.Player;
 
-public class Fireball extends Skill
-{
+public class Fireball extends Skill {
+
     Player hero;
-    public Fireball(Player h)
-    {
+
+    public Fireball(Player h) {
         hero = h;
         super.setSkillName("Fireball");
         super.setLevelRequirement(1);
@@ -14,10 +14,9 @@ public class Fireball extends Skill
         super.setManaCost(15);
         super.setType(2);
     }
-      
+
     @Override
-    public int use()
-    {
-        return (int)((hero.getCurrentMagic() * 1.25) + 25);
+    public int use() {
+        return (int) ((hero.getCurrentMagic() * 1.25) + 25);
     }
 }
