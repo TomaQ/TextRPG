@@ -84,7 +84,7 @@ public class Room {
     }
     
     //Returns true if there is only one exit
-    public boolean oneExit() {
+    private boolean oneExit() {
         int j = 0;
         if(getNExit() != null)
             j++;

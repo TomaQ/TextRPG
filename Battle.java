@@ -73,14 +73,14 @@ public final class Battle {
         return hero.getCurrentAgility() > monster.getCurrentAgility();
     }
 
-    public void playerTurn() { //formatting?
+    private void playerTurn() { //formatting?
         System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + "/" + hero.getMaxHealth() + " MP: " + hero.getCurrentMana() + "/" + hero.getMaxMana());
         System.out.println(monster.getName() + " - " + "HP: " + monster.getCurrentHealth());
         decidePlayerAction();
     }
 
     //Figures out the players action
-    public void decidePlayerAction() {
+    private void decidePlayerAction() {
         pass = false;//set to true if the player makes a valid move
 
         boolean loop = true;
@@ -126,7 +126,7 @@ public final class Battle {
     }
 
     //Player uses attack
-    public void playerAttack(int dmg) {
+    private void playerAttack(int dmg) {
         for (Skill skill : hero.getJob().getSkills()) {
             if (skill.getSkillName().equals("Attack")) {
                 dmg = skill.use();
@@ -139,7 +139,7 @@ public final class Battle {
     }
 
     //Player uses a skill
-    public boolean playerSkill(int dmg) {
+    private boolean playerSkill(int dmg) {
         String skillz = "";
         for (int i = 0; i < hero.getJob().getSkills().length; i++) {
             if (!hero.getJob().getSkills()[i].getSkillName().equals("Attack")) {//Need to remove getSkills from adding Attack
@@ -190,7 +190,7 @@ public final class Battle {
     }
 
     //Player uses an item
-    public boolean playerItem() {
+    private boolean playerItem() {
         String inven = "";
         for (int i = 0; i < hero.getInventory().size(); i++) {
             inven += "[" + i + "]" + hero.getInventory().get(i).getName() + ", ";
@@ -241,7 +241,7 @@ public final class Battle {
     }
 
     //Player runs away
-    public boolean runAway() {
+    private boolean runAway() {
         if (monster.isEscapable()) {
             if ((rand.nextInt(10) + 1) < 7) {//generates a number from 1-10 and checks if < 8                             //should have it check agility and stuff
                 monster.setCurrentHealth(0);
@@ -261,7 +261,7 @@ public final class Battle {
         }
     }
 
-    public void monsterTurn() {
+    private void monsterTurn() {
         System.out.println(monster.getName() + "'s turn!");
         //monster.getSkills(); blah stuff
         System.out.println("The " + monster.getName() + " looks displeased.");

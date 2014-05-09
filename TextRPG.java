@@ -38,7 +38,7 @@ public class TextRPG {
     }
 
     //Starts a new game
-    public static void newGame() throws IOException {
+    private static void newGame() throws IOException {
         Scanner scan = new Scanner(System.in);
         String nameInput = "";
         int jobSelector;
@@ -95,7 +95,7 @@ public class TextRPG {
     }
 
     //Currently under construction
-    public static void continueGame() throws IOException {
+    private static void continueGame() throws IOException {
         System.out.println("This doesn't work atm so here's a new game.");
         newGame();
     }
