@@ -2,13 +2,12 @@ package textrpg.monsters;
 
 import textrpg.items.*;
 
-public class Slime extends Monster //should be resistant to physical attacks!
-{
-    public Slime()
-    {
+public class Slime extends Monster {//should be resistant to physical attacks!
+
+    public Slime() {
         super.setName("Slime");
         super.setBaseHealth(200);
-        super.setBaseMana(10);        
+        super.setBaseMana(10);
         super.setBaseStrength(5);
         super.setBaseMagic(2);
         super.setBaseAgility(3);
@@ -18,7 +17,7 @@ public class Slime extends Monster //should be resistant to physical attacks!
         super.setGoldWorth(30);
         super.setExpWorth(25);
         super.setWeakness(2); //See Monster class for list of types
-        super.setEscapable(1);
+        super.setEscapable(true);
         
         Item slimeE = new SlimeExtract();
         super.getLoot().add(slimeE);
@@ -31,8 +30,7 @@ public class Slime extends Monster //should be resistant to physical attacks!
         super.initCurrentStats();
     }
     
-    public int slash()
-    {
+    /*public int slash() {
         return (int)(super.getBaseStrength() * 0.5) + 10;
-    }
+    }*/
 }

@@ -109,8 +109,9 @@ public final class Battle {
                         }
                     }
                     else if (input == 4) {
-                        runAway();
-                        loop = false;
+                        if (runAway()) {
+                            loop = false;
+                        }
                     }
                     else {
                         TextRPG.invalidInput();
@@ -239,22 +240,30 @@ public final class Battle {
         }
     }
 
-    public void runAway() {//player runs away
-        if ((rand.nextInt(10) + 1) < 7) {//generates a number from 1-10 and checks if < 8                             //should have it check agility and stuff
-            monster.setCurrentHealth(0);
-            ranAway = true;
-            System.out.println("Ran away safely!");
+    //Player runs away
+    public boolean runAway() {
+        if (monster.isEscapable()) {
+            if ((rand.nextInt(10) + 1) < 7) {//generates a number from 1-10 and checks if < 8                             //should have it check agility and stuff
+                monster.setCurrentHealth(0);
+                ranAway = true;
+                System.out.println("Ran away safely!");
+            }
+            else {
+                System.out.println("Failed to escape!");
+            }
+
+            pass = true;
+            return true;
         }
         else {
-            System.out.println("Failed to escape!");
+            System.out.println("You cannot run away!");
+            return false;
         }
-
-        pass = true;
     }
 
     public void monsterTurn() {
         System.out.println(monster.getName() + "'s turn!");
-        //monster.getSkills();
+        //monster.getSkills(); blah stuff
         System.out.println("The " + monster.getName() + " looks displeased.");
     }
 }
