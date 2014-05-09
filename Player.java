@@ -81,10 +81,9 @@ public class Player extends Entity {
         String[][] invenCount = new String[inventory.size()][2];
 
         for (int i = 0; i < inventory.size(); i++) {
-            for (int j = 0; j - 1 < i; j++) {//should use a map here instead lol
+            for (int j = 0; j - 1 < i; j++) {//i should use a map here instead lol
                 //short circuits here
                 if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())) {//if the names match
-
                     invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
                     break; //dont need to check rest of array if similar
                 }
@@ -116,15 +115,14 @@ public class Player extends Entity {
         return invenCount;
     }
     
-    public void printInventory() {
-        
+    //Prints the players inventory in the format 'Item name(quantity)'
+    public void printInventory() {   
         Game.printBreak();
         System.out.println("Your inventory:");
         String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
         String[][] invenCount = this.getCountedInventory();
         
         for (int i = 0; i < invenCount.length; i++){ //prints the inventory and counter if > 1
-       
             if (invenCount[i][0] != null) {
                 if (Integer.valueOf(invenCount[i][1]) > 1) {
                     inven += invenCount[i][0] + "(" + invenCount[i][1] + "), ";
@@ -143,7 +141,7 @@ public class Player extends Entity {
     
     public int getCurrentExp(){return currentExp;}
     public void setCurrentExp(int i) {
-        if (nextLevelExp < (currentExp + i)) {
+        if (nextLevelExp < (currentExp + i)) { //carrys over left over experience
             currentExp = (currentExp + i) - nextLevelExp;
             levelUp();
         }
@@ -157,7 +155,6 @@ public class Player extends Entity {
     
     public int getLevel(){return level;}
     public void levelUp(){
-    
         level += 1;
         System.out.println("You reached level " + level + "!");
 
@@ -183,7 +180,7 @@ public class Player extends Entity {
         System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
     
-    @Override
+    @Override //sets the current stats by calculating the base and bonus from equipment
     public void initCurrentStats() {
         super.setCurrentHealth(super.getBaseHealth() + calculateBonusHealth());
         super.setMaxHealth(super.getCurrentHealth());
@@ -196,8 +193,7 @@ public class Player extends Entity {
         super.setCurrentMagicDefense(super.getBaseMagicDefense() + calculateBonusMagicDefense());
     }
 
-    private int calculateBonusHealth()//calculates the bonus HP you get from equipment
-    {
+    private int calculateBonusHealth() {//calculates the bonus HP you get from equipment
         int bonus = 0;
         bonus += getWeapon().getEquipmentStats()[0]; //0 is the index of the hp modifier stat
         bonus += getOffHand().getEquipmentStats()[0];
@@ -302,8 +298,10 @@ public class Player extends Entity {
         return bonus;
     }
     
-    public void useItem(int[] statsModified)
-    {
+    //Takes an array of stats from an item and adds it to the players
+    //Used for HP pots and MP pots and such (for now)
+    //Look at Item use documentation for order of array
+    public void useItem(int[] statsModified) {
         if(statsModified[7] == 1){//if it can increase max hp or mp, can probably make if-else better
         
             super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
