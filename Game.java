@@ -55,7 +55,6 @@ public class Game {
         String firstUserInput, restofUserInput = "";
 
         if (i > 0) {// if there's a space then parse it
-
             firstUserInput = userInput.substring(0, i);
             restofUserInput = userInput.substring(i + 1, userInput.length());
         }
@@ -152,7 +151,8 @@ public class Game {
         }
     }
 
-    private void startingThingsForTesting(Player hero) {//method for testing purpose
+    //Method for testing purpose
+    private void startingThingsForTesting(Player hero) {
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
@@ -167,7 +167,8 @@ public class Game {
         hero.setChest(bronze);
     }
 
-    private String parseUserInput(String input) { //formats for shortcuts, need to make an array later of acceptable commands....
+    //Formats for shortcuts, need to make an array later of acceptable commands....
+    private String parseUserInput(String input) {
         switch (input) {
             case "north":
                 input = "n";
@@ -219,7 +220,8 @@ public class Game {
         printBreak();
     }
 
-    private void takeCommand(String rest, Player hero) {//figures out what to take
+    //Figures out what to take
+    private void takeCommand(String rest, Player hero) {
         boolean pass = false;
         for (int i = 0; i < currentRoom.getRoomLoot().size(); i++) {//for some reason using nested for each loops crashes here
             for (String tag : currentRoom.getRoomLoot().get(i).getTags()) {
@@ -233,11 +235,12 @@ public class Game {
                 }
             }
         }
-        if (!pass) { //if there was no item let them know
+        if (!pass) { //If there was no item let them know
             System.out.println("There's no item here called that.");
         }
     }
 
+    //Equips something
     private void equipCommand(String input, Player hero) {
         boolean pass = false;
         Equipment temp = null;
@@ -249,53 +252,53 @@ public class Game {
                     pass = true; //^^^ i dont like that line ^^^
                     j = (Equipment)i;//need to access equipmentType method
                     
-                    //look at docs for weapon types (when I write them...)
+                    //Look at docs for weapon types (when I write them...)
                     switch (j.getEquipmentType()) {
                         case 1:
                             temp = hero.getWeapon();
-                            hero.setWeapon((Weapon) i);
+                            hero.setWeapon((Weapon) j);
                             break;
                         case 2:
                             temp = hero.getChest();
-                            hero.setChest((Equipment) i);
+                            hero.setChest(j);
                             break;
                         case 3:
                             temp = hero.getLegs();
-                            hero.setLegs((Equipment) i);
+                            hero.setLegs(j);
                             break;
                         case 4:
                             temp = hero.getBracers();
-                            hero.setBracers((Equipment) i);
+                            hero.setBracers(j);
                             break;
                         case 5:
                             temp = hero.getBoots();
-                            hero.setBoots((Equipment) i);
+                            hero.setBoots(j);
                             break;
                         case 6:
                             temp = hero.getGloves();
-                            hero.setGloves((Equipment) i);
+                            hero.setGloves(j);
                             break;
                         case 7:
                             temp = hero.getOffHand();
-                            hero.setOffHand((Weapon) i);
+                            hero.setOffHand((Weapon) j);
                             break;
                         case 8:
                             temp = hero.getOffHand();
-                            hero.setOffHand((Weapon) i);
+                            hero.setOffHand((Weapon) j);
                             break;
                         case 9:
                             temp = hero.getRing();
-                            hero.setRing((Equipment) i);
+                            hero.setRing(j);
                             break;
                         case 10:
                             temp = hero.getHat();
-                            hero.setHat((Equipment) i);
+                            hero.setHat(j);
                             break;
                         case 11:
                             temp = hero.getGoggles();
-                            hero.setGoggles((Equipment) i);
+                            hero.setGoggles(j);
                             break;
-                        default: System.out.println(i.getItemType());
+                        default: System.out.println(j.getItemType()); //For debugging
                             break;
                     }
                     System.out.println("Equiped " + i.getName());
@@ -312,7 +315,7 @@ public class Game {
         if (!pass) {
             System.out.println("There's no item here called that.");
         }
-        else if(temp != null && !temp.getName().equals("None")){ //switch the equipment from inventory
+        else if(temp != null && !temp.getName().equals("None")){ //Switch the equipment from inventory
             hero.addInventory(temp);
         }
     }
@@ -326,8 +329,8 @@ public class Game {
                 currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
             }
             else {
-                for (NPC n : currentRoom.getNPCsInRoom()) {
-                    if (n.getName().equalsIgnoreCase(input)) {
+                for (NPC n : currentRoom.getNPCsInRoom()) {    //As of right now it can talk to multiple people
+                    if (n.getName().equalsIgnoreCase(input)) { //if they have the same name
                         n.printDefaultDialogue();
                         pass = true;
                     }
