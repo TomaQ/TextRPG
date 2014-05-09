@@ -1,7 +1,7 @@
 package textrpg.skills;
 
-public class Skill 
-{
+public class Skill {
+
     private String name;
     private int levelRequirement;
     private String[] itemsRequired;

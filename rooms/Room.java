@@ -9,9 +9,8 @@ import textrpg.monsters.*;
 import textrpg.npcs.NPC;
 import textrpg.shops.Shop;
 
-public class Room
-{
-    
+public class Room {
+ 
     private String roomName;
     private String roomDescription;
     private Room nExit = null;
@@ -21,7 +20,7 @@ public class Room
     
     List<Item> roomLoot = new ArrayList<>();
     private Monster[] monsterEncounters;
-    private int[] monsterEncounterChance;//out of 100, must match index's with monsterEncounters
+    private int[] monsterEncounterChance;//out of 100%, must match index's with monsterEncounters
     
     private NPC[] npcsInRoom;
     private Shop store; //only one shop per room
@@ -84,7 +83,8 @@ public class Room
         wExit = w;
     }
     
-    public boolean oneExit() {//returns true if there is only one exit                                   //can make these ints intead of checking room (?)
+    //Returns true if there is only one exit
+    private boolean oneExit() {
         int j = 0;
         if(getNExit() != null)
             j++;

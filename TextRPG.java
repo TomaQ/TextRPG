@@ -38,7 +38,7 @@ public class TextRPG {
     }
 
     //Starts a new game
-    public static void newGame() throws IOException {
+    private static void newGame() throws IOException {
         Scanner scan = new Scanner(System.in);
         String nameInput = "";
         int jobSelector;
@@ -89,14 +89,14 @@ public class TextRPG {
             System.out.println("Your new adventure is about to begin!~ Are you ready?(Y/y)");
 
             ans = scan.nextLine();
-            loop = true; //If user doesn't say yes then need to reset the job selector loop
+            loop = true; //If user doesn't enter 'y' or 'Y' then need to reset the job selector loop
         }
         new Game(p); //Creates a new game with the newly created player
     }
 
     //Currently under construction
-    public static void continueGame() throws IOException {
-        System.out.println("This doesn't work atm lol.");
+    private static void continueGame() throws IOException {
+        System.out.println("This doesn't work atm so here's a new game.");
         newGame();
     }
 
@@ -106,9 +106,9 @@ public class TextRPG {
     }
 
     public static void main(String[] args) throws IOException {
-        final double version = 0.3;
+        final double version = 0.4;
 
         System.out.println("TextRPG! v" + version);
-        new TextRPG(); //Starts the game
+        new TextRPG(); //Starts the game (make this into a method instead?)
     }
 }

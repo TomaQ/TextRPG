@@ -5,15 +5,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import textrpg.Player;
 
-public class Mage extends Job implements Levels
-{
+public class Mage extends Job implements Levels {
+
     private final String class_name = "Mage";
-    
+
     private final String[] initialSkills = {"Attack", "Fireball"};
-    
-    public Mage(Player p)
-    {
-        availableSkills  = initialSkills;//wrong!!
+   
+    public Mage(Player p) {
+        availableSkills  = initialSkills;//wrong!! but it's temp for now so w/e
         jobName = class_name;
         skillsLearned = new ArrayList<>();
         
@@ -26,14 +25,13 @@ public class Mage extends Job implements Levels
         p.setBaseMagicDefense(15);
         p.initCurrentStats();
         try {
-            this.initSkills(p);
+            this.initSkills(p); //Temp
         } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
         
     }
     
     @Override
-    public void levelUp(Player p)
-    {
+    public void levelUp(Player p) {
         p.setNextLevelExp((int)(p.getNextLevelExp()*1.2));
         
         p.setBaseHealth((int)(p.getBaseHealth() * 1.2));
