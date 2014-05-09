@@ -109,6 +109,6 @@ public class TextRPG {
         final double version = 0.4;
 
         System.out.println("TextRPG! v" + version);
-        new TextRPG(); //Starts the game
+        new TextRPG(); //Starts the game (make this into a method instead?)
     }
 }
