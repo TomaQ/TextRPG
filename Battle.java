@@ -12,13 +12,13 @@ import textrpg.skills.Skill;
 public final class Battle {
 
     Scanner scan = new Scanner(System.in);
-    Player hero;//not sure if health will recover after battle
+    Player hero;//not sure if i want health to recover after battle but for now it will
     Monster monster;
     int turns;
     Random rand = new Random();
     boolean ranAway = false; //flag to see if the player ran away
 
-    boolean pass = false;//checks to 
+    boolean pass = false; //used for loops
 
     public Battle(Player h, Monster m) {
         hero = h;
@@ -68,18 +68,18 @@ public final class Battle {
         Game.printBreak();
     }
 
-    public boolean moveFirst() {//calculates who gets the first turn based on agility
-
+    //Calculates who gets the first turn based on agility
+    public boolean moveFirst() {
         return hero.getCurrentAgility() > monster.getCurrentAgility();
     }
 
-    public void playerTurn() {//need to organize this like totally better
-
+    public void playerTurn() { //formatting?
         System.out.println(hero.getName() + " - " + "HP: " + hero.getCurrentHealth() + "/" + hero.getMaxHealth() + " MP: " + hero.getCurrentMana() + "/" + hero.getMaxMana());
         System.out.println(monster.getName() + " - " + "HP: " + monster.getCurrentHealth());
         decidePlayerAction();
     }
 
+    //Figures out the players action
     public void decidePlayerAction() {
         pass = false;//set to true if the player makes a valid move
 
@@ -124,8 +124,8 @@ public final class Battle {
         } while (!pass);
     }
 
-    public void playerAttack(int dmg) {//player uses attack
-
+    //Player uses attack
+    public void playerAttack(int dmg) {
         for (Skill skill : hero.getJob().getSkills()) {
             if (skill.getSkillName().equals("Attack")) {
                 dmg = skill.use();
@@ -137,13 +137,12 @@ public final class Battle {
         pass = true;//PASSED!
     }
 
-    public boolean playerSkill(int dmg) {//player uses a skill
-
+    //Player uses a skill
+    public boolean playerSkill(int dmg) {
         String skillz = "";
         for (int i = 0; i < hero.getJob().getSkills().length; i++) {
-            if (!hero.getJob().getSkills()[i].getSkillName().equals("Attack"))//Need to remove getSkills from adding Attack
-            {
-                skillz += hero.getJob().getSkills()[i].getSkillName() + "(" + i + ")" + ", ";
+            if (!hero.getJob().getSkills()[i].getSkillName().equals("Attack")) {//Need to remove getSkills from adding Attack
+                skillz += "[" + i + "]" + hero.getJob().getSkills()[i].getSkillName() +  ", ";
             }
         }
 
@@ -170,7 +169,7 @@ public final class Battle {
                 scan.next();
             }
         }
-        if (hero.getCurrentMana() >= hero.getJob().getSkills()[skillChosen].getManaCost()) {
+        if (hero.getCurrentMana() >= hero.getJob().getSkills()[skillChosen].getManaCost()) { //If they have enough mana
             dmg = hero.getJob().getSkills()[skillChosen].use();
 
             if (monster.getWeakness() == hero.getJob().getSkills()[skillChosen].getType()) {
@@ -181,7 +180,7 @@ public final class Battle {
 
             System.out.println("Did " + dmg + " damage! Remaining HP of monster:" + monster.getCurrentHealth());
             pass = true;//PASSED!
-            return true;
+            return true;//do I need both of these...
         }
         else {
             System.out.println("Not enough mana!");
@@ -189,10 +188,11 @@ public final class Battle {
         }
     }
 
+    //Player uses an item
     public boolean playerItem() {
         String inven = "";
         for (int i = 0; i < hero.getInventory().size(); i++) {
-            inven += hero.getInventory().get(i).getName() + "(" + i + ")" + ", ";
+            inven += "[" + i + "]" + hero.getInventory().get(i).getName() + ", ";
         }
         if (inven.length() > 0) {
             inven = inven.substring(0, inven.length() - 2);
@@ -220,28 +220,27 @@ public final class Battle {
                 scan.next();
             }
         }
+        
         Item chosenItem = hero.getInventory().get(itemChosen);
         if (chosenItem.getItemType() == 1) {//if the item type is consumable
 
             //probably a better way to do this
-            hero.useItem(hero.getInventory().get(itemChosen).use());
+            hero.useItem(chosenItem.use());
             if (chosenItem.isConsumable()) {
                 hero.getInventory().remove(chosenItem);
             }
 
             pass = true;//PASSED!
-            return true;
+            return true;//Why are both of these here...
         }
         else {
-            hero.getInventory().get(itemChosen).itemError();
+            chosenItem.itemError();
             return false;
         }
     }
 
-    public void runAway() //player runs away
-    {
-        if ((rand.nextInt(10) + 1) < 7) //generates a number from 1-10 and checks if < 8
-        {                              //should have it check agility and stuff
+    public void runAway() {//player runs away
+        if ((rand.nextInt(10) + 1) < 7) {//generates a number from 1-10 and checks if < 8                             //should have it check agility and stuff
             monster.setCurrentHealth(0);
             ranAway = true;
             System.out.println("Ran away safely!");
