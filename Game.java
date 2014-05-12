@@ -145,6 +145,9 @@ public class Game {
                     System.out.println("There isn't a shop here.");
                 }
                 break;
+            case "drop":
+                dropCommand(restofUserInput, hero);
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -342,6 +345,32 @@ public class Game {
         }
         else {
             System.out.println("No one's here!");
+        }
+    }
+ 
+    //Drops an item and puts it in a room
+    private void dropCommand(String input, Player hero) {
+        boolean found = false;
+        for (Item i : hero.getInventory()) {
+            if (i.getName().equalsIgnoreCase(input)) {
+                if (i.getItemType() != 3) { //If it is not a quest item
+                    currentRoom.getRoomLoot().add(i);
+                    hero.getInventory().remove(i);
+                    //need to check if there are multiple ones, also a/an, also item tags checking
+                    i.setItemRoomDescription("There is a " + i.getName() + " laying on the ground."); //shows the item in the look command
+                    System.out.println("Dropped " + i.getName() + ".");
+                    found = true;
+                    break; //only drop one item if there are multiple
+                }
+                
+                else {
+                    System.out.println("You cannot drop that item!");
+                }
+            }
+        }
+        
+        if(!found) {
+            System.out.println("Item not found.");
         }
     }
 }
