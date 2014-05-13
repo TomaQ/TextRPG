@@ -362,7 +362,7 @@ public class Game {
             }
         }
         if (!found) {
-            System.out.println("Item not found.");
+            System.out.println("You don't have an item called that.");
         }
     }
 
