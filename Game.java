@@ -351,26 +351,34 @@ public class Game {
     //Drops an item and puts it in a room
     private void dropCommand(String input, Player hero) {
         boolean found = false;
-        for (Item i : hero.getInventory()) {
-            if (i.getName().equalsIgnoreCase(input)) {
+        for (Item i : hero.getInventory()) { //Loops through the players inventory
+            if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
+                currentRoom.getRoomLoot().add(i);
+                hero.getInventory().remove(i);
+                //need to check if there are multiple ones, also a/an
+                i.setItemRoomDescription("There is a " + i.getName().toLowerCase() + " laying on the ground."); //shows the item in the look command
+                System.out.println("Dropped " + i.getName() + ".");
+                found = true;
+                break; //Don't need to search for other items if it is found already
+            }
+        }
+        if (!found) {
+            System.out.println("Item not found.");
+        }
+    }
+
+    private Item searchItem(Item i, String input) {
+        for (String tag : i.getTags()) { //Loops through all of the items tags
+            if (tag.equalsIgnoreCase(input)) {
                 if (i.getItemType() != 3) { //If it is not a quest item
-                    currentRoom.getRoomLoot().add(i);
-                    hero.getInventory().remove(i);
-                    //need to check if there are multiple ones, also a/an, also item tags checking
-                    i.setItemRoomDescription("There is a " + i.getName() + " laying on the ground."); //shows the item in the look command
-                    System.out.println("Dropped " + i.getName() + ".");
-                    found = true;
-                    break; //only drop one item if there are multiple
+                    return i;
                 }
-                
                 else {
                     System.out.println("You cannot drop that item!");
+                    return null;
                 }
             }
         }
-        
-        if(!found) {
-            System.out.println("Item not found.");
-        }
+        return null;
     }
 }
