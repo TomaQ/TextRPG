@@ -355,7 +355,6 @@ public class Game {
             if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
                 currentRoom.getRoomLoot().add(i);
                 hero.getInventory().remove(i);
-                //need to check if there are multiple ones, also a/an
                 i.setItemRoomDescription("There is a " + i.getName().toLowerCase() + " laying on the ground."); //shows the item in the look command
                 System.out.println("Dropped " + i.getName() + ".");
                 found = true;
@@ -367,6 +366,7 @@ public class Game {
         }
     }
 
+    //Searches for an item, called from the drop command only as of right now
     private Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
             if (tag.equalsIgnoreCase(input)) {
