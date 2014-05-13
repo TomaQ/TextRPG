@@ -51,8 +51,8 @@ public class Game {
 
     private void command(Player hero) {//checks what to do from the users input
         userInput = userInput.toLowerCase();
-        int i = userInput.indexOf(' '); //gets the space in the command
-        String firstUserInput, restofUserInput = "";
+        int i = userInput.indexOf(' '); //Gets the space in the command
+        String firstUserInput, restofUserInput = ""; //The first input is commands such as 'take' or 'equip' while the rest can be item names or such
 
         if (i > 0) {// if there's a space then parse it
             firstUserInput = userInput.substring(0, i);
@@ -65,7 +65,7 @@ public class Game {
         firstUserInput = parseUserInput(firstUserInput);
 
         switch (firstUserInput) { //this will be better later....
-            case "b":
+            case "battle":
                 Slime m = new Slime();//temporary
                 new Battle(hero, m);
                 break;
@@ -74,7 +74,7 @@ public class Game {
                 break;
             case "quit":
                 break;
-            case "n":
+            case "north":
                 if (currentRoom.getNExit() != null) {
                     currentRoom = currentRoom.getNExit();
                     currentRoom.enterRoomText();
@@ -83,7 +83,7 @@ public class Game {
                     Room.noExit();
                 }
                 break;
-            case "s":
+            case "south":
                 if (currentRoom.getSExit() != null) {
                     currentRoom = currentRoom.getSExit();
                     currentRoom.enterRoomText();
@@ -92,7 +92,7 @@ public class Game {
                     Room.noExit();
                 }
                 break;
-            case "e":
+            case "east":
                 if (currentRoom.getEExit() != null) {
                     currentRoom = currentRoom.getEExit();
                     currentRoom.enterRoomText();
@@ -101,7 +101,7 @@ public class Game {
                     Room.noExit();
                 }
                 break;
-            case "w":
+            case "west":
                 if (currentRoom.getWExit() != null) {
                     currentRoom = currentRoom.getWExit();
                     currentRoom.enterRoomText();
@@ -110,19 +110,19 @@ public class Game {
                     Room.noExit();
                 }
                 break;
-            case "exits":
+            case "exit":
                 currentRoom.getExits();
                 break;
             case "look":
                 System.out.println(currentRoom.getRoomDescription());
                 break;
-            case "i":
+            case "inventory":
                 hero.printInventory();
                 break;
             case "skills":
                 hero.getJob().printSkills();
                 break;
-            case "status":
+            case "stats":
                 hero.printStatus();
                 break;
             case "equipment":
@@ -170,36 +170,27 @@ public class Game {
         hero.setChest(bronze);
     }
 
-    //Formats for shortcuts, need to make an array later of acceptable commands....
+    //Formats for shortcuts
     private String parseUserInput(String input) {
-        switch (input) {
-            case "north":
-                input = "n";
-                break;
-            case "south":
-                input = "s";
-                break;
-            case "east":
-                input = "e";
-                break;
-            case "west":
-                input = "w";
-                break;
-            case "exit":
-                input = "exits";
-                break;
-            case "battle":
-                input = "b";
-                break;
-            case "inventory":
-                input = "i";
-                break;
-            case "search":
-                input = "look";
-                break;
-            case "stats":
-                input = "status";
-                break;
+        String[] north = {"north", "n"};
+        String[] south = {"south", "s"};
+        String[] east = {"east", "e"};
+        String[] west = {"west", "w"};
+        String[] exits = {"exit", "exits", "escapes", "entrance", "entrances"};
+        String[] battle = {"battle", "b"}; //Temp
+        String[] inventory = {"inventory", "i"};
+        String[] look = {"look", "search", "l"};
+        String[] stats = {"stats", "status"};
+        String[] take = {"take", "get"};
+        String[] skills = {"skills", "skill"};
+
+        String[][] commands = {north, south, east, west, exits, battle, inventory, look, stats, take, skills};
+        for (int i = 0; i < commands.length; i++) {
+            for (int j = 0; j < commands[i].length; j++) {
+                if (input.equalsIgnoreCase(commands[i][j])) {
+                    input = commands[i][0]; //Sets the input  to the first index of the array
+                }
+            }
         }
         return input;
     }
@@ -219,6 +210,7 @@ public class Game {
         System.out.println("equip - Equips something to youreself. Usage is equip 'object' where object is what you want to equip to yourself.");
         System.out.println("talk - Talks to someone, including yourself! Usage is talk 'person' where person is who you want to talk to. If you don't specify someone then it will talk to whoever it deems is most important.");
         System.out.println("shop - Enters the shop if there is currently one in the room.");
+        System.out.println("drop - Removes an item from your inventory and drops it in the room you are currently in.");
         System.out.println("quit - Quits the game.");
         printBreak();
     }
