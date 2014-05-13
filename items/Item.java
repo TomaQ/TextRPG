@@ -12,6 +12,9 @@ public class Item
     
     private String[] tags = null;//These are tags that the item can be refered to
     //Say there is a HealthPotion in the room , if someone wants to take it they would type "take pot" or "take 'tag'" etc.
+    //Different items cannot have the same tag
+    //One of the tags for the item must be the item name (it is not included by default)
+    //All Items must have tags including child classes (Equipment/Weapons)
     
     private int goldWorth;
     private int[] statsModified = new int[8];

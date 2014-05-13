@@ -8,8 +8,13 @@ public class IronSword extends Weapon {
         super.setEquipmentType(1);
         super.setEquipmentStats(s);
         super.setName("Iron Sword");
+        
+        String[] t = {"iron sword"};
+        super.setTags(t);
 
         super.setWeaponType(1);//testing not for realzz
         super.setWeaponDmg(9001);//lololz
+        
+        
     }
 }
