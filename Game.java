@@ -388,7 +388,9 @@ public class Game {
                         Weapon tempW = new NoneW();
                         hero.setWeapon(tempW);
                         break;
-
+                    case 2:
+                        hero.setChest(none);
+                        break;
                 }
                 hero.addInventory(e);
                 pass = true;
