@@ -70,6 +70,11 @@ public class Player extends Entity {
     public Equipment getGoggles(){return goggles;}
     public void setGoggles(Equipment e){goggles = e;initCurrentStats();}
     
+    public Equipment[] getEquipment() {
+        Equipment[] temp = {weapon, offHand, chest, legs, bracers, boots, gloves, ring, hat, goggles};
+        return temp;
+    }
+    
     public List<Item> getInventory(){return inventory;}//used for removing and looping
     public void addInventory(Item i){inventory.add(i);}
     
