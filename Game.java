@@ -377,96 +377,155 @@ public class Game {
         }
         return null;
     }
-    
+
+    //vvvv NEED TO REFACTOR vvvv!!!!!!!!!!!
     //Unequips a piece of armor or weapon and places it in the players inventory
     private void unequipCommand(String input, Player hero) {
-        boolean pass = false;
-        int selector; //used for switch case
-   
+        boolean pass = false; //checks if something was unequiped
+        Equipment none = new NoneE(); //Need to set the now null slot to an "empty" one
+
         switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
             case "weapon":
-                selector = 1;
+                if (!hero.getWeapon().getName().equals("None")) {
+                    hero.addInventory(hero.getWeapon());
+                    System.out.println("Unequiped " + hero.getWeapon().getName());
+                    Weapon tempW = new NoneW();
+                    hero.setWeapon(tempW);
+                    pass = true;
+                }
                 break;
             case "chest":
-                selector = 2;
+                if (!hero.getChest().getName().equals("None")) {
+                    hero.addInventory(hero.getChest());
+                    System.out.println("Unequiped " + hero.getChest().getName());
+                    hero.setChest(none);
+                    pass = true;
+                }
                 break;
             case "legs":
-                selector = 3;
+                if (!hero.getLegs().getName().equals("None")) {
+                    hero.addInventory(hero.getLegs());
+                    System.out.println("Unequiped " + hero.getLegs().getName());
+                    hero.setLegs(none);
+                    pass = true;
+                }
                 break;
             case "bracers":
-                selector = 4;
+                if (!hero.getBracers().getName().equals("None")) {
+                    hero.addInventory(hero.getBracers());
+                    System.out.println("Unequiped " + hero.getBracers().getName());
+                    hero.setBracers(none);
+                    pass = true;
+                }
                 break;
             case "boots":
-                selector = 5;
+                if (!hero.getBoots().getName().equals("None")) {
+                    hero.addInventory(hero.getBoots());
+                    System.out.println("Unequiped " + hero.getBoots().getName());
+                    hero.setBoots(none);
+                    pass = true;
+                }
                 break;
             case "gloves":
-                selector = 6;
+                if (!hero.getGloves().getName().equals("None")) {
+                    hero.addInventory(hero.getGloves());
+                    System.out.println("Unequiped " + hero.getGloves().getName());
+                    hero.setGloves(none);
+                    pass = true;
+                }
                 break;
             case "shield":
-                selector = 7;
+                if (!hero.getOffHand().getName().equals("None")) {
+                    hero.addInventory(hero.getOffHand());
+                    System.out.println("Unequiped " + hero.getOffHand().getName());
+                    Weapon tempW = new NoneW();
+                    hero.setOffHand(tempW);
+                    pass = true;
+                }
                 break;
             case "offhand":
-                selector = 8;
+                if (!hero.getOffHand().getName().equals("None")) {
+                    hero.addInventory(hero.getOffHand());
+                    System.out.println("Unequiped " + hero.getOffHand().getName());
+                    Weapon tempW = new NoneW();
+                    hero.setOffHand(tempW);
+                    pass = true;
+                }
                 break;
             case "ring":
-                selector = 9;
+                if (!hero.getRing().getName().equals("None")) {
+                    hero.addInventory(hero.getRing());
+                    System.out.println("Unequiped " + hero.getRing().getName());
+                    hero.setRing(none);
+                    pass = true;
+                }
                 break;
             case "hat":
-                selector = 10;
+                if (!hero.getHat().getName().equals("None")) {
+                    hero.addInventory(hero.getHat());
+                    System.out.println("Unequiped " + hero.getHat().getName());
+                    hero.setHat(none);
+                    pass = true;
+                }
                 break;
             case "goggles":
-                selector = 11;
+                if (!hero.getGoggles().getName().equals("None")) {
+                    hero.addInventory(hero.getGoggles());
+                    System.out.println("Unequiped " + hero.getGoggles().getName());
+                    hero.setGoggles(none);
+                    pass = true;
+                }
                 break;
         }
 
-        for (Equipment e : hero.getEquipment()) {
-            if (input.equalsIgnoreCase(e.getName())) { //should also check for "chest" or "legs"
-                Equipment none = new NoneE(); //Need to set the now null slot to an "empty" one
-                selector = e.getEquipmentType();
-                switch (selector) {
-                    case 1:
-                        Weapon tempW = new NoneW();
-                        hero.setWeapon(tempW);
-                        break;
-                    case 2:
-                        hero.setChest(none);
-                        break;
-                    case 3:
-                        hero.setLegs(none);
-                        break;
-                    case 4:
-                        hero.setBracers(none);
-                        break;
-                    case 5:
-                        hero.setBoots(none);
-                        break;
-                    case 6:
-                        hero.setGloves(none);
-                        break;
-                    case 7:
-                        Weapon tempS = new NoneW(); //tempW is already define?? Compiler bug?
-                        hero.setOffHand(tempS);
-                        break;
-                    case 8:
-                        Weapon tempO = new NoneW();
-                        hero.setOffHand(tempO);
-                        break;
-                    case 9:
-                        hero.setRing(none);
-                        break;
-                    case 10:
-                        hero.setHat(none);
-                        break;
-                    case 11:
-                        hero.setGoggles(none);
-                        break;
+        if (!pass) { //If it did not get unequiped already from above
+            for (Equipment e : hero.getEquipment()) {
+                if (input.equalsIgnoreCase(e.getName())) {
+                    switch (e.getEquipmentType()) {
+                        case 1:
+                            Weapon tempW = new NoneW();
+                            hero.setWeapon(tempW);
+                            break;
+                        case 2:
+                            hero.setChest(none);
+                            break;
+                        case 3:
+                            hero.setLegs(none);
+                            break;
+                        case 4:
+                            hero.setBracers(none);
+                            break;
+                        case 5:
+                            hero.setBoots(none);
+                            break;
+                        case 6:
+                            hero.setGloves(none);
+                            break;
+                        case 7:
+                            Weapon tempS = new NoneW(); //tempW is already define?? Compiler bug?
+                            hero.setOffHand(tempS);
+                            break;
+                        case 8:
+                            Weapon tempO = new NoneW();
+                            hero.setOffHand(tempO);
+                            break;
+                        case 9:
+                            hero.setRing(none);
+                            break;
+                        case 10:
+                            hero.setHat(none);
+                            break;
+                        case 11:
+                            hero.setGoggles(none);
+                            break;
+                    }
+                    hero.addInventory(e);
+                    pass = true;
+                    System.out.println("Unequiped " + e.getName());
                 }
-                hero.addInventory(e);
-                pass = true;
-                System.out.println("Unequiped " + e.getName());
             }
         }
-        if (!pass) {
+        if (!pass) { //If nothing was unequiped
             System.out.println("You don't have anything equipped called that.");
         }
     }
