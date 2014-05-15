@@ -378,18 +378,50 @@ public class Game {
         return null;
     }
     
+    //Unequips a piece of armor or weapon and places it in the players inventory
     private void unequipCommand(String input, Player hero) {
         boolean pass = false;
+        int selector; //used for switch case
         for (Equipment e : hero.getEquipment()) {
             if (input.equalsIgnoreCase(e.getName())) { //should also check for "chest" or "legs"
-                Equipment none = new NoneE();
-                switch (e.getEquipmentType()) {
+                Equipment none = new NoneE(); //Need to set the now null slot to an "empty" one
+                selector = e.getEquipmentType();
+                switch (selector) {
                     case 1:
                         Weapon tempW = new NoneW();
                         hero.setWeapon(tempW);
                         break;
                     case 2:
                         hero.setChest(none);
+                        break;
+                    case 3:
+                        hero.setLegs(none);
+                        break;
+                    case 4:
+                        hero.setBracers(none);
+                        break;
+                    case 5:
+                        hero.setBoots(none);
+                        break;
+                    case 6:
+                        hero.setGloves(none);
+                        break;
+                    case 7:
+                        Weapon tempS = new NoneW(); //tempW is already define?? Compiler bug?
+                        hero.setOffHand(tempS);
+                        break;
+                    case 8:
+                        Weapon tempO = new NoneW();
+                        hero.setOffHand(tempO);
+                        break;
+                    case 9:
+                        hero.setRing(none);
+                        break;
+                    case 10:
+                        hero.setHat(none);
+                        break;
+                    case 11:
+                        hero.setGoggles(none);
                         break;
                 }
                 hero.addInventory(e);
