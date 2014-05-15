@@ -239,6 +239,8 @@ public class Game {
         }
     }
 
+    
+    //REFACTORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     //Equips something
     private void equipCommand(String input, Player hero) {
         boolean pass = false;
@@ -470,6 +472,6 @@ public class Game {
         hero.addInventory(e);
         System.out.println("Unequiped " + e.getName());
         Equipment none = new NoneE(); //Need to set the slot now to empty
-        hero.setEquipment(none);
+        hero.setEquipment(none, e.getEquipmentType());
     }
 }

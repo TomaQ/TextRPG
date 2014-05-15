@@ -375,4 +375,46 @@ public class Player extends Entity {
                 break;
         }
     }
+    
+    //Sets the equipment based on the type passed
+    public void setEquipment(Equipment e, int type) {
+        switch (type) {
+            case 1:
+                Weapon tempW = new NoneW();
+                setWeapon(tempW);
+                break;
+            case 2:
+                setChest(e);
+                break;
+            case 3:
+                setLegs(e);
+                break;
+            case 4:
+                setBracers(e);
+                break;
+            case 5:
+                setBoots(e);
+                break;
+            case 6:
+                setGloves(e);
+                break;
+            case 7:
+                Weapon tempS = new NoneW();
+                setOffHand(tempS);
+                break;
+            case 8:
+                Weapon tempO = new NoneW();
+                setOffHand(tempO);
+                break;
+            case 9:
+                setRing(e);
+                break;
+            case 10:
+                setHat(e);
+                break;
+            case 11:
+                setGoggles(e);
+                break;
+        }
+    }
 }
