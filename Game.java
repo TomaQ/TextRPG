@@ -382,6 +382,43 @@ public class Game {
     private void unequipCommand(String input, Player hero) {
         boolean pass = false;
         int selector; //used for switch case
+   
+        switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
+            case "weapon":
+                selector = 1;
+                break;
+            case "chest":
+                selector = 2;
+                break;
+            case "legs":
+                selector = 3;
+                break;
+            case "bracers":
+                selector = 4;
+                break;
+            case "boots":
+                selector = 5;
+                break;
+            case "gloves":
+                selector = 6;
+                break;
+            case "shield":
+                selector = 7;
+                break;
+            case "offhand":
+                selector = 8;
+                break;
+            case "ring":
+                selector = 9;
+                break;
+            case "hat":
+                selector = 10;
+                break;
+            case "goggles":
+                selector = 11;
+                break;
+        }
+
         for (Equipment e : hero.getEquipment()) {
             if (input.equalsIgnoreCase(e.getName())) { //should also check for "chest" or "legs"
                 Equipment none = new NoneE(); //Need to set the now null slot to an "empty" one
