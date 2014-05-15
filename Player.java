@@ -335,4 +335,44 @@ public class Player extends Entity {
         super.setCurrentDefense(super.getCurrentDefense() + statsModified[5]);
         super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
     }
+    
+    //Sets the equipment based on it's type
+    //Look at docs for equipment type
+    public void setEquipment(Equipment e) {
+        switch (e.getEquipmentType()) {
+            case 1:
+                setWeapon((Weapon)e);
+                break;
+            case 2:
+                setChest(e);
+                break;
+            case 3:
+                setLegs(e);
+                break;
+            case 4:
+                setBracers(e);
+                break;
+            case 5:
+                setBoots(e);
+                break;
+            case 6:
+                setGloves(e);
+                break;
+            case 7:
+                setOffHand((Weapon)e);
+                break;
+            case 8:
+                setOffHand((Weapon)e);
+                break;
+            case 9:
+                setRing(e);
+                break;
+            case 10:
+                setHat(e);
+                break;
+            case 11:
+                setGoggles(e);
+                break;
+        }
+    }
 }
