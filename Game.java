@@ -380,7 +380,6 @@ public class Game {
         return null;
     }
 
-    //vvvv NEED TO REFACTOR vvvv!!!!!!!!!!!
     //Unequips a piece of armor or weapon and places it in the players inventory
     private void unequipCommand(String input, Player hero) {
         boolean pass = false; //checks if something was unequiped
