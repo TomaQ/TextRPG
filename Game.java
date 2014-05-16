@@ -148,6 +148,9 @@ public class Game {
             case "drop":
                 dropCommand(restofUserInput, hero);
                 break;
+            case "unequip":
+                unequipCommand(restofUserInput, hero);
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -211,6 +214,7 @@ public class Game {
         System.out.println("talk - Talks to someone, including yourself! Usage is talk 'person' where person is who you want to talk to. If you don't specify someone then it will talk to whoever it deems is most important.");
         System.out.println("shop - Enters the shop if there is currently one in the room.");
         System.out.println("drop - Removes an item from your inventory and drops it in the room you are currently in.");
+        System.out.println("unequip - Unequips something from yourself. Useage is unequip 'object' where object is what you want to unequip from yourself.");
         System.out.println("quit - Quits the game.");
         printBreak();
     }
@@ -235,6 +239,8 @@ public class Game {
         }
     }
 
+    
+    //REFACTORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     //Equips something
     private void equipCommand(String input, Player hero) {
         boolean pass = false;
@@ -372,5 +378,99 @@ public class Game {
             }
         }
         return null;
+    }
+
+    //Unequips a piece of armor or weapon and places it in the players inventory
+    private void unequipCommand(String input, Player hero) {
+        boolean pass = false; //checks if something was unequiped
+
+        switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
+            case "weapon":
+                if (!hero.getWeapon().getName().equals("None")) {
+                    unEquip(hero.getWeapon(), hero);
+                    pass = true;
+                }
+                break;
+            case "chest":
+                if (!hero.getChest().getName().equals("None")) {
+                    unEquip(hero.getChest(), hero);
+                    pass = true;
+                }
+                break;
+            case "legs":
+                if (!hero.getLegs().getName().equals("None")) {
+                    unEquip(hero.getLegs(), hero);
+                    pass = true;
+                }
+                break;
+            case "bracers":
+                if (!hero.getBracers().getName().equals("None")) {
+                    unEquip(hero.getBracers(), hero);
+                    pass = true;
+                }
+                break;
+            case "boots":
+                if (!hero.getBoots().getName().equals("None")) {
+                    unEquip(hero.getBoots(), hero);
+                    pass = true;
+                }
+                break;
+            case "gloves":
+                if (!hero.getGloves().getName().equals("None")) {
+                    unEquip(hero.getGloves(), hero);
+                    pass = true;
+                }
+                break;
+            case "shield":
+                if (!hero.getOffHand().getName().equals("None")) {
+                    unEquip(hero.getOffHand(), hero);
+                    pass = true;
+                }
+                break;
+            case "offhand":
+                if (!hero.getOffHand().getName().equals("None")) {
+                    unEquip(hero.getOffHand(), hero);
+                    pass = true;
+                }
+                break;
+            case "ring":
+                if (!hero.getRing().getName().equals("None")) {
+                    unEquip(hero.getRing(), hero);
+                    pass = true;
+                }
+                break;
+            case "hat":
+                if (!hero.getHat().getName().equals("None")) {
+                    unEquip(hero.getHat(), hero);
+                    pass = true;
+                }
+                break;
+            case "goggles":
+                if (!hero.getGoggles().getName().equals("None")) {
+                    unEquip(hero.getGoggles(), hero);
+                    pass = true;
+                }
+                break;
+        }
+
+        if (!pass) { //If it did not get unequiped already from above
+            for (Equipment e : hero.getEquipment()) {
+                if (input.equalsIgnoreCase(e.getName())) {
+                    unEquip(e, hero);
+                    pass = true;
+                }
+            }
+        }
+        if (!pass) { //If nothing was unequiped
+            System.out.println("You don't have anything equipped called that.");
+        }
+    }
+
+    //Does the actual unequiping
+    private void unEquip(Equipment e, Player hero) {
+        hero.addInventory(e);
+        System.out.println("Unequiped " + e.getName());
+        Equipment none = new NoneE(); //Need to set the slot now to empty
+        hero.setEquipment(none, e.getEquipmentType());
     }
 }

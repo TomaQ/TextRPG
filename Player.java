@@ -70,6 +70,11 @@ public class Player extends Entity {
     public Equipment getGoggles(){return goggles;}
     public void setGoggles(Equipment e){goggles = e;initCurrentStats();}
     
+    public Equipment[] getEquipment() {
+        Equipment[] temp = {weapon, offHand, chest, legs, bracers, boots, gloves, ring, hat, goggles};
+        return temp;
+    }
+    
     public List<Item> getInventory(){return inventory;}//used for removing and looping
     public void addInventory(Item i){inventory.add(i);}
     
@@ -329,5 +334,54 @@ public class Player extends Entity {
         super.setCurrentAgility(super.getCurrentAgility() + statsModified[4]);
         super.setCurrentDefense(super.getCurrentDefense() + statsModified[5]);
         super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
+    }
+    
+    //Sets the equipment based on it's type
+    //Look at docs for equipment type
+    //Calls this method when no type is specified
+    public void setEquipment(Equipment e) {
+        setEquipment(e, e.getEquipmentType());
+    }
+    
+    //Sets the equipment based on the type passed
+    public void setEquipment(Equipment e, int type) {
+        switch (type) {
+            case 1:
+                Weapon tempW = new NoneW();
+                setWeapon(tempW);
+                break;
+            case 2:
+                setChest(e);
+                break;
+            case 3:
+                setLegs(e);
+                break;
+            case 4:
+                setBracers(e);
+                break;
+            case 5:
+                setBoots(e);
+                break;
+            case 6:
+                setGloves(e);
+                break;
+            case 7:
+                Weapon tempS = new NoneW();
+                setOffHand(tempS);
+                break;
+            case 8:
+                Weapon tempO = new NoneW();
+                setOffHand(tempO);
+                break;
+            case 9:
+                setRing(e);
+                break;
+            case 10:
+                setHat(e);
+                break;
+            case 11:
+                setGoggles(e);
+                break;
+        }
     }
 }
