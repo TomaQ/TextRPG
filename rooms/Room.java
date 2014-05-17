@@ -31,7 +31,22 @@ public class Room {
     public String getRoomDescription() {
         String temp = roomDescription;
         for(int i = 0; i < roomLoot.size(); i++){
-            temp += " " + roomLoot.get(i).getItemRoomDescription();
+            String iName = roomLoot.get(i).getName().toLowerCase();
+            if (temp.contains(iName + " laying on the ground")){
+                int index = temp.indexOf(iName + " laying on the ground") - ("AEIOU".contains(String.valueOf(iName.charAt(0))) ? 4 : 3);
+                char quanity = temp.charAt(index); //checking to see if there is a digit in the line because if there is then that means there are already more than two of the same items in the same spot
+                if (Character.isDigit(quanity)){
+                    quanity++;
+                    temp = temp.substring(0, index) + quanity + temp.substring(index+1);
+                }
+                else{
+                    temp = temp.substring(0, index-9);
+                    temp+= " There are 2 " + iName + "s laying on the ground."; 
+                }
+            }
+            else{
+                temp += " " + roomLoot.get(i).getItemRoomDescription();
+            }
         }
         return temp;
     }
