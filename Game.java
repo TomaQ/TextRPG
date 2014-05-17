@@ -455,9 +455,11 @@ public class Game {
 
         if (!pass) { //If it did not get unequiped already from above
             for (Equipment e : hero.getEquipment()) {
-                if (input.equalsIgnoreCase(e.getName())) {
-                    unEquip(e, hero);
-                    pass = true;
+                for (String s : e.getTags()) {
+                    if (input.equalsIgnoreCase(s)) {
+                        unEquip(e, hero);
+                        pass = true;
+                    }
                 }
             }
         }
