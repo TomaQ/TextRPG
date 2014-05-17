@@ -353,7 +353,8 @@ public class Game {
             if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
                 currentRoom.getRoomLoot().add(i);
                 hero.getInventory().remove(i);
-                i.setItemRoomDescription("There is a " + i.getName().toLowerCase() + " laying on the ground."); //shows the item in the look command
+                String a_an = ("AEIOU".contains(String.valueOf(i.toString().charAt(0))) ? "an " : "a ");
+                i.setItemRoomDescription("There is " + a_an + i.getName().toLowerCase() + " laying on the ground."); //shows the item in the look command
                 System.out.println("Dropped " + i.getName() + ".");
                 found = true;
                 break; //Don't need to search for other items if it is found already
