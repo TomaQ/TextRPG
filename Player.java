@@ -32,7 +32,8 @@ public class Player extends Entity {
 
     private int gold = 0;
 
-    public Player(String n, int j) { //sets the level to 1 and initializes the players job
+    //sets the level to 1 and initializes the players job
+    public Player(String n, int j) {
         level = 1;
         super.setName(n);
         new Job(this, j);
@@ -69,18 +70,18 @@ public class Player extends Entity {
     
     public Equipment getGoggles(){return goggles;}
     public void setGoggles(Equipment e){goggles = e;initCurrentStats();}
-    
+   
     public Equipment[] getEquipment() {
         Equipment[] temp = {weapon, offHand, chest, legs, bracers, boots, gloves, ring, hat, goggles};
         return temp;
     }
-    
+
     public List<Item> getInventory(){return inventory;}//used for removing and looping
     public void addInventory(Item i){inventory.add(i);}
     
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
-    
+   
     //Returns a 2d array of the item name and the quantity of each
     public String[][] getCountedInventory() {
         String[][] invenCount = new String[inventory.size()][2];
@@ -101,33 +102,33 @@ public class Player extends Entity {
         }
         return invenCount;
     }
-    
+
     //Returns the players inventory without duplicates
     public Item[] getCountedInventoryItems() {
         Item[] invenCount = new Item[inventory.size()];
 
         for (int i = 0; i < inventory.size(); i++) {
-            for(int j = 0; j - 1 < i; j++) {
-                if(invenCount[j] != null && invenCount[j] == inventory.get(i)) {
+            for (int j = 0; j - 1 < i; j++) {
+                if (invenCount[j] != null && invenCount[j] == inventory.get(i)) {
                     invenCount[i] = inventory.get(j);
                     break;
                 }
-                else if(invenCount[j] == null){
+                else if (invenCount[j] == null) {
                     invenCount[j] = inventory.get(i);
                 }
             }
         }
         return invenCount;
     }
-    
+
     //Prints the players inventory in the format 'Item name(quantity)'
-    public void printInventory() {   
+    public void printInventory() {
         Game.printBreak();
         System.out.println("Your inventory:");
         String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
         String[][] invenCount = this.getCountedInventory();
-        
-        for (int i = 0; i < invenCount.length; i++){ //prints the inventory and counter if > 1
+
+        for (int i = 0; i < invenCount.length; i++) { //prints the inventory and counter if > 1
             if (invenCount[i][0] != null) {
                 if (Integer.valueOf(invenCount[i][1]) > 1) {
                     inven += invenCount[i][0] + "(" + invenCount[i][1] + "), ";
@@ -184,165 +185,84 @@ public class Player extends Entity {
         System.out.println("Gloves: " + getGloves().getName() + "\tRing: " + getRing().getName());
         System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
-    
+
     @Override //sets the current stats by calculating the base and bonus from equipment
     public void initCurrentStats() {
-        super.setCurrentHealth(super.getBaseHealth() + calculateBonusHealth());
+        int[] temp = calculateBonusStats();
+        super.setCurrentHealth(super.getBaseHealth() + temp[0]);
         super.setMaxHealth(super.getCurrentHealth());
-        super.setCurrentMana(super.getBaseMana() + calculateBonusMana());
+        super.setCurrentMana(super.getBaseMana() + temp[1]);
         super.setMaxMana(super.getCurrentMana());
-        super.setCurrentStrength(super.getBaseStrength() + calculateBonusStrength());
-        super.setCurrentMagic(super.getBaseMagic() + calculateBonusMagic());
-        super.setCurrentAgility(super.getBaseAgility() + calculateBonusAgility());
-        super.setCurrentDefense(super.getBaseDefense() + calculateBonusDefense());
-        super.setCurrentMagicDefense(super.getBaseMagicDefense() + calculateBonusMagicDefense());
+        super.setCurrentStrength(super.getBaseStrength() + temp[2]);
+        super.setCurrentMagic(super.getBaseMagic() + temp[3]);
+        super.setCurrentAgility(super.getBaseAgility() + temp[4]);
+        super.setCurrentDefense(super.getBaseDefense() + temp[5]);
+        super.setCurrentMagicDefense(super.getBaseMagicDefense() + temp[6]);
     }
 
-    private int calculateBonusHealth() {//calculates the bonus HP you get from equipment
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[0]; //0 is the index of the hp modifier stat
-        bonus += getOffHand().getEquipmentStats()[0];
-        bonus += getChest().getEquipmentStats()[0];
-        bonus += getLegs().getEquipmentStats()[0];
-        bonus += getBracers().getEquipmentStats()[0];
-        bonus += getBoots().getEquipmentStats()[0];
-        bonus += getGloves().getEquipmentStats()[0];
-        bonus += getRing().getEquipmentStats()[0];
-        bonus += getHat().getEquipmentStats()[0];
-        bonus += getGoggles().getEquipmentStats()[0];
-        return bonus;
+    //Calculates the bonus stats from equipment
+    private int[] calculateBonusStats() {
+        int[] temp = new int[7];
+        for (int i = 0; i < 7; i++) {
+            temp[i] = 0;
+            temp[i] += getWeapon().getEquipmentStats()[i]; //0 is the index of the hp modifier stat, look at docs
+            temp[i] += getOffHand().getEquipmentStats()[i];
+            temp[i] += getChest().getEquipmentStats()[i];
+            temp[i] += getLegs().getEquipmentStats()[i];
+            temp[i] += getBracers().getEquipmentStats()[i];
+            temp[i] += getBoots().getEquipmentStats()[i];
+            temp[i] += getGloves().getEquipmentStats()[i];
+            temp[i] += getRing().getEquipmentStats()[i];
+            temp[i] += getHat().getEquipmentStats()[i];
+            temp[i] += getGoggles().getEquipmentStats()[i];
+        }
+        return temp;
     }
 
-    private int calculateBonusMana() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[1];
-        bonus += getOffHand().getEquipmentStats()[1];
-        bonus += getChest().getEquipmentStats()[1];
-        bonus += getLegs().getEquipmentStats()[1];
-        bonus += getBracers().getEquipmentStats()[1];
-        bonus += getBoots().getEquipmentStats()[1];
-        bonus += getGloves().getEquipmentStats()[1];
-        bonus += getRing().getEquipmentStats()[1];
-        bonus += getHat().getEquipmentStats()[1];
-        bonus += getGoggles().getEquipmentStats()[1];
-        return bonus;
-    }
-
-    private int calculateBonusStrength() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[2];
-        bonus += getOffHand().getEquipmentStats()[2];
-        bonus += getChest().getEquipmentStats()[2];
-        bonus += getLegs().getEquipmentStats()[2];
-        bonus += getBracers().getEquipmentStats()[2];
-        bonus += getBoots().getEquipmentStats()[2];
-        bonus += getGloves().getEquipmentStats()[2];
-        bonus += getRing().getEquipmentStats()[2];
-        bonus += getHat().getEquipmentStats()[2];
-        bonus += getGoggles().getEquipmentStats()[2];
-        return bonus;
-    }
-
-    private int calculateBonusMagic() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[3];
-        bonus += getOffHand().getEquipmentStats()[3];
-        bonus += getChest().getEquipmentStats()[3];
-        bonus += getLegs().getEquipmentStats()[3];
-        bonus += getBracers().getEquipmentStats()[3];
-        bonus += getBoots().getEquipmentStats()[3];
-        bonus += getGloves().getEquipmentStats()[3];
-        bonus += getRing().getEquipmentStats()[3];
-        bonus += getHat().getEquipmentStats()[3];
-        bonus += getGoggles().getEquipmentStats()[3];
-        return bonus;
-    }
-
-    private int calculateBonusAgility() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[4];
-        bonus += getOffHand().getEquipmentStats()[4];
-        bonus += getChest().getEquipmentStats()[4];
-        bonus += getLegs().getEquipmentStats()[4];
-        bonus += getBracers().getEquipmentStats()[4];
-        bonus += getBoots().getEquipmentStats()[4];
-        bonus += getGloves().getEquipmentStats()[4];
-        bonus += getRing().getEquipmentStats()[4];
-        bonus += getHat().getEquipmentStats()[4];
-        bonus += getGoggles().getEquipmentStats()[4];
-        return bonus;
-    }
-
-    private int calculateBonusDefense() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[5];
-        bonus += getOffHand().getEquipmentStats()[5];
-        bonus += getChest().getEquipmentStats()[5];
-        bonus += getLegs().getEquipmentStats()[5];
-        bonus += getBracers().getEquipmentStats()[5];
-        bonus += getBoots().getEquipmentStats()[5];
-        bonus += getGloves().getEquipmentStats()[5];
-        bonus += getRing().getEquipmentStats()[5];
-        bonus += getHat().getEquipmentStats()[5];
-        bonus += getGoggles().getEquipmentStats()[5];
-        return bonus;
-    }
-
-    private int calculateBonusMagicDefense() {
-        int bonus = 0;
-        bonus += getWeapon().getEquipmentStats()[6];
-        bonus += getOffHand().getEquipmentStats()[6];
-        bonus += getChest().getEquipmentStats()[6];
-        bonus += getLegs().getEquipmentStats()[6];
-        bonus += getBracers().getEquipmentStats()[6];
-        bonus += getBoots().getEquipmentStats()[6];
-        bonus += getGloves().getEquipmentStats()[6];
-        bonus += getRing().getEquipmentStats()[6];
-        bonus += getHat().getEquipmentStats()[6];
-        bonus += getGoggles().getEquipmentStats()[6];
-        return bonus;
-    }
-    
     //Takes an array of stats from an item and adds it to the players
     //Used for HP pots and MP pots and such (for now)
     //Look at Item use documentation for order of array
     public void useItem(int[] statsModified) {
-        if(statsModified[7] == 1){//if it can increase max hp or mp, can probably make if-else better
-        
+        if (statsModified[7] == 1) {//if it can increase max hp or mp, can probably make if-else better
+
             super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
         }
-        else{
-            if(super.getCurrentHealth() + statsModified[0] > super.getMaxHealth())
+        else {
+            if (super.getCurrentHealth() + statsModified[0] > super.getMaxHealth()) {
                 super.setCurrentHealth(super.getMaxHealth());
-            else
+            }
+            else {
                 super.setCurrentHealth(super.getCurrentHealth() + statsModified[0]);
+            }
         }
-        
-        if(statsModified[7] == 1){//if it can increase max hp or mp, can probably make if-else better
-        
+
+        if (statsModified[7] == 1) {//if it can increase max hp or mp, can probably make if-else better
+
             super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
         }
-        else{
-            if(super.getCurrentMana() + statsModified[1] > super.getMaxMana())
+        else {
+            if (super.getCurrentMana() + statsModified[1] > super.getMaxMana()) {
                 super.setCurrentMana(super.getMaxMana());
-            else
+            }
+            else {
                 super.setCurrentMana(super.getCurrentMana() + statsModified[1]);
+            }
         }
-        
+
         super.setCurrentStrength(super.getCurrentStrength() + statsModified[2]);
         super.setCurrentMagic(super.getCurrentMagic() + statsModified[3]);
         super.setCurrentAgility(super.getCurrentAgility() + statsModified[4]);
         super.setCurrentDefense(super.getCurrentDefense() + statsModified[5]);
         super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
     }
-    
+
     //Sets the equipment based on it's type
     //Look at docs for equipment type
     //Calls this method when no type is specified
     public void setEquipment(Equipment e) {
         setEquipment(e, e.getEquipmentType());
     }
-    
+
     //Sets the equipment based on the type passed
     public void setEquipment(Equipment e, int type) {
         switch (type) {
