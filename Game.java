@@ -224,7 +224,7 @@ public class Game {
         boolean pass = false;
         for (int i = 0; i < currentRoom.getRoomLoot().size(); i++) {//for some reason using nested for each loops crashes here
             for (String tag : currentRoom.getRoomLoot().get(i).getTags()) {
-                if (tag.equals(rest)) {
+                if (tag.equalsIgnoreCase(rest)) {
                     Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
 
                     hero.addInventory(temp);
