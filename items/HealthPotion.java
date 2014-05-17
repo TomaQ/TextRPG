@@ -11,7 +11,7 @@ public class HealthPotion extends Item {
         int[] i = {50, 0, 0, 0, 0, 0, 0, 0};
         super.setStatsModified(i);
 
-        String[] t = {"health pot", "health potion", "hp pot", "hp potion"};
+        String[] t = {"health pot", "hp pot", "hp potion"};
         super.setTags(t);
 
         super.setConsumable(true);

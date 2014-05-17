@@ -9,7 +9,7 @@ public class BronzeChest extends Equipment {
         super.setEquipmentStats(stats);
         super.setName("Bronze Chestplate");
         
-        String[] t = {"bronze chestplate", "bronze chest"};
+        String[] t = {"bronze chest"};
         super.setTags(t);
     }
 }

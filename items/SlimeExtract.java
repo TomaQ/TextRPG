@@ -8,7 +8,7 @@ public class SlimeExtract extends Item {
         super.setName("Slime Extract");
         super.setItemDescription("The goo from a slime.");
 
-        String[] t = {"slime extract", "slime"};
+        String[] t = {"slime"};
         super.setTags(t);
         
         super.setConsumable(false);
