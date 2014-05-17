@@ -72,7 +72,7 @@ public class Player extends Entity {
     public void setGoggles(Equipment e){goggles = e;initCurrentStats();}
    
     public Equipment[] getEquipment() {
-        Equipment[] temp = {weapon, offHand, chest, legs, bracers, boots, gloves, ring, hat, goggles};
+        Equipment[] temp = {weapon, chest, legs, bracers, boots, gloves, offHand, ring, hat, goggles};
         return temp;
     }
 
@@ -267,8 +267,13 @@ public class Player extends Entity {
     public void setEquipment(Equipment e, int type) {
         switch (type) {
             case 1:
-                Weapon tempW = new NoneW();
-                setWeapon(tempW);
+                if (e.getName().equals("None")) {
+                    Weapon tempW = new NoneW();
+                    setWeapon(tempW);
+                }
+                else {
+                    setWeapon((Weapon) e);
+                }
                 break;
             case 2:
                 setChest(e);
@@ -286,12 +291,22 @@ public class Player extends Entity {
                 setGloves(e);
                 break;
             case 7:
-                Weapon tempS = new NoneW();
-                setOffHand(tempS);
+                if (e.getName().equals("None")) {
+                    Weapon tempS = new NoneW();
+                    setOffHand(tempS);
+                }
+                else {
+                    setOffHand((Weapon) e);
+                }
                 break;
             case 8:
-                Weapon tempO = new NoneW();
-                setOffHand(tempO);
+                if (e.getName().equals("None")) {
+                    Weapon tempO = new NoneW();
+                    setOffHand(tempO);
+                }
+                else {
+                    setOffHand((Weapon) e);
+                }
                 break;
             case 9:
                 setRing(e);

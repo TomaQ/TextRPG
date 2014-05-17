@@ -239,85 +239,41 @@ public class Game {
         }
     }
 
-    
-    //REFACTORRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR
     //Equips something
     private void equipCommand(String input, Player hero) {
         boolean pass = false;
+        Equipment original = null;
         Equipment temp = null;
-        Equipment j = null; //the item that we searched for
-        
+
         for (Item i : hero.getInventory()) {
-            if ((i.getName().toLowerCase().equals(input))) {
-                if (i.getClass().getSuperclass().equals(Equipment.class) || i.getClass().getSuperclass().equals(Weapon.class)) {
-                    pass = true; //^^^ i dont like that line ^^^
-                    j = (Equipment)i;//need to access equipmentType method
-                    
-                    //Look at docs for weapon types (when I write them...)
-                    switch (j.getEquipmentType()) {
-                        case 1:
-                            temp = hero.getWeapon();
-                            hero.setWeapon((Weapon) j);
-                            break;
-                        case 2:
-                            temp = hero.getChest();
-                            hero.setChest(j);
-                            break;
-                        case 3:
-                            temp = hero.getLegs();
-                            hero.setLegs(j);
-                            break;
-                        case 4:
-                            temp = hero.getBracers();
-                            hero.setBracers(j);
-                            break;
-                        case 5:
-                            temp = hero.getBoots();
-                            hero.setBoots(j);
-                            break;
-                        case 6:
-                            temp = hero.getGloves();
-                            hero.setGloves(j);
-                            break;
-                        case 7:
-                            temp = hero.getOffHand();
-                            hero.setOffHand((Weapon) j);
-                            break;
-                        case 8:
-                            temp = hero.getOffHand();
-                            hero.setOffHand((Weapon) j);
-                            break;
-                        case 9:
-                            temp = hero.getRing();
-                            hero.setRing(j);
-                            break;
-                        case 10:
-                            temp = hero.getHat();
-                            hero.setHat(j);
-                            break;
-                        case 11:
-                            temp = hero.getGoggles();
-                            hero.setGoggles(j);
-                            break;
-                        default: System.out.println(j.getItemType()); //For debugging
-                            break;
+            for (String s : i.getTags()) {
+                if (s.equalsIgnoreCase(input)) {
+                    if (i.getClass().getSuperclass().equals(Equipment.class) || i.getClass().getSuperclass().equals(Weapon.class)) {
+                        pass = true;
+                        temp = (Equipment) i; //Sets the current item to a temp variable
+
+                        int equipType = temp.getEquipmentType();
+                        if (equipType > 7) {
+                            equipType = equipType - 1; //For index mapping purposes, look at docs
+                        }
+                        original = hero.getEquipment()[equipType - 1]; //Gets the current players equipment, semi chance of bug but none so far
+                        hero.setEquipment(temp); //Sets the equipment from the inventory
+                        System.out.println("Equiped " + temp.getName());
                     }
-                    System.out.println("Equiped " + i.getName());
-                }
-                else {
-                    System.out.println("You can't equip that!");
-                    pass = true;
+                    else {
+                        System.out.println("You can't equip that!");
+                        pass = true;
+                    }
                 }
             }
         }
-        
-        hero.getInventory().remove(j); //removes the item from the inventory
-        
+
+        hero.getInventory().remove(temp); //removes the item from the inventory
         if (!pass) {
             System.out.println("There's no item here called that.");
         }
-        else if(temp != null && !temp.getName().equals("None")){ //Switch the equipment from inventory
-            hero.addInventory(temp);
+        else if (temp != null && !original.getName().equals("None")) { //Switch the equipment from inventory
+            hero.addInventory(original);
         }
     }
 
