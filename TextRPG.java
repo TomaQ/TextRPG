@@ -106,7 +106,7 @@ public class TextRPG {
     }
 
     public static void main(String[] args) throws IOException {
-        final double version = 0.4;
+        final double version = 0.8;
 
         System.out.println("TextRPG! v" + version);
         new TextRPG(); //Starts the game (make this into a method instead?)
