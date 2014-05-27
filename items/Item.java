@@ -56,12 +56,10 @@ public class Item
     public String[] getTags(){return tags;}
     public void setTags(String[] t) {
         String[] temp = new String[t.length + 1];
-        //temp = t;
         
-        for(int i = 0; i < t.length; i++) {
-            temp[i] = t[i];
-        }
-        temp[t.length] = this.getName().toLowerCase();
+        System.arraycopy(t, 0, temp, 0, t.length);
+        
+        temp[t.length] = getName().toLowerCase(); //Inserts the items name as a tag
         tags = temp;
     }
     
@@ -70,7 +68,7 @@ public class Item
     
      //Overwrite if you can use the item
     public int[] use() {
-        this.itemError();
+        itemError();
         return no_stats_modified;
     }
 

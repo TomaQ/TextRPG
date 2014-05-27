@@ -19,7 +19,6 @@ public class Monster extends Entity {
     private boolean escapable;//if you can't run away then set to false
     
     public List<Item> getLoot(){return loot;}
-    public void setLoot(List<Item> l){loot = l;}
     
     public int[] getLootChance(){return lootChance;} //returns a whole number out of 100
     public void setLootChance(int[] i){lootChance = i;}
@@ -45,8 +44,8 @@ public class Monster extends Entity {
         Random rand = new Random(); //should make a random int method
 
         for (int i = 0; i < this.getLoot().size(); i++) {
-            if (rand.nextInt(101) > lootChance[i]) {
-                loot.remove(loot.get(i));
+            if (rand.nextInt(101) > getLootChance()[i]) {
+                getLoot().remove(getLoot().get(i));
             }
         }
     }

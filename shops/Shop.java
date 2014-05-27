@@ -44,11 +44,11 @@ public class Shop {
 
         //Prints the inventory of the shop
         String inven = "";
-        for (int i = 0; i < inventory.length; i++) {
-            inven += "[" + i + "]" + inventory[i].getName() + "(" + inventory[i].getGoldWorth() +  "g), ";
+        for (int i = 0; i < getInventory().length; i++) {
+            inven += "[" + i + "]" + getInventory()[i].getName() + "(" + getInventory()[i].getGoldWorth() +  "g), ";
         }
 
-        System.out.println(inven + "[" + inventory.length + "]exit");
+        System.out.println(inven + "[" + getInventory().length + "]exit");
 
         //Gets the users input
         int chosen = -1;
@@ -66,17 +66,17 @@ public class Shop {
         }
 
         //If the input is legal then buy the item, maybe make unsellable items
-        if (chosen > -1 && chosen < inventory.length) {
-            if (inventory[chosen].getGoldWorth() <= hero.getGold()) {
-                hero.getInventory().add(inventory[chosen]);
-                hero.setGold(hero.getGold() - inventory[chosen].getGoldWorth());
-                System.out.println("Bought " + inventory[chosen].getName() + ".");
+        if (chosen > -1 && chosen < getInventory().length) {
+            if (getInventory()[chosen].getGoldWorth() <= hero.getGold()) {
+                hero.getInventory().add(getInventory()[chosen]);
+                hero.setGold(hero.getGold() - getInventory()[chosen].getGoldWorth());
+                System.out.println("Bought " + getInventory()[chosen].getName() + ".");
             }
             else {
                 System.out.println("Not enough gold!");
             }
         }
-        else if (chosen == inventory.length) {
+        else if (chosen == getInventory().length) {
         }//Exits the buying transaction
         else {
             TextRPG.invalidInput();

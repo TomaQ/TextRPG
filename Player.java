@@ -84,9 +84,9 @@ public class Player extends Entity {
    
     //Returns a 2d array of the item name and the quantity of each
     public String[][] getCountedInventory() {
-        String[][] invenCount = new String[inventory.size()][2];
+        String[][] invenCount = new String[getInventory().size()][2];
 
-        for (int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < getInventory().size(); i++) {
             for (int j = 0; j - 1 < i; j++) {//i should use a map here instead lol
                 //short circuits here
                 if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())) {//if the names match
@@ -94,7 +94,7 @@ public class Player extends Entity {
                     break; //dont need to check rest of array if similar
                 }
                 else if (invenCount[j][0] == null) { //if it doesnt find the item then it adds it to the string
-                    invenCount[j][0] = inventory.get(i).getName();
+                    invenCount[j][0] = getInventory().get(i).getName();
                     invenCount[j][1] = "1";
                     break; //dont need to check the rest of array if inserted
                 }
@@ -105,16 +105,16 @@ public class Player extends Entity {
 
     //Returns the players inventory without duplicates
     public Item[] getCountedInventoryItems() {
-        Item[] invenCount = new Item[inventory.size()];
+        Item[] invenCount = new Item[getInventory().size()];
 
-        for (int i = 0; i < inventory.size(); i++) {
+        for (int i = 0; i < getInventory().size(); i++) {
             for (int j = 0; j - 1 < i; j++) {
-                if (invenCount[j] != null && invenCount[j] == inventory.get(i)) {
-                    invenCount[i] = inventory.get(j);
+                if (invenCount[j] != null && invenCount[j] == getInventory().get(i)) {
+                    invenCount[i] = getInventory().get(j);
                     break;
                 }
                 else if (invenCount[j] == null) {
-                    invenCount[j] = inventory.get(i);
+                    invenCount[j] = getInventory().get(i);
                 }
             }
         }
@@ -147,7 +147,7 @@ public class Player extends Entity {
     
     public int getCurrentExp(){return currentExp;}
     public void setCurrentExp(int i) {
-        if (nextLevelExp < (currentExp + i)) { //carrys over left over experience
+        if (nextLevelExp < (currentExp + i)) { //Carrys over left over experience
             currentExp = (currentExp + i) - nextLevelExp;
             levelUp();
         }
@@ -160,12 +160,12 @@ public class Player extends Entity {
     public void setNextLevelExp(int i){nextLevelExp = i;}
     
     public int getLevel(){return level;}
-    public void levelUp(){
+    public void levelUp() {
         level += 1;
         System.out.println("You reached level " + level + "!");
 
-        job.levelUp(this);
-        initCurrentStats(); //need to set currect stats since they changed
+        getJob().levelUp(this); //Note: This line does not call this method
+        initCurrentStats(); //Need to set currect stats since they changed
     }
     
     public int getGold(){return gold;}
@@ -186,7 +186,7 @@ public class Player extends Entity {
         System.out.println("Helmet: " + getHat().getName() + "\tGoggles: " + getGoggles().getName());
     }
 
-    @Override //sets the current stats by calculating the base and bonus from equipment
+    @Override //Sets the current stats by calculating the base and bonus from equipment
     public void initCurrentStats() {
         int[] temp = calculateBonusStats();
         super.setCurrentHealth(super.getBaseHealth() + temp[0]);
