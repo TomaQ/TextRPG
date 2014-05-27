@@ -30,8 +30,8 @@ public class Room {
      
     public String getRoomDescription() {
         String temp = roomDescription;
-        for(int i = 0; i < roomLoot.size(); i++){
-            temp += " " + roomLoot.get(i).getItemRoomDescription();
+        for(int i = 0; i < getRoomLoot().size(); i++){
+            temp += " " + getRoomLoot().get(i).getItemRoomDescription();
         }
         return temp;
     }
