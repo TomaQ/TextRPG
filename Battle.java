@@ -156,6 +156,7 @@ public final class Battle {
         boolean loop = true;
         while (loop) {
             try {
+                System.out.print(">");
                 skillChosen = scan.nextInt();
                 scan.nextLine();//consumes empty line
 
@@ -191,15 +192,23 @@ public final class Battle {
 
     //Player uses an item
     private boolean playerItem() {
-        String inven = "";
-        for (int i = 0; i < hero.getInventory().size(); i++) {
-            inven += "[" + i + "]" + hero.getInventory().get(i).getName() + ", ";
-        }
-        if (inven.length() > 0) {
-            inven = inven.substring(0, inven.length() - 2);
-        }
+        String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
 
-        System.out.println(inven);
+        String formattedInven = "";
+        for (int i = 0; i < inven.length; i++) {
+            if (inven[i][0] != null) {
+                if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + "), ";
+                }
+                else {
+                    formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                }
+            }
+        }
+        if(formattedInven.length() > 2) { //method plis
+            formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
+        }
+        System.out.println(formattedInven);
 
         System.out.println("Which item will you use?");
 
@@ -208,9 +217,10 @@ public final class Battle {
 
         while (loop) {
             try {
+                System.out.print(">");
                 itemChosen = scan.nextInt();
                 scan.nextLine();
-                if (itemChosen < hero.getInventory().size() && itemChosen >= 0) {
+                if (itemChosen < inven.length && itemChosen >= 0) {
                     loop = false;
                 }
                 else {
