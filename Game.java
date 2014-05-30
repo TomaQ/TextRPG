@@ -339,73 +339,59 @@ public class Game {
     //Unequips a piece of armor or weapon and places it in the players inventory
     private void unequipCommand(String input, Player hero) {
         boolean pass = false; //checks if something was unequiped
-
-        switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
+        String parsedInput = parseUnequipInput(input);
+        
+        switch (parsedInput) { //separate inputs for boots, boot, weapons (both of them), and all
             case "weapon":
-                if (!hero.getWeapon().getName().equals("None")) {
-                    unEquip(hero.getWeapon(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getWeapon(), hero);
                 break;
             case "chest":
-                if (!hero.getChest().getName().equals("None")) {
-                    unEquip(hero.getChest(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getChest(), hero);
                 break;
             case "legs":
-                if (!hero.getLegs().getName().equals("None")) {
-                    unEquip(hero.getLegs(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getLegs(), hero);
                 break;
             case "bracers":
-                if (!hero.getBracers().getName().equals("None")) {
-                    unEquip(hero.getBracers(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getBracers(), hero);
                 break;
             case "boots":
-                if (!hero.getBoots().getName().equals("None")) {
-                    unEquip(hero.getBoots(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getBoots(), hero);
                 break;
             case "gloves":
-                if (!hero.getGloves().getName().equals("None")) {
-                    unEquip(hero.getGloves(), hero);
-                    pass = true;
-                }
-                break;
-            case "shield":
-                if (!hero.getOffHand().getName().equals("None")) {
-                    unEquip(hero.getOffHand(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getGloves(), hero);
                 break;
             case "offhand":
-                if (!hero.getOffHand().getName().equals("None")) {
-                    unEquip(hero.getOffHand(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getOffHand(), hero);
                 break;
             case "ring":
-                if (!hero.getRing().getName().equals("None")) {
-                    unEquip(hero.getRing(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getRing(), hero);
                 break;
             case "hat":
-                if (!hero.getHat().getName().equals("None")) {
-                    unEquip(hero.getHat(), hero);
+                pass = unEquip(hero.getHat(), hero);
+                break;
+            case "goggles":
+                pass = unEquip(hero.getGoggles(), hero);
+                break;
+            case "weapons":
+                pass = unEquip(hero.getWeapon(), hero);
+                boolean pass2 = unEquip(hero.getOffHand(), hero);
+                
+                if (pass || pass2) { //If either was unequiped
                     pass = true;
                 }
                 break;
-            case "goggles":
-                if (!hero.getGoggles().getName().equals("None")) {
-                    unEquip(hero.getGoggles(), hero);
-                    pass = true;
-                }
+            case "all":
+                unEquip(hero.getWeapon(), hero);
+                unEquip(hero.getChest(), hero);
+                unEquip(hero.getLegs(), hero);
+                unEquip(hero.getBracers(), hero);
+                unEquip(hero.getBoots(), hero);
+                unEquip(hero.getGloves(), hero);
+                unEquip(hero.getOffHand(), hero);
+                unEquip(hero.getRing(), hero);
+                unEquip(hero.getHat(), hero);
+                unEquip(hero.getGoggles(), hero);
+                pass = true;
                 break;
         }
 
@@ -413,8 +399,7 @@ public class Game {
             for (Equipment e : hero.getEquipment()) {
                 for (String s : e.getTags()) {
                     if (input.equalsIgnoreCase(s)) {
-                        unEquip(e, hero);
-                        pass = true;
+                        pass = unEquip(e, hero);
                     }
                 }
             }
@@ -425,10 +410,38 @@ public class Game {
     }
 
     //Does the actual unequiping
-    private void unEquip(Equipment e, Player hero) {
-        hero.addInventory(e);
-        System.out.println("Unequiped " + e.getName());
-        Equipment none = new NoneE(); //Need to set the slot now to empty
-        hero.setEquipment(none, e.getEquipmentType());
+    private boolean unEquip(Equipment e, Player hero) {
+        if (!e.getName().equals("None")) {
+            hero.addInventory(e);
+            System.out.println("Unequiped " + e.getName());
+            Equipment none = new NoneE(); //Need to set the slot now to empty
+            hero.setEquipment(none, e.getEquipmentType());
+            return true;
+        }
+        return false;
+    }
+    
+    //Figures out different unequip commands and sets them to one that the UnequipCommand will know
+    private String parseUnequipInput(String input) {
+        String[] weapon = {"weapon", "main hand"};
+        String[] chest = {"chest", "torso"};
+        String[] legs = {"legs", "leg", "pants"};
+        String[] bracers = {"bracers", "bracer"};
+        String[] boots = {"boots", "boot", "feet", "shoes"};
+        String[] gloves = {"gloves", "glove"};
+        String[] offHand = {"offhand", "shield"};
+        String[] ring = {"ring", "rings"};
+        String[] hat = {"hat", "helmet", "mask"};
+        String[] goggles = {"goggles", "goggle", "glasses"};
+
+        String[][] commands = {weapon, chest, legs, bracers, boots, gloves, offHand, ring, hat, goggles};
+        for (int i = 0; i < commands.length; i++) {
+            for (int j = 0; j < commands[i].length; j++) {
+                if (input.equalsIgnoreCase(commands[i][j])) {
+                    input = commands[i][0]; //Sets the input  to the first index of the array
+                }
+            }
+        }
+        return input;
     }
 }
