@@ -339,8 +339,9 @@ public class Game {
     //Unequips a piece of armor or weapon and places it in the players inventory
     private void unequipCommand(String input, Player hero) {
         boolean pass = false; //checks if something was unequiped
-
-        switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
+        String parsedInput = parseUnequipInput(input);
+        
+        switch (parsedInput) { //separate inputs for boots, boot, weapons (both of them), and all
             case "weapon":
                 pass = unEquip(hero.getWeapon(), hero);
                 break;
@@ -359,9 +360,6 @@ public class Game {
             case "gloves":
                 pass = unEquip(hero.getGloves(), hero);
                 break;
-            case "shield":
-                pass = unEquip(hero.getOffHand(), hero);
-                break;
             case "offhand":
                 pass = unEquip(hero.getOffHand(), hero);
                 break;
@@ -373,6 +371,27 @@ public class Game {
                 break;
             case "goggles":
                 pass = unEquip(hero.getGoggles(), hero);
+                break;
+            case "weapons":
+                pass = unEquip(hero.getWeapon(), hero);
+                boolean pass2 = unEquip(hero.getOffHand(), hero);
+                
+                if (pass || pass2) { //If either was unequiped
+                    pass = true;
+                }
+                break;
+            case "all":
+                unEquip(hero.getWeapon(), hero);
+                unEquip(hero.getChest(), hero);
+                unEquip(hero.getLegs(), hero);
+                unEquip(hero.getBracers(), hero);
+                unEquip(hero.getBoots(), hero);
+                unEquip(hero.getGloves(), hero);
+                unEquip(hero.getOffHand(), hero);
+                unEquip(hero.getRing(), hero);
+                unEquip(hero.getHat(), hero);
+                unEquip(hero.getGoggles(), hero);
+                pass = true;
                 break;
         }
 
@@ -400,5 +419,29 @@ public class Game {
             return true;
         }
         return false;
+    }
+    
+    //Figures out different unequip commands and sets them to one that the UnequipCommand will know
+    private String parseUnequipInput(String input) {
+        String[] weapon = {"weapon", "main hand"};
+        String[] chest = {"chest", "torso"};
+        String[] legs = {"legs", "leg", "pants"};
+        String[] bracers = {"bracers", "bracer"};
+        String[] boots = {"boots", "boot", "feet", "shoes"};
+        String[] gloves = {"gloves", "glove"};
+        String[] offHand = {"offhand", "shield"};
+        String[] ring = {"ring", "rings"};
+        String[] hat = {"hat", "helmet", "mask"};
+        String[] goggles = {"goggles", "goggle", "glasses"};
+
+        String[][] commands = {weapon, chest, legs, bracers, boots, gloves, offHand, ring, hat, goggles};
+        for (int i = 0; i < commands.length; i++) {
+            for (int j = 0; j < commands[i].length; j++) {
+                if (input.equalsIgnoreCase(commands[i][j])) {
+                    input = commands[i][0]; //Sets the input  to the first index of the array
+                }
+            }
+        }
+        return input;
     }
 }
