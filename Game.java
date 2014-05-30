@@ -342,70 +342,37 @@ public class Game {
 
         switch (input) { //separate inputs for boots, boot, weapons (both of them), and all
             case "weapon":
-                if (!hero.getWeapon().getName().equals("None")) {
-                    unEquip(hero.getWeapon(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getWeapon(), hero);
                 break;
             case "chest":
-                if (!hero.getChest().getName().equals("None")) {
-                    unEquip(hero.getChest(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getChest(), hero);
                 break;
             case "legs":
-                if (!hero.getLegs().getName().equals("None")) {
-                    unEquip(hero.getLegs(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getLegs(), hero);
                 break;
             case "bracers":
-                if (!hero.getBracers().getName().equals("None")) {
-                    unEquip(hero.getBracers(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getBracers(), hero);
                 break;
             case "boots":
-                if (!hero.getBoots().getName().equals("None")) {
-                    unEquip(hero.getBoots(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getBoots(), hero);
                 break;
             case "gloves":
-                if (!hero.getGloves().getName().equals("None")) {
-                    unEquip(hero.getGloves(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getGloves(), hero);
                 break;
             case "shield":
-                if (!hero.getOffHand().getName().equals("None")) {
-                    unEquip(hero.getOffHand(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getOffHand(), hero);
                 break;
             case "offhand":
-                if (!hero.getOffHand().getName().equals("None")) {
-                    unEquip(hero.getOffHand(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getOffHand(), hero);
                 break;
             case "ring":
-                if (!hero.getRing().getName().equals("None")) {
-                    unEquip(hero.getRing(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getRing(), hero);
                 break;
             case "hat":
-                if (!hero.getHat().getName().equals("None")) {
-                    unEquip(hero.getHat(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getHat(), hero);
                 break;
             case "goggles":
-                if (!hero.getGoggles().getName().equals("None")) {
-                    unEquip(hero.getGoggles(), hero);
-                    pass = true;
-                }
+                pass = unEquip(hero.getGoggles(), hero);
                 break;
         }
 
@@ -413,8 +380,7 @@ public class Game {
             for (Equipment e : hero.getEquipment()) {
                 for (String s : e.getTags()) {
                     if (input.equalsIgnoreCase(s)) {
-                        unEquip(e, hero);
-                        pass = true;
+                        pass = unEquip(e, hero);
                     }
                 }
             }
@@ -425,10 +391,14 @@ public class Game {
     }
 
     //Does the actual unequiping
-    private void unEquip(Equipment e, Player hero) {
-        hero.addInventory(e);
-        System.out.println("Unequiped " + e.getName());
-        Equipment none = new NoneE(); //Need to set the slot now to empty
-        hero.setEquipment(none, e.getEquipmentType());
+    private boolean unEquip(Equipment e, Player hero) {
+        if (!e.getName().equals("None")) {
+            hero.addInventory(e);
+            System.out.println("Unequiped " + e.getName());
+            Equipment none = new NoneE(); //Need to set the slot now to empty
+            hero.setEquipment(none, e.getEquipmentType());
+            return true;
+        }
+        return false;
     }
 }
