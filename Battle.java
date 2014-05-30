@@ -220,7 +220,7 @@ public final class Battle {
                 System.out.print(">");
                 itemChosen = scan.nextInt();
                 scan.nextLine();
-                if (itemChosen < inven.length && itemChosen >= 0) {
+                if (itemChosen < formattedInven.length() && itemChosen >= 0) {
                     loop = false;
                 }
                 else {

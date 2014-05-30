@@ -82,7 +82,10 @@ public class Player extends Entity {
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
    
-    //Returns a 2d array of the item name and the quantity of each
+    /**
+     * Returns a 2D array containing the Item name and quantity of each.
+     * @return String[][]
+     */
     public String[][] getCountedInventory() {
         String[][] invenCount = new String[getInventory().size()][2];
 
@@ -103,7 +106,10 @@ public class Player extends Entity {
         return invenCount;
     }
 
-    //Returns the players inventory without duplicates
+    /**
+     * Returns the Player's inventory without duplicates
+     * @return Item[]
+     */
     public Item[] getCountedInventoryItems() {
         Item[] invenCount = new Item[getInventory().size()];
 
