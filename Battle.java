@@ -192,60 +192,67 @@ public final class Battle {
 
     //Player uses an item
     private boolean playerItem() {
-        String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
+        if (!hero.getInventory().isEmpty()) {
+            String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
 
-        String formattedInven = "";
-        for (int i = 0; i < inven.length; i++) {
-            if (inven[i][0] != null) {
-                if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + "), ";
-                }
-                else {
-                    formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+            String formattedInven = "";
+            for (int i = 0; i < inven.length; i++) {
+                if (inven[i][0] != null) {
+                    if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
+                        formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + "), ";
+                    }
+                    else {
+                        formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                    }
                 }
             }
-        }
-        if(formattedInven.length() > 2) { //method plis
-            formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
-        }
-        System.out.println(formattedInven);
+            if (formattedInven.length() > 2) { //method plis
+                formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
+            }
+            System.out.println(formattedInven);
 
-        System.out.println("Which item will you use?");
+            System.out.println("Which item will you use?");
 
-        boolean loop = true;
-        int itemChosen = -1;
+            boolean loop = true;
+            int itemChosen = -1;
 
-        while (loop) {
-            try {
-                System.out.print(">");
-                itemChosen = scan.nextInt();
-                scan.nextLine();
-                if (itemChosen < formattedInven.length() && itemChosen >= 0) {
-                    loop = false;
+            while (loop) {
+                try {
+                    System.out.print(">");
+                    itemChosen = scan.nextInt();
+                    scan.nextLine();
+                    if (itemChosen < formattedInven.length() && itemChosen >= 0) {
+                        loop = false;
+                    }
+                    else {
+                        TextRPG.invalidInput();
+                    }
                 }
-                else {
+                catch (InputMismatchException e) {
                     TextRPG.invalidInput();
+                    scan.next();
                 }
-            } catch (InputMismatchException e) {
-                TextRPG.invalidInput();
-                scan.next();
-            }
-        }
-
-        Item chosenItem = hero.getItem(inven[itemChosen][0]);
-        if (chosenItem.getItemType() == 1) {//if the item type is consumable
-
-            //probably a better way to do this
-            hero.useItem(chosenItem.use());
-            if (chosenItem.isConsumable()) {
-                hero.getInventory().remove(chosenItem);
             }
 
-            pass = true;//PASSED!
-            return true;//Why are both of these here...
+            Item chosenItem = hero.getItem(inven[itemChosen][0]);
+            if (chosenItem.getItemType() == 1) {//if the item type is consumable
+
+                //probably a better way to do this
+                hero.useItem(chosenItem.use());
+                if (chosenItem.isConsumable()) {
+                    hero.getInventory().remove(chosenItem);
+                }
+
+                pass = true;//PASSED!
+                return true;//Why are both of these here...
+            }
+            else {
+                chosenItem.itemError();
+                return false;
+            }
         }
         else {
-            chosenItem.itemError();
+            System.out.println("Inventory is empty.");
             return false;
         }
     }
