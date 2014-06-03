@@ -1,6 +1,7 @@
 //This is where the game runs
 package textrpg;
 
+import java.util.List;
 import java.util.Scanner;
 import textrpg.equipment.*;
 import textrpg.items.*;
@@ -309,7 +310,7 @@ public class Game {
             if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
                 currentRoom.getRoomLoot().add(i);
                 hero.getInventory().remove(i);
-                i.setItemRoomDescription("There is a " + i.getName().toLowerCase() + " laying on the ground."); //shows the item in the look command
+                i.setItemRoomDescription(null);
                 System.out.println("Dropped " + i.getName() + ".");
                 found = true;
                 break; //Don't need to search for other items if it is found already
@@ -443,5 +444,44 @@ public class Game {
             }
         }
         return input;
+    }
+    
+    /**
+     * Returns a 2D array containing the Item name and quantity of each.
+     *
+     * @return String[][]
+     */
+    public static String[][] getCountedInventory(List<Item> list) {
+        String[][] invenCount = new String[list.size()][2];
+
+        for (int i = 0; i < list.size(); i++) {
+            for (int j = 0; j - 1 < i; j++) {//i should use a map here instead lol
+                //short circuits here
+                if (invenCount[j][0] != null && invenCount[j][0].equals(list.get(i).getName())) {//if the names match
+                    invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
+                    break; //dont need to check rest of array if similar
+                }
+                else if (invenCount[j][0] == null) { //if it doesnt find the item then it adds it to the string
+                    invenCount[j][0] = list.get(i).getName();
+                    invenCount[j][1] = "1";
+                    break; //dont need to check the rest of array if inserted
+                }
+            }
+        }
+        return invenCount;
+    }
+    
+    /**
+     * Returns an Item by searching for the name of the Item in the Players inventory
+     * @param s The Item's name
+     * @return 
+     */
+    public static Item getItem(String s, List<Item> list) {
+        for(Item i : list) {
+            if(i.getName().equals(s)) {
+                return i;
+            }
+        }
+        return null;
     }
 }

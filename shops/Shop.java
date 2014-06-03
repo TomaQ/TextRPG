@@ -2,6 +2,7 @@ package textrpg.shops;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
+import textrpg.Game;
 import textrpg.Player;
 import textrpg.TextRPG;
 import textrpg.items.Item;
@@ -86,7 +87,7 @@ public class Shop {
     private void sell(Player hero) {
         System.out.println("What do you want to sell? Current Gold:" + hero.getGold());
 
-        String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
+        String[][] inven = Game.getCountedInventory(hero.getInventory()); //Gets the individual strings for each item in the hero's inventory
 
         //Prints the items the hero has to sell with in the format [index to chose]"Item name"(quantity)
         String formattedInven = "";
@@ -128,7 +129,7 @@ public class Shop {
 
         //Sells the item
         if (!hero.getInventory().isEmpty() && chosen < j && chosen > -1) {
-            Item chosenItem = hero.getItem(inven[chosen][0]);
+            Item chosenItem = Game.getItem(inven[chosen][0], hero.getInventory());
             hero.setGold(hero.getGold() + chosenItem.getSellingPrice());
             System.out.println("Sold " + chosenItem.getName() + ".");
             hero.getInventory().remove(chosenItem);
