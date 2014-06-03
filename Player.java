@@ -127,7 +127,9 @@ public class Player extends Entity {
         return invenCount;
     }
 
-    //Prints the players inventory in the format 'Item name(quantity)'
+    /**
+     * Prints the players inventory in the format 'Item name(quantity)
+     */
     public void printInventory() {
         Game.printBreak();
         System.out.println("Your inventory:");
@@ -225,9 +227,12 @@ public class Player extends Entity {
         return temp;
     }
 
-    //Takes an array of stats from an item and adds it to the players
     //Used for HP pots and MP pots and such (for now)
     //Look at Item use documentation for order of array
+    /**
+     * Takes an array of stats from an item and adds it to the players
+     * @param statsModified 
+     */
     public void useItem(int[] statsModified) {
         if (statsModified[7] == 1) {//if it can increase max hp or mp, can probably make if-else better
 
@@ -262,14 +267,21 @@ public class Player extends Entity {
         super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
     }
 
-    //Sets the equipment based on it's type
     //Look at docs for equipment type
     //Calls this method when no type is specified
+    /**
+     * Sets the equipment passed to the Player
+     * @param e The equipment to equip
+     */
     public void setEquipment(Equipment e) {
         setEquipment(e, e.getEquipmentType());
     }
 
-    //Sets the equipment based on the type passed
+    /**
+     * Sets the equipment passed to the Player
+     * @param e The equipment to equip
+     * @param type The type of equipment
+     */
     public void setEquipment(Equipment e, int type) {
         switch (type) {
             case 1:
