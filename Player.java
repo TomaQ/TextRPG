@@ -150,7 +150,7 @@ public class Player extends Entity {
 
         System.out.println(inven);
     }
-    
+
     public int getCurrentExp(){return currentExp;}
     public void setCurrentExp(int i) {
         if (nextLevelExp < (currentExp + i)) { //Carrys over left over experience
@@ -161,7 +161,7 @@ public class Player extends Entity {
             currentExp = i;
         }
     }
-    
+
     public int getNextLevelExp(){return nextLevelExp;}
     public void setNextLevelExp(int i){nextLevelExp = i;}
     
