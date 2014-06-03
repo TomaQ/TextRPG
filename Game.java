@@ -301,7 +301,7 @@ public class Game {
             System.out.println("No one's here!");
         }
     }
- 
+
     //Drops an item and puts it in a room
     private void dropCommand(String input, Player hero) {
         boolean found = false;
@@ -420,7 +420,7 @@ public class Game {
         }
         return false;
     }
-    
+
     //Figures out different unequip commands and sets them to one that the UnequipCommand will know
     private String parseUnequipInput(String input) {
         String[] weapon = {"weapon", "main hand"};
