@@ -156,6 +156,7 @@ public final class Battle {
         boolean loop = true;
         while (loop) {
             try {
+                System.out.print(">");
                 skillChosen = scan.nextInt();
                 scan.nextLine();//consumes empty line
 
@@ -191,51 +192,67 @@ public final class Battle {
 
     //Player uses an item
     private boolean playerItem() {
-        String inven = "";
-        for (int i = 0; i < hero.getInventory().size(); i++) {
-            inven += "[" + i + "]" + hero.getInventory().get(i).getName() + ", ";
-        }
-        if (inven.length() > 0) {
-            inven = inven.substring(0, inven.length() - 2);
-        }
+        if (!hero.getInventory().isEmpty()) {
+            String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
 
-        System.out.println(inven);
-
-        System.out.println("Which item will you use?");
-
-        boolean loop = true;
-        int itemChosen = -1;
-
-        while (loop) {
-            try {
-                itemChosen = scan.nextInt();
-                scan.nextLine();
-                if (itemChosen < hero.getInventory().size() && itemChosen >= 0) {
-                    loop = false;
+            String formattedInven = "";
+            for (int i = 0; i < inven.length; i++) {
+                if (inven[i][0] != null) {
+                    if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
+                        formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + "), ";
+                    }
+                    else {
+                        formattedInven += "[" + i + "]" + inven[i][0] + ", ";
+                    }
                 }
-                else {
+            }
+            if (formattedInven.length() > 2) { //method plis
+                formattedInven = formattedInven.substring(0, formattedInven.length() - 2);
+            }
+            System.out.println(formattedInven);
+
+            System.out.println("Which item will you use?");
+
+            boolean loop = true;
+            int itemChosen = -1;
+
+            while (loop) {
+                try {
+                    System.out.print(">");
+                    itemChosen = scan.nextInt();
+                    scan.nextLine();
+                    if (itemChosen < formattedInven.length() && itemChosen >= 0) {
+                        loop = false;
+                    }
+                    else {
+                        TextRPG.invalidInput();
+                    }
+                }
+                catch (InputMismatchException e) {
                     TextRPG.invalidInput();
+                    scan.next();
                 }
-            } catch (InputMismatchException e) {
-                TextRPG.invalidInput();
-                scan.next();
-            }
-        }
-        
-        Item chosenItem = hero.getInventory().get(itemChosen);
-        if (chosenItem.getItemType() == 1) {//if the item type is consumable
-
-            //probably a better way to do this
-            hero.useItem(chosenItem.use());
-            if (chosenItem.isConsumable()) {
-                hero.getInventory().remove(chosenItem);
             }
 
-            pass = true;//PASSED!
-            return true;//Why are both of these here...
+            Item chosenItem = hero.getItem(inven[itemChosen][0]);
+            if (chosenItem.getItemType() == 1) {//if the item type is consumable
+
+                //probably a better way to do this
+                hero.useItem(chosenItem.use());
+                if (chosenItem.isConsumable()) {
+                    hero.getInventory().remove(chosenItem);
+                }
+
+                pass = true;//PASSED!
+                return true;//Why are both of these here...
+            }
+            else {
+                chosenItem.itemError();
+                return false;
+            }
         }
         else {
-            chosenItem.itemError();
+            System.out.println("Inventory is empty.");
             return false;
         }
     }

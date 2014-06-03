@@ -81,8 +81,26 @@ public class Player extends Entity {
     
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
-   
-    //Returns a 2d array of the item name and the quantity of each
+
+    /**
+     * Returns an Item by searching for the name of the Item in the Players inventory
+     * @param s The Item's name
+     * @return 
+     */
+    public Item getItem(String s) {
+        for(Item i : getInventory()) {
+            if(i.getName().equals(s)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Returns a 2D array containing the Item name and quantity of each.
+     *
+     * @return String[][]
+     */
     public String[][] getCountedInventory() {
         String[][] invenCount = new String[getInventory().size()][2];
 
@@ -103,25 +121,30 @@ public class Player extends Entity {
         return invenCount;
     }
 
-    //Returns the players inventory without duplicates
+    /**
+     * Returns the Player's inventory without duplicates
+     * @return Item[]
+     */
     public Item[] getCountedInventoryItems() {
         Item[] invenCount = new Item[getInventory().size()];
 
         for (int i = 0; i < getInventory().size(); i++) {
             for (int j = 0; j - 1 < i; j++) {
                 if (invenCount[j] != null && invenCount[j] == getInventory().get(i)) {
-                    invenCount[i] = getInventory().get(j);
                     break;
                 }
                 else if (invenCount[j] == null) {
                     invenCount[j] = getInventory().get(i);
+                    break;
                 }
             }
         }
         return invenCount;
     }
 
-    //Prints the players inventory in the format 'Item name(quantity)'
+    /**
+     * Prints the players inventory in the format 'itemName(quantity)'
+     */
     public void printInventory() {
         Game.printBreak();
         System.out.println("Your inventory:");
@@ -144,7 +167,7 @@ public class Player extends Entity {
 
         System.out.println(inven);
     }
-    
+
     public int getCurrentExp(){return currentExp;}
     public void setCurrentExp(int i) {
         if (nextLevelExp < (currentExp + i)) { //Carrys over left over experience
@@ -155,7 +178,7 @@ public class Player extends Entity {
             currentExp = i;
         }
     }
-    
+
     public int getNextLevelExp(){return nextLevelExp;}
     public void setNextLevelExp(int i){nextLevelExp = i;}
     
@@ -219,9 +242,12 @@ public class Player extends Entity {
         return temp;
     }
 
-    //Takes an array of stats from an item and adds it to the players
     //Used for HP pots and MP pots and such (for now)
     //Look at Item use documentation for order of array
+    /**
+     * Takes an array of stats from an item and adds it to the players
+     * @param statsModified 
+     */
     public void useItem(int[] statsModified) {
         if (statsModified[7] == 1) {//if it can increase max hp or mp, can probably make if-else better
 
@@ -256,14 +282,21 @@ public class Player extends Entity {
         super.setCurrentMagicDefense(super.getCurrentMagicDefense() + statsModified[6]);
     }
 
-    //Sets the equipment based on it's type
     //Look at docs for equipment type
     //Calls this method when no type is specified
+    /**
+     * Sets the equipment passed to the Player
+     * @param e The equipment to equip
+     */
     public void setEquipment(Equipment e) {
         setEquipment(e, e.getEquipmentType());
     }
 
-    //Sets the equipment based on the type passed
+    /**
+     * Sets the equipment passed to the Player
+     * @param e The equipment to equip
+     * @param type The type of equipment
+     */
     public void setEquipment(Equipment e, int type) {
         switch (type) {
             case 1:
