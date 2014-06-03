@@ -81,9 +81,24 @@ public class Player extends Entity {
     
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
-   
+
+    /**
+     * Returns an Item by searching for the name of the Item in the Players inventory
+     * @param s The Item's name
+     * @return 
+     */
+    public Item getItem(String s) {
+        for(Item i : getInventory()) {
+            if(i.getName().equals(s)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     /**
      * Returns a 2D array containing the Item name and quantity of each.
+     *
      * @return String[][]
      */
     public String[][] getCountedInventory() {
@@ -116,11 +131,11 @@ public class Player extends Entity {
         for (int i = 0; i < getInventory().size(); i++) {
             for (int j = 0; j - 1 < i; j++) {
                 if (invenCount[j] != null && invenCount[j] == getInventory().get(i)) {
-                    invenCount[i] = getInventory().get(j);
                     break;
                 }
                 else if (invenCount[j] == null) {
                     invenCount[j] = getInventory().get(i);
+                    break;
                 }
             }
         }
@@ -128,7 +143,7 @@ public class Player extends Entity {
     }
 
     /**
-     * Prints the players inventory in the format 'Item name(quantity)
+     * Prints the players inventory in the format 'itemName(quantity)'
      */
     public void printInventory() {
         Game.printBreak();

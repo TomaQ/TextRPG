@@ -231,8 +231,8 @@ public final class Battle {
                 scan.next();
             }
         }
-        
-        Item chosenItem = hero.getInventory().get(itemChosen);
+
+        Item chosenItem = hero.getItem(inven[itemChosen][0]);
         if (chosenItem.getItemType() == 1) {//if the item type is consumable
 
             //probably a better way to do this
