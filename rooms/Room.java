@@ -29,25 +29,40 @@ public class Room {
 
     public String getRoomDescription() {
         String temp = roomDescription;
-        String[][] inven = Game.getCountedInventory(getRoomLoot());
+        
+        List<Item> noDescList = new ArrayList<>();
+        List<Item> descList = new ArrayList<>();
+        for(Item i: getRoomLoot()) {
+            if(i.getItemRoomDescription() == null) {
+                noDescList.add(i);
+            }
+            else {
+                descList.add(i);
+            }
+        }
+        String[][] countedNoDesc = Game.getCountedInventory(noDescList);
+        String[][] countedDesc = Game.getCountedInventory(descList);
 
-        for (int i = 0; i < inven.length; i++) {
-            Item tempItem = Game.getItem(inven[i][0], getRoomLoot());
+        for (int i = 0; i < countedDesc.length; i++) {
+            Item tempItem = Game.getItem(countedDesc[i][0], descList);
+            temp += " " + tempItem.getItemRoomDescription();
+        }
+        for (int i = 0; i < countedNoDesc.length; i++) {
+            Item tempItem = Game.getItem(countedNoDesc[i][0], noDescList);
             if (tempItem != null) {
-                if (tempItem.getItemRoomDescription() != null) {
-                    temp += " " + getRoomLoot().get(i).getItemRoomDescription();
+                if (Integer.valueOf(countedNoDesc[i][1]) > 1) {
+                    temp += " There are " + countedNoDesc[i][1] + " " + countedNoDesc[i][0] + "s laying on the ground.";
                 }
                 else {
-                    if (Integer.valueOf(inven[i][1]) > 1) {
-                        temp += " There are " + inven[i][1] + " " + inven[i][0] + "s laying on the ground.";
+                    String aAn = "a";
+                    String vowels = "AEIOUaeiou";
+                    if(vowels.indexOf(countedNoDesc[i][0].substring(0, 1)) > -1) {
+                        aAn = "an";
                     }
-                    else {
-                        temp += " There is a " + inven[i][0] + " laying on the ground";
-                    }
+                    temp += " There is " + aAn + " " + countedNoDesc[i][0] + " laying on the ground.";
                 }
             }
         }
-   
 //        for (int i = 0; i < getRoomLoot().size(); i++) {
 //            if (getRoomLoot().get(i).getItemRoomDescription() != null) {
 //                temp += " " + getRoomLoot().get(i).getItemRoomDescription();
