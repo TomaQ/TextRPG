@@ -33,7 +33,7 @@ public class Room {
      */
     public String getRoomDescription() {
         String temp = roomDescription;
-        
+
         List<Item> noDescList = new ArrayList<>(); //List for the items with no description (dropped items)
         List<Item> descList = new ArrayList<>(); //List for the items that are described (set by the room)
         for(Item i: getRoomLoot()) { //Adds the item to the apropriate list
