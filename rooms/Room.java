@@ -31,14 +31,31 @@ public class Room {
         String temp = roomDescription;
         String[][] inven = Game.getCountedInventory(getRoomLoot());
 
-        for (int i = 0; i < getRoomLoot().size(); i++) {
-            if (getRoomLoot().get(i).getItemRoomDescription() != null) {
-                temp += " " + getRoomLoot().get(i).getItemRoomDescription();
-            }
-            else {
-                temp += " " + "There is a " + getRoomLoot().get(i).getName().toLowerCase() + " laying on the ground.";
+        for (int i = 0; i < inven.length; i++) {
+            Item tempItem = Game.getItem(inven[i][0], getRoomLoot());
+            if (tempItem != null) {
+                if (tempItem.getItemRoomDescription() != null) {
+                    temp += " " + getRoomLoot().get(i).getItemRoomDescription();
+                }
+                else {
+                    if (Integer.valueOf(inven[i][1]) > 1) {
+                        temp += " There are " + inven[i][1] + " " + inven[i][0] + "s laying on the ground.";
+                    }
+                    else {
+                        temp += " There is a " + inven[i][0] + " laying on the ground";
+                    }
+                }
             }
         }
+   
+//        for (int i = 0; i < getRoomLoot().size(); i++) {
+//            if (getRoomLoot().get(i).getItemRoomDescription() != null) {
+//                temp += " " + getRoomLoot().get(i).getItemRoomDescription();
+//            }
+//            else {
+//                temp += " " + "There is a " + getRoomLoot().get(i).getName().toLowerCase() + " laying on the ground.";
+//            }
+//        }
         return temp;
     }
     public void setRoomDescription(String n){roomDescription = n;}
