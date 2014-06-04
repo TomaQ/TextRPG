@@ -83,45 +83,6 @@ public class Player extends Entity {
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
 
     /**
-     * Returns an Item by searching for the name of the Item in the Players inventory
-     * @param s The Item's name
-     * @return 
-     */
-    public Item getItem(String s) {
-        for(Item i : getInventory()) {
-            if(i.getName().equals(s)) {
-                return i;
-            }
-        }
-        return null;
-    }
-
-    /**
-     * Returns a 2D array containing the Item name and quantity of each.
-     *
-     * @return String[][]
-     */
-    public String[][] getCountedInventory() {
-        String[][] invenCount = new String[getInventory().size()][2];
-
-        for (int i = 0; i < getInventory().size(); i++) {
-            for (int j = 0; j - 1 < i; j++) {//i should use a map here instead lol
-                //short circuits here
-                if (invenCount[j][0] != null && invenCount[j][0].equals(inventory.get(i).getName())) {//if the names match
-                    invenCount[j][1] = Integer.toString(Integer.valueOf(invenCount[j][1]) + 1);
-                    break; //dont need to check rest of array if similar
-                }
-                else if (invenCount[j][0] == null) { //if it doesnt find the item then it adds it to the string
-                    invenCount[j][0] = getInventory().get(i).getName();
-                    invenCount[j][1] = "1";
-                    break; //dont need to check the rest of array if inserted
-                }
-            }
-        }
-        return invenCount;
-    }
-
-    /**
      * Returns the Player's inventory without duplicates
      * @return Item[]
      */
@@ -148,8 +109,8 @@ public class Player extends Entity {
     public void printInventory() {
         Game.printBreak();
         System.out.println("Your inventory:");
-        String inven = "Gold: " + this.getGold() + ", ";//the inventory string that gets printed out
-        String[][] invenCount = this.getCountedInventory();
+        String inven = "Gold: " + getGold() + ", ";//the inventory string that gets printed out
+        String[][] invenCount = Game.getCountedInventory(getInventory());
 
         for (int i = 0; i < invenCount.length; i++) { //prints the inventory and counter if > 1
             if (invenCount[i][0] != null) {

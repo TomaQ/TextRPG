@@ -193,7 +193,7 @@ public final class Battle {
     //Player uses an item
     private boolean playerItem() {
         if (!hero.getInventory().isEmpty()) {
-            String[][] inven = hero.getCountedInventory(); //Gets the individual strings for each item in the hero's inventory
+            String[][] inven = Game.getCountedInventory(hero.getInventory()); //Gets the individual strings for each item in the hero's inventory
 
             String formattedInven = "";
             for (int i = 0; i < inven.length; i++) {
@@ -221,7 +221,7 @@ public final class Battle {
                     System.out.print(">");
                     itemChosen = scan.nextInt();
                     scan.nextLine();
-                    if (itemChosen < formattedInven.length() && itemChosen >= 0) {
+                    if (itemChosen < inven.length && itemChosen >= 0) {
                         loop = false;
                     }
                     else {
@@ -234,7 +234,7 @@ public final class Battle {
                 }
             }
 
-            Item chosenItem = hero.getItem(inven[itemChosen][0]);
+            Item chosenItem = Game.getItem(inven[itemChosen][0], hero.getInventory());
             if (chosenItem.getItemType() == 1) {//if the item type is consumable
 
                 //probably a better way to do this
