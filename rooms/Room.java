@@ -27,12 +27,16 @@ public class Room {
     public String getRoomName(){return roomName;}
     public void setRoomName(String n){roomName = n;}
 
+    /**
+     * Returns the rooms description with all of the items
+     * @return roomDescription
+     */
     public String getRoomDescription() {
         String temp = roomDescription;
         
-        List<Item> noDescList = new ArrayList<>();
-        List<Item> descList = new ArrayList<>();
-        for(Item i: getRoomLoot()) {
+        List<Item> noDescList = new ArrayList<>(); //List for the items with no description (dropped items)
+        List<Item> descList = new ArrayList<>(); //List for the items that are described (set by the room)
+        for(Item i: getRoomLoot()) { //Adds the item to the apropriate list
             if(i.getItemRoomDescription() == null) {
                 noDescList.add(i);
             }
@@ -40,37 +44,31 @@ public class Room {
                 descList.add(i);
             }
         }
-        String[][] countedNoDesc = Game.getCountedInventory(noDescList);
+        String[][] countedNoDesc = Game.getCountedInventory(noDescList); //Obtains the counted version of each list
         String[][] countedDesc = Game.getCountedInventory(descList);
 
+        //Adds the items description to the room's description
         for (int i = 0; i < countedDesc.length; i++) {
             Item tempItem = Game.getItem(countedDesc[i][0], descList);
             temp += " " + tempItem.getItemRoomDescription();
         }
+        //Sets the items description and adds it to the room's description
         for (int i = 0; i < countedNoDesc.length; i++) {
             Item tempItem = Game.getItem(countedNoDesc[i][0], noDescList);
             if (tempItem != null) {
-                if (Integer.valueOf(countedNoDesc[i][1]) > 1) {
+                if (Integer.valueOf(countedNoDesc[i][1]) > 1) { //If there are multiples of the item
                     temp += " There are " + countedNoDesc[i][1] + " " + countedNoDesc[i][0] + "s laying on the ground.";
                 }
-                else {
+                else { //Checks if there needs to be a 'a' or 'an'
                     String aAn = "a";
                     String vowels = "AEIOUaeiou";
-                    if(vowels.indexOf(countedNoDesc[i][0].substring(0, 1)) > -1) {
+                    if(vowels.indexOf(countedNoDesc[i][0].substring(0, 1)) > -1) { //If the first letter of the item's name is a vowel
                         aAn = "an";
                     }
                     temp += " There is " + aAn + " " + countedNoDesc[i][0] + " laying on the ground.";
                 }
             }
         }
-//        for (int i = 0; i < getRoomLoot().size(); i++) {
-//            if (getRoomLoot().get(i).getItemRoomDescription() != null) {
-//                temp += " " + getRoomLoot().get(i).getItemRoomDescription();
-//            }
-//            else {
-//                temp += " " + "There is a " + getRoomLoot().get(i).getName().toLowerCase() + " laying on the ground.";
-//            }
-//        }
         return temp;
     }
     public void setRoomDescription(String n){roomDescription = n;}
