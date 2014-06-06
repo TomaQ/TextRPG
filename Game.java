@@ -495,10 +495,15 @@ public class Game {
      * @param hero 
      */
     private void examineCommand(String input, Player hero) {
+        boolean pass = false;
         for(Item i: hero.getInventory()) {
             if(searchItem(i, input) != null) {
                 System.out.println(i.getItemDescription());
+                pass = true; //it found an item
             }
+        }
+        if(!pass) {
+            System.out.println("You don't have an item called that.");
         }
     }
 }
