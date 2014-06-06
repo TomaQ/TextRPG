@@ -203,6 +203,16 @@ public class Game {
         return input;
     }
     
+    /**
+     * Returns the last word of the input
+     * @param input
+     * @return 
+     */
+    private String parseLastInput(String input) {
+        return input.substring(input.lastIndexOf(" ") + 1, input.length());
+        
+    }
+    
     //Prints all of the available commands
     private void printCommands() {
         printBreak();
@@ -310,9 +320,21 @@ public class Game {
 
     //Drops an item and puts it in a room
     private void dropCommand(String input, Player hero) {
+        String amount = parseLastInput(input);
+        Integer amtToRemove = 0; //The amount of the item to drop
+        
+        try { //If the last word in the input is a number then get the value and remove the last word from the input
+            amtToRemove = Integer.valueOf(amount);
+            input = input.substring(0, input.length() - String.valueOf(amtToRemove).length() -1);
+        }
+        catch(NumberFormatException e) {}
+        
         boolean found = false;
+        if(amtToRemove < 1) {
+            amtToRemove = 1;
+        }
         for (Item i : hero.getInventory()) { //Loops through the players inventory
-            if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
+            if (searchItem(i, input) != null) {
                 if (i.getItemType() != 3) { //If it is not a quest item
                     currentRoom.getRoomLoot().add(i);
                     hero.getInventory().remove(i);
@@ -331,6 +353,10 @@ public class Game {
         }
     }
 
+    private void dropItem(Player hero) {
+        
+    }
+    
     //Searches for an item, called from the drop command only as of right now
     private Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
@@ -449,7 +475,7 @@ public class Game {
         }
         return input;
     }
-    
+
     /**
      * Returns a 2D array containing the Item name and quantity of each.
      *
@@ -474,7 +500,7 @@ public class Game {
         }
         return invenCount;
     }
-    
+
     /**
      * Returns an Item by searching for the name of the Item in the Players inventory
      * @param s The Item's name
@@ -488,7 +514,7 @@ public class Game {
         }
         return null;
     }
-    
+
     /**
      * Prints out the items description.
      * @param input
