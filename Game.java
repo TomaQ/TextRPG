@@ -152,6 +152,9 @@ public class Game {
             case "unequip":
                 unequipCommand(restofUserInput, hero);
                 break;
+            case "examine":
+                examineCommand(restofUserInput, hero);
+                break;
             default:
                 System.out.println("Command not recognized.");
                 break;
@@ -187,8 +190,9 @@ public class Game {
         String[] stats = {"stats", "status"};
         String[] take = {"take", "get"};
         String[] skills = {"skills", "skill"};
+        String[] examine = {"examine", "inspect"};
 
-        String[][] commands = {north, south, east, west, exits, battle, inventory, look, stats, take, skills};
+        String[][] commands = {north, south, east, west, exits, battle, inventory, look, stats, take, skills, examine};
         for (int i = 0; i < commands.length; i++) {
             for (int j = 0; j < commands[i].length; j++) {
                 if (input.equalsIgnoreCase(commands[i][j])) {
@@ -216,6 +220,7 @@ public class Game {
         System.out.println("shop - Enters the shop if there is currently one in the room.");
         System.out.println("drop - Removes an item from your inventory and drops it in the room you are currently in.");
         System.out.println("unequip - Unequips something from yourself. Useage is unequip 'object' where object is what you want to unequip from yourself.");
+        System.out.println("examine - Tells you about the item.");
         System.out.println("quit - Quits the game.");
         printBreak();
     }
@@ -308,12 +313,17 @@ public class Game {
         boolean found = false;
         for (Item i : hero.getInventory()) { //Loops through the players inventory
             if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
-                currentRoom.getRoomLoot().add(i);
-                hero.getInventory().remove(i);
-                i.setItemRoomDescription(null);
-                System.out.println("Dropped " + i.getName() + ".");
-                found = true;
-                break; //Don't need to search for other items if it is found already
+                if (i.getItemType() != 3) { //If it is not a quest item
+                    currentRoom.getRoomLoot().add(i);
+                    hero.getInventory().remove(i);
+                    i.setItemRoomDescription(null);
+                    System.out.println("Dropped " + i.getName() + ".");
+                    found = true;
+                    break; //Don't need to search for other items if it is found already
+                }
+                else {
+                    System.out.println("You cannot drop that item!");
+                }
             }
         }
         if (!found) {
@@ -325,13 +335,7 @@ public class Game {
     private Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
             if (tag.equalsIgnoreCase(input)) {
-                if (i.getItemType() != 3) { //If it is not a quest item
-                    return i;
-                }
-                else {
-                    System.out.println("You cannot drop that item!");
-                    return null;
-                }
+                return i;
             }
         }
         return null;
@@ -483,5 +487,23 @@ public class Game {
             }
         }
         return null;
+    }
+    
+    /**
+     * Prints out the items description.
+     * @param input
+     * @param hero 
+     */
+    private void examineCommand(String input, Player hero) {
+        boolean pass = false;
+        for(Item i: hero.getInventory()) {
+            if(searchItem(i, input) != null) {
+                System.out.println(i.getItemDescription());
+                pass = true; //it found an item
+            }
+        }
+        if(!pass) {
+            System.out.println("You don't have an item called that.");
+        }
     }
 }
