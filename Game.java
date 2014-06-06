@@ -220,7 +220,7 @@ public class Game {
         System.out.println("shop - Enters the shop if there is currently one in the room.");
         System.out.println("drop - Removes an item from your inventory and drops it in the room you are currently in.");
         System.out.println("unequip - Unequips something from yourself. Useage is unequip 'object' where object is what you want to unequip from yourself.");
-        System.out.print("examine - Tells you about the item.");
+        System.out.println("examine - Tells you about the item.");
         System.out.println("quit - Quits the game.");
         printBreak();
     }
