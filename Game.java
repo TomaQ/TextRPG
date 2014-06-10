@@ -320,8 +320,8 @@ public class Game {
 
     //Drops an item and puts it in a room
     private void dropCommand(String input, Player hero) {
-        String amount = parseLastInput(input);
-        Integer amtToRemove = 0; //The amount of the item to drop
+        String amount = parseLastInput(input); //Gets the last word of the input
+        Integer amtToRemove = 1; //The amount of the item to drop
         
         try { //If the last word in the input is a number then get the value and remove the last word from the input
             amtToRemove = Integer.valueOf(amount);
@@ -333,6 +333,22 @@ public class Game {
         if(amtToRemove < 1) {
             amtToRemove = 1;
         }
+        for(int i = 0; i < amtToRemove; i++) {
+            found = dropItem(hero, input); //Drops the item from the players inventory
+        }
+        
+        if (!found) {
+            System.out.println("You don't have an item called that.");
+        }
+    }
+
+    /**
+     * Drops an item if the given string was found in the players inventory.
+     * @param hero The player
+     * @param input The tag of the item to drop
+     * @return boolean
+     */
+    private boolean dropItem(Player hero, String input) {
         for (Item i : hero.getInventory()) { //Loops through the players inventory
             if (searchItem(i, input) != null) {
                 if (i.getItemType() != 3) { //If it is not a quest item
@@ -340,21 +356,14 @@ public class Game {
                     hero.getInventory().remove(i);
                     i.setItemRoomDescription(null);
                     System.out.println("Dropped " + i.getName() + ".");
-                    found = true;
-                    break; //Don't need to search for other items if it is found already
+                    return true;
                 }
                 else {
                     System.out.println("You cannot drop that item!");
                 }
             }
         }
-        if (!found) {
-            System.out.println("You don't have an item called that.");
-        }
-    }
-
-    private void dropItem(Player hero) {
-        
+        return false;
     }
     
     //Searches for an item, called from the drop command only as of right now
