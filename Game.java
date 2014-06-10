@@ -51,7 +51,7 @@ public class Game {
     }
 
     private void command(Player hero) {//checks what to do from the users input
-        userInput = userInput.toLowerCase();
+        userInput = userInput.toLowerCase().trim();
         int i = userInput.indexOf(' '); //Gets the space in the command
         String firstUserInput, restofUserInput = ""; //The first input is commands such as 'take' or 'equip' while the rest can be item names or such
 
@@ -329,22 +329,23 @@ public class Game {
         }
         catch(NumberFormatException e) {}
         
-        int amountFound = 0;
-        if(amtToRemove < 1) {
+        int amountFound = 0; //The number of times the item was dropped
+        if(amtToRemove < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
             amtToRemove = 1;
         }
+        
+        Item foundItem = getItem(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
         for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
             amountFound += dropItem(hero, input); //Drops the item from the players inventory
         }
       
-        Item foundItem = getItem(input, hero.getInventory());
-        System.out.println(amountFound + ", " + foundItem);
+
 
         if (amountFound < 1) {
             System.out.println("You don't have an item called that.");
         }
         else if (amountFound > 1) {
-            System.out.println("Dropped " + amountFound + " " + foundItem.getName());
+            System.out.println("Dropped " + amountFound + " " + foundItem.getName() + "s.");
         }
         else if (amountFound == 1) {
             System.out.println("Dropped " + foundItem.getName() + ".");
@@ -517,7 +518,6 @@ public class Game {
     public static Item getItem(String input, List<Item> list) {
         for (Item i : list) {
             if(searchItem(i, input) != null) {
-                System.out.println("PASSED GETITEM");
                 return i;
             }
         }
@@ -527,9 +527,7 @@ public class Game {
     //Searches for an item, called from the drop command only as of right now
     private static Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
-            System.out.println(tag + "," + input);
             if (tag.equalsIgnoreCase(input)) {
-                System.out.println("PASSED SEARCHITEM" + i.getName());
                 return i;
             }
         }
