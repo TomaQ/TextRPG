@@ -329,16 +329,25 @@ public class Game {
         }
         catch(NumberFormatException e) {}
         
-        boolean found = false;
+        int amountFound = 0;
         if(amtToRemove < 1) {
             amtToRemove = 1;
         }
-        for(int i = 0; i < amtToRemove; i++) {
-            found = dropItem(hero, input); //Drops the item from the players inventory
+        for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
+            amountFound += dropItem(hero, input); //Drops the item from the players inventory
         }
-        
-        if (!found) {
+      
+        Item foundItem = getItem(input, hero.getInventory());
+        System.out.println(amountFound + ", " + foundItem);
+
+        if (amountFound < 1) {
             System.out.println("You don't have an item called that.");
+        }
+        else if (amountFound > 1) {
+            System.out.println("Dropped " + amountFound + " " + foundItem.getName());
+        }
+        else if (amountFound == 1) {
+            System.out.println("Dropped " + foundItem.getName() + ".");
         }
     }
 
@@ -348,32 +357,21 @@ public class Game {
      * @param input The tag of the item to drop
      * @return boolean
      */
-    private boolean dropItem(Player hero, String input) {
+    private int dropItem(Player hero, String input) {
         for (Item i : hero.getInventory()) { //Loops through the players inventory
             if (searchItem(i, input) != null) {
                 if (i.getItemType() != 3) { //If it is not a quest item
                     currentRoom.getRoomLoot().add(i);
                     hero.getInventory().remove(i);
                     i.setItemRoomDescription(null);
-                    System.out.println("Dropped " + i.getName() + ".");
-                    return true;
+                    return 1;
                 }
                 else {
                     System.out.println("You cannot drop that item!");
                 }
             }
         }
-        return false;
-    }
-    
-    //Searches for an item, called from the drop command only as of right now
-    private Item searchItem(Item i, String input) {
-        for (String tag : i.getTags()) { //Loops through all of the items tags
-            if (tag.equalsIgnoreCase(input)) {
-                return i;
-            }
-        }
-        return null;
+        return 0;
     }
 
     //Unequips a piece of armor or weapon and places it in the players inventory
@@ -487,7 +485,7 @@ public class Game {
 
     /**
      * Returns a 2D array containing the Item name and quantity of each.
-     *
+     * @param list
      * @return String[][]
      */
     public static String[][] getCountedInventory(List<Item> list) {
@@ -512,12 +510,26 @@ public class Game {
 
     /**
      * Returns an Item by searching for the name of the Item in the Players inventory
-     * @param s The Item's name
+     * @param input The item's name
+     * @param list
      * @return 
      */
-    public static Item getItem(String s, List<Item> list) {
-        for(Item i : list) {
-            if(i.getName().equals(s)) {
+    public static Item getItem(String input, List<Item> list) {
+        for (Item i : list) {
+            if(searchItem(i, input) != null) {
+                System.out.println("PASSED GETITEM");
+                return i;
+            }
+        }
+        return null;
+    }
+
+    //Searches for an item, called from the drop command only as of right now
+    private static Item searchItem(Item i, String input) {
+        for (String tag : i.getTags()) { //Loops through all of the items tags
+            System.out.println(tag + "," + input);
+            if (tag.equalsIgnoreCase(input)) {
+                System.out.println("PASSED SEARCHITEM" + i.getName());
                 return i;
             }
         }
