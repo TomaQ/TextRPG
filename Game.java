@@ -51,7 +51,7 @@ public class Game {
     }
 
     private void command(Player hero) {//checks what to do from the users input
-        userInput = userInput.toLowerCase();
+        userInput = userInput.toLowerCase().trim();
         int i = userInput.indexOf(' '); //Gets the space in the command
         String firstUserInput, restofUserInput = ""; //The first input is commands such as 'take' or 'equip' while the rest can be item names or such
 
@@ -203,6 +203,16 @@ public class Game {
         return input;
     }
     
+    /**
+     * Returns the last word of the input
+     * @param input
+     * @return 
+     */
+    private String parseLastInput(String input) {
+        return input.substring(input.lastIndexOf(" ") + 1, input.length());
+        
+    }
+    
     //Prints all of the available commands
     private void printCommands() {
         printBreak();
@@ -310,35 +320,59 @@ public class Game {
 
     //Drops an item and puts it in a room
     private void dropCommand(String input, Player hero) {
-        boolean found = false;
+        String amount = parseLastInput(input); //Gets the last word of the input
+        Integer amtToRemove = 1; //The amount of the item to drop
+        
+        try { //If the last word in the input is a number then get the value and remove the last word from the input
+            amtToRemove = Integer.valueOf(amount);
+            input = input.substring(0, input.length() - String.valueOf(amtToRemove).length() -1);
+        }
+        catch(NumberFormatException e) {}
+        
+        int amountFound = 0; //The number of times the item was dropped
+        if(amtToRemove < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
+            amtToRemove = 1;
+        }
+        
+        Item foundItem = getItem(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
+        for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
+            amountFound += dropItem(hero, input); //Drops the item from the players inventory
+        }
+      
+
+
+        if (amountFound < 1) {
+            System.out.println("You don't have an item called that.");
+        }
+        else if (amountFound > 1) {
+            System.out.println("Dropped " + amountFound + " " + foundItem.getName() + "s.");
+        }
+        else if (amountFound == 1) {
+            System.out.println("Dropped " + foundItem.getName() + ".");
+        }
+    }
+
+    /**
+     * Drops an item if the given string was found in the players inventory.
+     * @param hero The player
+     * @param input The tag of the item to drop
+     * @return boolean
+     */
+    private int dropItem(Player hero, String input) {
         for (Item i : hero.getInventory()) { //Loops through the players inventory
-            if (searchItem(i, input) != null) { //maybe return item and do the rest in here?
+            if (searchItem(i, input) != null) {
                 if (i.getItemType() != 3) { //If it is not a quest item
                     currentRoom.getRoomLoot().add(i);
                     hero.getInventory().remove(i);
                     i.setItemRoomDescription(null);
-                    System.out.println("Dropped " + i.getName() + ".");
-                    found = true;
-                    break; //Don't need to search for other items if it is found already
+                    return 1;
                 }
                 else {
                     System.out.println("You cannot drop that item!");
                 }
             }
         }
-        if (!found) {
-            System.out.println("You don't have an item called that.");
-        }
-    }
-
-    //Searches for an item, called from the drop command only as of right now
-    private Item searchItem(Item i, String input) {
-        for (String tag : i.getTags()) { //Loops through all of the items tags
-            if (tag.equalsIgnoreCase(input)) {
-                return i;
-            }
-        }
-        return null;
+        return 0;
     }
 
     //Unequips a piece of armor or weapon and places it in the players inventory
@@ -449,10 +483,10 @@ public class Game {
         }
         return input;
     }
-    
+
     /**
      * Returns a 2D array containing the Item name and quantity of each.
-     *
+     * @param list
      * @return String[][]
      */
     public static String[][] getCountedInventory(List<Item> list) {
@@ -474,21 +508,32 @@ public class Game {
         }
         return invenCount;
     }
-    
+
     /**
      * Returns an Item by searching for the name of the Item in the Players inventory
-     * @param s The Item's name
+     * @param input The item's name
+     * @param list
      * @return 
      */
-    public static Item getItem(String s, List<Item> list) {
-        for(Item i : list) {
-            if(i.getName().equals(s)) {
+    public static Item getItem(String input, List<Item> list) {
+        for (Item i : list) {
+            if(searchItem(i, input) != null) {
                 return i;
             }
         }
         return null;
     }
-    
+
+    //Searches for an item, called from the drop command only as of right now
+    private static Item searchItem(Item i, String input) {
+        for (String tag : i.getTags()) { //Loops through all of the items tags
+            if (tag.equalsIgnoreCase(input)) {
+                return i;
+            }
+        }
+        return null;
+    }
+
     /**
      * Prints out the items description.
      * @param input
