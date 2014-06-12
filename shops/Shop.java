@@ -129,7 +129,7 @@ public class Shop {
 
         //Sells the item
         if (!hero.getInventory().isEmpty() && chosen < j && chosen > -1) {
-            Item chosenItem = Game.getItem(inven[chosen][0], hero.getInventory());
+            Item chosenItem = Game.getItemFromInventory(inven[chosen][0], hero.getInventory());
             hero.setGold(hero.getGold() + chosenItem.getSellingPrice());
             System.out.println("Sold " + chosenItem.getName() + ".");
             hero.getInventory().remove(chosenItem);

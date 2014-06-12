@@ -334,7 +334,7 @@ public class Game {
             amtToRemove = 1;
         }
         
-        Item foundItem = getItem(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
+        Item foundItem = getItemFromInventory(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
         for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
             amountFound += dropItem(hero, input); //Drops the item from the players inventory
         }
@@ -515,7 +515,7 @@ public class Game {
      * @param list
      * @return 
      */
-    public static Item getItem(String input, List<Item> list) {
+    public static Item getItemFromInventory(String input, List<Item> list) {
         for (Item i : list) {
             if(searchItem(i, input) != null) {
                 return i;
@@ -524,7 +524,12 @@ public class Game {
         return null;
     }
 
-    //Searches for an item, called from the drop command only as of right now
+    /**
+     * Checks if a string matches any of an item's tags.
+     * @param i
+     * @param input
+     * @return Item
+     */
     private static Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
             if (tag.equalsIgnoreCase(input)) {

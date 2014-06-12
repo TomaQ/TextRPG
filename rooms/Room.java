@@ -49,12 +49,12 @@ public class Room {
 
         //Adds the items description to the room's description
         for (int i = 0; i < countedDesc.length; i++) {
-            Item tempItem = Game.getItem(countedDesc[i][0], descList);
+            Item tempItem = Game.getItemFromInventory(countedDesc[i][0], descList);
             temp += " " + tempItem.getItemRoomDescription();
         }
         //Sets the items description and adds it to the room's description
         for (int i = 0; i < countedNoDesc.length; i++) {
-            Item tempItem = Game.getItem(countedNoDesc[i][0], noDescList);
+            Item tempItem = Game.getItemFromInventory(countedNoDesc[i][0], noDescList);
             if (tempItem != null) {
                 if (Integer.valueOf(countedNoDesc[i][1]) > 1) { //If there are multiples of the item
                     temp += " There are " + countedNoDesc[i][1] + " " + countedNoDesc[i][0] + "s laying on the ground.";
