@@ -166,9 +166,9 @@ public class Game {
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
-        hero.addInventory(s);
+        hero.addItemToInventory(s);
         Item hp = new HealthPotion();
-        hero.addInventory(hp);
+        hero.addItemToInventory(hp);
 
         System.out.println("Here's some gear!");
         Weapon iron = new IronSword();
@@ -243,7 +243,7 @@ public class Game {
                 if (tag.equalsIgnoreCase(rest)) {
                     Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
 
-                    hero.addInventory(temp);
+                    hero.addItemToInventory(temp);
                     currentRoom.getRoomLoot().remove(temp);
                     System.out.println("Took " + temp.getName() + ".");
                     pass = true;
@@ -289,7 +289,7 @@ public class Game {
             System.out.println("There's no item here called that.");
         }
         else if (temp != null && !original.getName().equals("None")) { //Switch the equipment from inventory
-            hero.addInventory(original);
+            hero.addItemToInventory(original);
         }
     }
 
@@ -334,7 +334,7 @@ public class Game {
             amtToRemove = 1;
         }
         
-        Item foundItem = getItem(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
+        Item foundItem = getItemFromInventory(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
         for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
             amountFound += dropItem(hero, input); //Drops the item from the players inventory
         }
@@ -451,7 +451,7 @@ public class Game {
     //Does the actual unequiping
     private boolean unEquip(Equipment e, Player hero) {
         if (!e.getName().equals("None")) {
-            hero.addInventory(e);
+            hero.addItemToInventory(e);
             System.out.println("Unequiped " + e.getName());
             Equipment none = new NoneE(); //Need to set the slot now to empty
             hero.setEquipment(none, e.getEquipmentType());
@@ -515,7 +515,7 @@ public class Game {
      * @param list
      * @return 
      */
-    public static Item getItem(String input, List<Item> list) {
+    public static Item getItemFromInventory(String input, List<Item> list) {
         for (Item i : list) {
             if(searchItem(i, input) != null) {
                 return i;
@@ -524,7 +524,12 @@ public class Game {
         return null;
     }
 
-    //Searches for an item, called from the drop command only as of right now
+    /**
+     * Checks if a string matches any of an item's tags.
+     * @param i
+     * @param input
+     * @return Item
+     */
     private static Item searchItem(Item i, String input) {
         for (String tag : i.getTags()) { //Loops through all of the items tags
             if (tag.equalsIgnoreCase(input)) {

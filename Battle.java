@@ -51,7 +51,7 @@ public final class Battle {
             h.setGold(hero.getGold() + m.getGoldWorth());
             String lootName = "";
             for (Item i : m.getLoot()) {
-                h.addInventory(i);
+                h.addItemToInventory(i);
                 lootName += i.getName() + ", ";
             }
             if(lootName.length() > 2){
@@ -234,7 +234,7 @@ public final class Battle {
                 }
             }
 
-            Item chosenItem = Game.getItem(inven[itemChosen][0], hero.getInventory());
+            Item chosenItem = Game.getItemFromInventory(inven[itemChosen][0], hero.getInventory());
             if (chosenItem.getItemType() == 1) {//if the item type is consumable
 
                 //probably a better way to do this
