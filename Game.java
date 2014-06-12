@@ -166,9 +166,9 @@ public class Game {
         System.out.println("There is much testing to be done.\n'b' for battle and 'help' for help~~");
         System.out.println("Here are some items for you!");
         Item s = new SlimeExtract();
-        hero.addInventory(s);
+        hero.addItemToInventory(s);
         Item hp = new HealthPotion();
-        hero.addInventory(hp);
+        hero.addItemToInventory(hp);
 
         System.out.println("Here's some gear!");
         Weapon iron = new IronSword();
@@ -243,7 +243,7 @@ public class Game {
                 if (tag.equalsIgnoreCase(rest)) {
                     Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
 
-                    hero.addInventory(temp);
+                    hero.addItemToInventory(temp);
                     currentRoom.getRoomLoot().remove(temp);
                     System.out.println("Took " + temp.getName() + ".");
                     pass = true;
@@ -289,7 +289,7 @@ public class Game {
             System.out.println("There's no item here called that.");
         }
         else if (temp != null && !original.getName().equals("None")) { //Switch the equipment from inventory
-            hero.addInventory(original);
+            hero.addItemToInventory(original);
         }
     }
 
@@ -451,7 +451,7 @@ public class Game {
     //Does the actual unequiping
     private boolean unEquip(Equipment e, Player hero) {
         if (!e.getName().equals("None")) {
-            hero.addInventory(e);
+            hero.addItemToInventory(e);
             System.out.println("Unequiped " + e.getName());
             Equipment none = new NoneE(); //Need to set the slot now to empty
             hero.setEquipment(none, e.getEquipmentType());

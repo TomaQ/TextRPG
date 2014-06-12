@@ -51,7 +51,7 @@ public final class Battle {
             h.setGold(hero.getGold() + m.getGoldWorth());
             String lootName = "";
             for (Item i : m.getLoot()) {
-                h.addInventory(i);
+                h.addItemToInventory(i);
                 lootName += i.getName() + ", ";
             }
             if(lootName.length() > 2){

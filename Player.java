@@ -77,7 +77,7 @@ public class Player extends Entity {
     }
 
     public List<Item> getInventory(){return inventory;}//used for removing and looping
-    public void addInventory(Item i){inventory.add(i);}
+    public void addItemToInventory(Item i){inventory.add(i);}
     
     public Job getJob(){return job;}
     public void setJob(Job j){job = j;} //if it is ever possible to switch jobs then need to do more than this
@@ -86,7 +86,7 @@ public class Player extends Entity {
      * Returns the Player's inventory without duplicates
      * @return Item[]
      */
-    public Item[] getCountedInventoryItems() {
+    public Item[] getUniqueInventoryItems() {
         Item[] invenCount = new Item[getInventory().size()];
 
         for (int i = 0; i < getInventory().size(); i++) {

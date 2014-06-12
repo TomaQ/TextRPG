@@ -95,11 +95,11 @@ public class Shop {
         for (int i = 0; i < inven.length; i++) {
             if (inven[i][0] != null) {
                 if (Integer.valueOf(inven[i][1]) > 1) { //If they're multiple items of the same name
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")(" + hero.getCountedInventoryItems()[i].getSellingPrice() + "g), ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + inven[i][1] + ")(" + hero.getUniqueInventoryItems()[i].getSellingPrice() + "g), ";
                     j++;
                 }
                 else {
-                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + hero.getCountedInventoryItems()[i].getSellingPrice() + "g), ";
+                    formattedInven += "[" + i + "]" + inven[i][0] + "(" + hero.getUniqueInventoryItems()[i].getSellingPrice() + "g), ";
                     j++;
                 }
             }
