@@ -236,23 +236,57 @@ public class Game {
     }
 
     //Figures out what to take
-    private void takeCommand(String rest, Player hero) {
-        boolean pass = false;
-        for (int i = 0; i < currentRoom.getRoomLoot().size(); i++) {//for some reason using nested for each loops crashes here
-            for (String tag : currentRoom.getRoomLoot().get(i).getTags()) {
-                if (tag.equalsIgnoreCase(rest)) {
-                    Item temp = currentRoom.getRoomLoot().get(i);//sets the item to be taken to a temp variable
-
-                    hero.addItemToInventory(temp);
-                    currentRoom.getRoomLoot().remove(temp);
-                    System.out.println("Took " + temp.getName() + ".");
-                    pass = true;
-                }
-            }
+    private void takeCommand(String input, Player hero) {
+        String amount = parseLastInput(input);
+        Integer amtToTake = 1;
+        
+        //If the player enters "take hp pot all" it will take all of the hp pots in the room
+        if(amount.equalsIgnoreCase("all")) {
+            amtToTake = currentRoom.getRoomLoot().size();
         }
-        if (!pass) { //If there was no item let them know
+        
+        try {
+            amtToTake = Integer.valueOf(amount);
+            input = input.substring(0, input.length() - amount.length() -1);
+        }
+        catch (NumberFormatException e){}
+        
+        int amountFound = 0; //The number of times the item was dropped
+        if(amtToTake < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
+            amtToTake = 1;
+        }
+        
+        Item foundItem = getItemFromInventory(input, hero.getInventory());
+        for(int i = 0; i < amtToTake; i++) { //can make this loop better by getting item instead of searching tag every time
+            amountFound += takeItem(hero, input); //Takes the item from the room and adds it to the player's inventory
+        }
+      
+        if (amountFound < 1) {
             System.out.println("There's no item here called that.");
         }
+        else if (amountFound > 1) {
+            System.out.println("Took " + amountFound + " " + foundItem.getName() + "s.");
+        }
+        else if (amountFound == 1) {
+            System.out.println("Took " + foundItem.getName() + ".");
+        }
+    }
+
+    /**
+     * Takes an item found and adds it to the players inventory.
+     * @param hero
+     * @param input The String that is being searched against
+     * @return 1 if found, 0 otherwise.
+     */
+    public int takeItem(Player hero, String input) { 
+        for (Item i : currentRoom.getRoomLoot()) {
+            if (searchItem(i, input) != null) {
+                hero.addItemToInventory(i);
+                currentRoom.getRoomLoot().remove(i);
+                return 1;
+            }
+        }
+        return 0;
     }
 
     //Equips something
@@ -325,7 +359,7 @@ public class Game {
         
         try { //If the last word in the input is a number then get the value and remove the last word from the input
             amtToRemove = Integer.valueOf(amount);
-            input = input.substring(0, input.length() - String.valueOf(amtToRemove).length() -1);
+            input = input.substring(0, input.length() - amount.length() -1);
         }
         catch(NumberFormatException e) {}
         
