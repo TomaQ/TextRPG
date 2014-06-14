@@ -12,7 +12,7 @@ public class StartingRoom extends Room {
         super.setRoomDescription("You are in a room, it feels like a starting room. There's a merchant sitting in the corner of the room.");
         
         HealthPotion pot = new HealthPotion();
-        pot.setItemRoomDescription("There is a health potion sitting on a table next to you.");
+        pot.setItemRoomDescription("There is a Health Potion sitting on a table next to you.");
         super.getRoomLoot().add(pot);
         
         Shop store = new GeneralShop();

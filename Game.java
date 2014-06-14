@@ -239,28 +239,30 @@ public class Game {
     private void takeCommand(String input, Player hero) {
         String amount = parseLastInput(input);
         Integer amtToTake = 1;
-        
+
         //If the player enters "take hp pot all" it will take all of the hp pots in the room
-        if(amount.equalsIgnoreCase("all")) {
+        if (amount.equalsIgnoreCase("all")) {
             amtToTake = currentRoom.getRoomLoot().size();
+            input = input.substring(0, input.length() - amount.length() - 1);
         }
-        
+
         try {
             amtToTake = Integer.valueOf(amount);
-            input = input.substring(0, input.length() - amount.length() -1);
+            input = input.substring(0, input.length() - amount.length() - 1);
         }
-        catch (NumberFormatException e){}
+        catch (NumberFormatException e) {}
         
-        int amountFound = 0; //The number of times the item was dropped
-        if(amtToTake < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
+        if (amtToTake < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
             amtToTake = 1;
         }
-        
-        Item foundItem = getItemFromInventory(input, hero.getInventory());
-        for(int i = 0; i < amtToTake; i++) { //can make this loop better by getting item instead of searching tag every time
+
+        int amountFound = 0; //The number of times the item was taken
+
+        Item foundItem = getItemFromInventory(input, currentRoom.getRoomLoot());
+        for (int i = 0; i < amtToTake; i++) { //can make this loop better by getting item instead of searching tag every time
             amountFound += takeItem(hero, input); //Takes the item from the room and adds it to the player's inventory
         }
-      
+
         if (amountFound < 1) {
             System.out.println("There's no item here called that.");
         }
