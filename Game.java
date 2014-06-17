@@ -237,7 +237,7 @@ public class Game {
 
     //Figures out what to take
     private void takeCommand(String input, Player hero) {
-        String amount = parseLastInput(input);
+        String amount = parseLastInput(input); //The last word in the string input
         Integer amtToTake = 1;
 
         //If the player enters "take hp pot all" it will take all of the hp pots in the room
@@ -246,12 +246,13 @@ public class Game {
             input = input.substring(0, input.length() - amount.length() - 1);
         }
 
+        //Tries to convert the string amount into an integer, if so then changes the input string to not include the number in it
         try {
             amtToTake = Integer.valueOf(amount);
             input = input.substring(0, input.length() - amount.length() - 1);
         }
         catch (NumberFormatException e) {}
-        
+
         if (amtToTake < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
             amtToTake = 1;
         }
@@ -266,7 +267,7 @@ public class Game {
         if (amountFound < 1) {
             System.out.println("There's no item here called that.");
         }
-        else if (amountFound > 1) {
+        else if (amountFound > 1) { //For grammar/formatting sake
             System.out.println("Took " + amountFound + " " + foundItem.getName() + "s.");
         }
         else if (amountFound == 1) {
@@ -291,11 +292,15 @@ public class Game {
         return 0;
     }
 
-    //Equips something
+    /**
+     * Equips the equipment/weapon based on the input from the player
+     * @param input
+     * @param hero 
+     */
     private void equipCommand(String input, Player hero) {
         boolean pass = false;
-        Equipment original = null;
-        Equipment temp = null;
+        Equipment original = null; //The original equipment that was on the player
+        Equipment temp = null; //The equipment found in the players inventory
 
         for (Item i : hero.getInventory()) {
             for (String s : i.getTags()) {
@@ -324,7 +329,7 @@ public class Game {
         if (!pass) {
             System.out.println("There's no item here called that.");
         }
-        else if (temp != null && !original.getName().equals("None")) { //Switch the equipment from inventory
+        else if (temp != null && !original.getName().equals("None")) { //Switch the equipment from inventory, all empty slots have a "None" equipment in them
             hero.addItemToInventory(original);
         }
     }
@@ -333,14 +338,14 @@ public class Game {
     private void talkCommand(String input) {
         if (currentRoom.getNPCsInRoom() != null) {
             boolean pass = false;
-            
-            if (input.trim().equals("")) { //If the player doesn't specify someone
+
+            if (input.equals("")) { //If the player doesn't specify someone
                 currentRoom.getNPCsInRoom()[0].printDefaultDialogue();
             }
             else {
                 for (NPC n : currentRoom.getNPCsInRoom()) {    //As of right now it can talk to multiple people
-                    if (n.getName().equalsIgnoreCase(input)) { //if they have the same name
-                        n.printDefaultDialogue();
+                    if (n.getName().equalsIgnoreCase(input)) { //If they have the same name
+                        n.printDefaultDialogue(); //The npc "talks"
                         pass = true;
                     }
                 }
@@ -358,29 +363,27 @@ public class Game {
     private void dropCommand(String input, Player hero) {
         String amount = parseLastInput(input); //Gets the last word of the input
         Integer amtToRemove = 1; //The amount of the item to drop
-        
+
         try { //If the last word in the input is a number then get the value and remove the last word from the input
             amtToRemove = Integer.valueOf(amount);
             input = input.substring(0, input.length() - amount.length() -1);
         }
         catch(NumberFormatException e) {}
-        
+
         int amountFound = 0; //The number of times the item was dropped
         if(amtToRemove < 1) { //Any number below 1 is treated as 1 so -23 is 1 time, same for 0
             amtToRemove = 1;
         }
-        
+
         Item foundItem = getItemFromInventory(input, hero.getInventory()); //Searches the player's inventory for an item matching the input
         for(int i = 0; i < amtToRemove; i++) { //can make this loop better by getting item instead of searching tag every time
             amountFound += dropItem(hero, input); //Drops the item from the players inventory
         }
-      
-
 
         if (amountFound < 1) {
             System.out.println("You don't have an item called that.");
         }
-        else if (amountFound > 1) {
+        else if (amountFound > 1) { //For grammar sake
             System.out.println("Dropped " + amountFound + " " + foundItem.getName() + "s.");
         }
         else if (amountFound == 1) {
