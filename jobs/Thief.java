@@ -29,7 +29,7 @@ public class Thief extends Job {
     final String[] initialSkills = {"Attack", "Backstab"};
 
     public Thief(Player p) {
-        super.initializeJobStats(BASE_STATS, CLASS_NAME, initialSkills, p);
+        super.initializeJobStats(BASE_STATS, CLASS_NAME, initialSkills, p); //Initializes the base stats and other variables for the job
 
         try {
             this.initSkills(p); //temp
@@ -41,7 +41,7 @@ public class Thief extends Job {
 
     @Override
     public void levelUp(Player p) {
-        super.incrementStats = BASE_INCREMENTS;
+        super.incrementStats = BASE_INCREMENTS; //Sets the increments in the Job class to this class's and then calls the super method
         super.levelUp(p);
     }
 }

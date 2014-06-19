@@ -19,7 +19,7 @@ public class Job {
     protected String[] availableSkills;//skills that the job is able to learn
     //ALL JOBS MUST LEARN ATTACK
     
-    protected double[] incrementStats;
+    protected double[] incrementStats; //The percentage that the stats will be increased by when the Player levels up
 
     public Job(){}
 
@@ -71,6 +71,7 @@ public class Job {
         }
     }
 
+    //Initializes the Player's stats based on the job
     public void initializeJobStats(int[] baseStats, String job_Name, String[] initialSkills, Player p) {
         availableSkills = initialSkills;//this is just temp
         jobName = job_Name;
@@ -86,6 +87,7 @@ public class Job {
         p.initCurrentStats();
     }
 
+    //Increases the Player's stats based on the job
     public void levelUp(Player p) {
         p.setNextLevelExp((int) (p.getNextLevelExp() * incrementStats[0]));
 
