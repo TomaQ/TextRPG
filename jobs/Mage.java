@@ -1,45 +1,47 @@
 package textrpg.jobs;
 
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import textrpg.Player;
 
 public class Mage extends Job {
 
-    private final String class_name = "Mage";
+    private final String CLASS_NAME = "Mage";
+    final int BASE_HEALTH = 80;
+    final int BASE_MANA = 80;
+    final int BASE_AGILITY = 10;
+    final int BASE_MAGIC = 25;
+    final int BASE_STRENGTH = 7;
+    final int BASE_DEFENSE = 10;
+    final int BASE_MAGIC_DEFENSE = 15;
+    final double NEXT_LEVEL_EXP_INCREMENT = 1.2;
+    final double BASE_HEALTH_INCREMENT = 1.2;
+    final double BASE_MANA_INCREMENT = 1.1;
+    final double BASE_AGILITY_INCREMENT = 1.2;
+    final double BASE_MAGIC_INCREMENT = 1.15;
+    final double BASE_STRENGTH_INCREMENT = 1.15;
+    final double BASE_DEFENSE_INCREMENT = 1.2;
+    final double BASE_MAGIC_DEFENSE_INCREMENT = 1.15;
 
-    private final String[] initialSkills = {"Attack", "Fireball"};
-   
+    final int[] BASE_STATS = {BASE_HEALTH, BASE_MANA, BASE_AGILITY, BASE_MAGIC, BASE_STRENGTH, BASE_DEFENSE, BASE_MAGIC_DEFENSE};
+    final double[] BASE_INCREMENTS = {NEXT_LEVEL_EXP_INCREMENT, BASE_HEALTH_INCREMENT, BASE_MANA_INCREMENT, BASE_AGILITY_INCREMENT, BASE_MAGIC_INCREMENT, BASE_STRENGTH_INCREMENT, BASE_DEFENSE_INCREMENT, BASE_MAGIC_DEFENSE_INCREMENT};
+
+    final String[] initialSkills = {"Attack", "Fireball"};
+
     public Mage(Player p) {
-        availableSkills  = initialSkills;//wrong!! but it's temp for now so w/e
-        jobName = class_name;
-        skillsLearned = new ArrayList<>();
-        
-        p.setBaseHealth(80);
-        p.setBaseMana(80);
-        p.setBaseAgility(10);
-        p.setBaseDefense(10);
-        p.setBaseMagic(25);
-        p.setBaseStrength(6);
-        p.setBaseMagicDefense(15);
-        p.initCurrentStats();
+        super.initializeJobStats(BASE_STATS, CLASS_NAME, initialSkills, p);
+
         try {
             this.initSkills(p); //Temp
-        } catch (Exception ex) {Logger.getLogger(Warrior.class.getName()).log(Level.SEVERE, null, ex);}
-        
+        }
+        catch (Exception ex) {
+            Logger.getLogger(Mage.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-    
+
     @Override
     public void levelUp(Player p) {
-        p.setNextLevelExp((int)(p.getNextLevelExp()*1.2));
-        
-        p.setBaseHealth((int)(p.getBaseHealth() * 1.2));
-        p.setBaseMana((int)(p.getBaseMana() * 1.1));
-        p.setBaseAgility((int)(p.getBaseAgility() * 1.2));
-        p.setBaseDefense((int)(p.getBaseDefense() * 1.3));
-        p.setBaseMagic((int)(p.getBaseMagic() * 1.1));
-        p.setBaseStrength((int)(p.getBaseStrength() * 1.25));
-        p.setBaseMagicDefense((int)(p.getBaseMagicDefense() * 1.15));
+        super.incrementStats = BASE_INCREMENTS;
+        super.levelUp(p);
     }
 }

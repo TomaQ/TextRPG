@@ -2,6 +2,7 @@ package textrpg.jobs;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.ArrayList;
 import java.util.List;
 import textrpg.Game;
 import textrpg.Player;
@@ -17,8 +18,10 @@ public class Job {
     protected List<Skill> skillsLearned;//the skills that the player currently has learned
     protected String[] availableSkills;//skills that the job is able to learn
     //ALL JOBS MUST LEARN ATTACK
+    
+    protected double[] incrementStats;
 
-    public Job(){}//default
+    public Job(){}
 
     //Sets the players job
     public Job(Player h, int i) {
@@ -53,7 +56,7 @@ public class Job {
         for (int i = 0; i < skillsLearned.size(); i++) {
             skil += (skillsLearned.get(i).getSkillName() + ", ");
         }
-        skil = skil.substring(0, skil.length() - SUBSTRING_OFFSET); //This removes the ', ' at the end of the string
+        skil = skil.substring(0, skil.length() - SUBSTRING_OFFSET); //This removes the ", " at the end of the string
         System.out.println(skil);
     }
 
@@ -68,5 +71,30 @@ public class Job {
         }
     }
 
-    public void levelUp(Player p){};//OVERWRITE THIS should make an interface for things like this or something?
+    public void initializeJobStats(int[] baseStats, String job_Name, String[] initialSkills, Player p) {
+        availableSkills = initialSkills;//this is just temp
+        jobName = job_Name;
+        skillsLearned = new ArrayList<>();
+
+        p.setBaseHealth(baseStats[0]);
+        p.setBaseMana(baseStats[1]);
+        p.setBaseAgility(baseStats[2]);
+        p.setBaseDefense(baseStats[5]);
+        p.setBaseMagic(baseStats[3]);
+        p.setBaseStrength(baseStats[4]);
+        p.setBaseMagicDefense(baseStats[6]);
+        p.initCurrentStats();
+    }
+
+    public void levelUp(Player p) {
+        p.setNextLevelExp((int) (p.getNextLevelExp() * incrementStats[0]));
+
+        p.setBaseHealth((int) (p.getBaseHealth() * incrementStats[1]));
+        p.setBaseMana((int) (p.getBaseMana() * incrementStats[2]));
+        p.setBaseAgility((int) (p.getBaseAgility() * incrementStats[3]));
+        p.setBaseDefense((int) (p.getBaseDefense() * incrementStats[6]));
+        p.setBaseMagic((int) (p.getBaseMagic() * incrementStats[4]));
+        p.setBaseStrength((int) (p.getBaseStrength() * incrementStats[5]));
+        p.setBaseMagicDefense((int) (p.getBaseMagicDefense() * incrementStats[7]));
+    }
 }
