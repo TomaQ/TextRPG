@@ -175,6 +175,8 @@ public class Game {
         Equipment bronze = new BronzeChest();
         hero.getInventory().add(iron);
         hero.setChest(bronze);
+        
+        DataHandler.doTheStuff();
     }
 
     //Formats for shortcuts
