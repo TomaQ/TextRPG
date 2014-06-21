@@ -5,6 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TextRPG {
+    final static int DATA_BASE = 1;
 
     public TextRPG() throws IOException {
         System.out.println("New Game = 1, Continue = 2");
@@ -109,6 +110,11 @@ public class TextRPG {
         final double version = 0.8;
 
         System.out.println("TextRPG! v" + version);
-        new TextRPG(); //Starts the game (make this into a method instead?)
+        if (DATA_BASE == 0) {
+            new TextRPG(); //Starts the game (make this into a method instead?)
+        }
+        else {
+            DataHandler.doTheStuff();
+        }
     }
 }
