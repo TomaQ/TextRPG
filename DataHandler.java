@@ -11,8 +11,6 @@ public class DataHandler {
         Connection c = null;
         Statement stmt = null;
 
-        Gson gson = new Gson();
-
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:./src/textrpg/data/items.db");
