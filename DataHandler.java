@@ -31,7 +31,7 @@ public class DataHandler {
                         createDatabase(stmt);
                         break;
                     case 2:
-                        insertNewObject(stmt);
+                        insertNewItem(stmt);
                         break;
                     case 3:
                         printDatabase(stmt);
@@ -89,6 +89,61 @@ public class DataHandler {
 
         //ResultSet rs = stmt.executeQuery("SELECT OBJECT FROM ITEMS where ID=1");
         //Item newHpPot = gson.fromJson(rs.getString("object"), Item.class);
+    }
+    
+    private static void insertNewItem(Statement stmt) {
+        
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Are you sure? y/n");
+        String input = scan.nextLine();
+        
+        if(input.equalsIgnoreCase("y")) {
+            Gson gson = new Gson();
+            String[] newItemValues = new String[8];
+          
+            System.out.println("ID: ");
+            newItemValues[0] = scan.nextLine();
+            System.out.println("Name: ");
+            newItemValues[1] = scan.nextLine();
+            System.out.println("Item description: ");
+            newItemValues[2] = scan.nextLine();
+            System.out.println("Item type (1 is consumable, 2 is material, 3 is quest item): ");
+            newItemValues[3] = scan.nextLine();
+            System.out.println("Gold worth: ");
+            newItemValues[4] = scan.nextLine();
+            System.out.println("Stats (HP, Mana, STR, MAG, AGI, DEF, MDEF)(separate with commas): ");
+            newItemValues[5] = scan.nextLine();
+            System.out.println("Tags (separate with commas): ");
+            newItemValues[6] = scan.nextLine();
+            System.out.println("Consumable (1 or 0): ");
+            newItemValues[7] = scan.nextLine();
+            
+            Item newItem = new Item();
+            newItem.setName(newItemValues[1]);
+            newItem.setItemDescription(newItemValues[2]);
+            newItem.setItemType(Integer.valueOf(newItemValues[3]));
+            newItem.setGoldWorth(Integer.valueOf(newItemValues[4]));
+            //newItem.setStatsModified(newItemValues[5]);
+            //newItem.setTags(newItemValues[6]);
+            if (newItemValues[7].equals("1")) {
+                newItem.setConsumable(true);
+            }
+            else {
+                newItem.setConsumable(false);
+            }
+
+            String newItemJ = gson.toJson(newItem);
+
+            try {
+                String sql = "INSERT INTO ITEMS (ID, OBJECT) VALUES (" + newItemValues[0] + ", '" + newItemJ + "')";
+                stmt.executeUpdate(sql);
+            }
+            catch (Exception e) {
+                System.out.println(e.getClass().getName() + ": " + e.getMessage());
+            }
+            System.out.println("Inserted " + newItem.getName() + " into database.");
+
+        }
     }
 
     private static void deleteDatabase(Statement stmt) {
