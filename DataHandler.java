@@ -4,12 +4,20 @@ import java.sql.*;
 import com.google.gson.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import textrpg.equipment.Equipment;
 import textrpg.items.*;
+import textrpg.monsters.Monster;
+import textrpg.npcs.NPC;
+import textrpg.rooms.Room;
+import textrpg.shops.Shop;
+import textrpg.skills.Skill;
+import textrpg.weapons.Weapon;
 
 public class DataHandler {
 
     private static Connection c = null;
     private static Statement stmt = null;
+    private static Gson gson = new Gson();
 
     public static void openDatabase() {
         try {
@@ -85,7 +93,7 @@ public class DataHandler {
     //For testing only atm
     private static void insertNewObject(Statement stmt) {
         try {
-            Gson gson = new Gson();
+            
 
             Item hpPot = new HealthPotion();
             String hpPotJ = gson.toJson(hpPot);
@@ -115,7 +123,7 @@ public class DataHandler {
         String input = scan.nextLine();
         
         if(input.equalsIgnoreCase("y")) {
-            Gson gson = new Gson();
+            
             String[] newItemValues = new String[7];
           
             int[] statsModified = new int[7];//Fix all of this later
@@ -214,19 +222,122 @@ public class DataHandler {
     }
     
     public static Item getItem(int i) {
-        Gson gson = new Gson();
+        
         ResultSet rs;
         Item newItem = null;
         try {
             rs = stmt.executeQuery("SELECT OBJECT FROM ITEMS where ID=" + i);
-            System.out.println("trying....");
             newItem = gson.fromJson(rs.getString("object"), Item.class);
-            System.out.println("item: " + newItem);
         }
         catch (Exception e) {
             printExceptionError(e);
         }
         
         return newItem;
+    }
+
+    public static Equipment getEquipment(int i) {
+        ResultSet rs;
+        Equipment newEquipment = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM EQUIPMENT where ID=" + i);
+            newEquipment = gson.fromJson(rs.getString("object"), Equipment.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newEquipment;
+    }
+
+    public static Weapon getWeapon(int i) {
+        ResultSet rs;
+        Weapon newWeapon = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM WEAPONS where ID=" + i);
+            newWeapon = gson.fromJson(rs.getString("object"), Weapon.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newWeapon;
+    }
+
+    public static Room getRoom(int i) {
+        ResultSet rs;
+        Room newRoom = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM ROOMS where ID=" + i);
+            newRoom = gson.fromJson(rs.getString("object"), Room.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newRoom;
+    }
+
+    public static Skill getSkill(int i) {
+        ResultSet rs;
+        Skill newSkill = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM SKILLS where ID=" + i);
+            newSkill = gson.fromJson(rs.getString("object"), Skill.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newSkill;
+    }
+
+    public static Shop getShop(int i) {
+        ResultSet rs;
+        Shop newShop = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM SHOPS where ID=" + i);
+            newShop = gson.fromJson(rs.getString("object"), Shop.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newShop;
+    }
+    
+    public static NPC getNPC(int i) {
+        ResultSet rs;
+        NPC newNPC = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM NPCS where ID=" + i);
+            newNPC = gson.fromJson(rs.getString("object"), NPC.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newNPC;
+    }
+    
+    public static Monster getMonster(int i) {
+        ResultSet rs;
+        Monster newMonster = null;
+
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM MONSTERS where ID=" + i);
+            newMonster = gson.fromJson(rs.getString("object"), Monster.class);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+
+        return newMonster;
     }
 }

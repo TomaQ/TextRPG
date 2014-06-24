@@ -1,10 +1,12 @@
 package textrpg.skills;
 
+import textrpg.items.Item;
+
 public class Skill {
 
     private String name;
     private int levelRequirement;
-    private String[] itemsRequired;
+    private Item[] itemsRequired;
     private int type;
     //1 = physical, 2 = fire, 3 = water, 4 = lightning, 5 = ice, more?!
     
@@ -16,8 +18,8 @@ public class Skill {
     public int getLevelRequirement(){return levelRequirement;}
     public void setLevelRequirement(int l){levelRequirement = l;}
     
-    public String[] getItemsRequired(){return itemsRequired;}
-    public void setItemsRequired(String[] s){itemsRequired = s;}
+    public Item[] getItemsRequired(){return itemsRequired;}
+    public void setItemsRequired(Item[] i){itemsRequired = i;}
     
     public int getManaCost(){return manaCost;}
     public void setManaCost(int i){manaCost = i;}
