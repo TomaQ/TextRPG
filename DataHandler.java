@@ -32,6 +32,8 @@ public class DataHandler {
     public static void doTheStuff() {
 
         try {
+            
+            openDatabase();
 
             Scanner scan = new Scanner(System.in);
             int input = -1;
@@ -80,6 +82,7 @@ public class DataHandler {
         }
     }
 
+    //For testing only atm
     private static void insertNewObject(Statement stmt) {
         try {
             Gson gson = new Gson();
