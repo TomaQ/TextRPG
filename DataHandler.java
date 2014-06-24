@@ -2,6 +2,7 @@ package textrpg;
 
 import java.sql.*;
 import com.google.gson.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 import textrpg.items.*;
 
@@ -112,8 +113,10 @@ public class DataHandler {
         
         if(input.equalsIgnoreCase("y")) {
             Gson gson = new Gson();
-            String[] newItemValues = new String[8];
+            String[] newItemValues = new String[7];
           
+            int[] statsModified = new int[7];//Fix all of this later
+            
             System.out.println("ID: ");
             newItemValues[0] = scan.nextLine();
             System.out.println("Name: ");
@@ -124,21 +127,38 @@ public class DataHandler {
             newItemValues[3] = scan.nextLine();
             System.out.println("Gold worth: ");
             newItemValues[4] = scan.nextLine();
-            System.out.println("Stats (HP, Mana, STR, MAG, AGI, DEF, MDEF)(separate with commas): ");
-            newItemValues[5] = scan.nextLine();
-            System.out.println("Tags (separate with commas): ");
-            newItemValues[6] = scan.nextLine();
+            
+            System.out.println("Stats (HP, Mana, STR, MAG, AGI, DEF, MDEF): ");
+            for(int i = 0; i < statsModified.length; i++) {
+                statsModified[i] = scan.nextInt(); //no error checking, fix later
+                scan.nextLine();
+            }
+                    
+            
+            System.out.println("Tags (When done enter -1): ");
+            String tagsInput = scan.nextLine();
+            ArrayList<String> tags = new ArrayList<>();
+            
+            while(!tagsInput.equalsIgnoreCase("-1")) {
+                tags.add(tagsInput);
+                tagsInput = scan.nextLine();
+            }
+                
             System.out.println("Consumable (1 or 0): ");
-            newItemValues[7] = scan.nextLine();
+            newItemValues[6] = scan.nextLine();
             
             Item newItem = new Item();
             newItem.setName(newItemValues[1]);
             newItem.setItemDescription(newItemValues[2]);
             newItem.setItemType(Integer.valueOf(newItemValues[3]));
             newItem.setGoldWorth(Integer.valueOf(newItemValues[4]));
-            //newItem.setStatsModified(newItemValues[5]);
-            //newItem.setTags(newItemValues[6]);
-            if (newItemValues[7].equals("1")) {
+            
+            newItem.setStatsModified(statsModified);
+
+            String[] tagsArray = new String[tags.size()]; //Need to test
+            newItem.setTags(tags.toArray(tagsArray));
+            
+            if (newItemValues[6].equals("1")) {
                 newItem.setConsumable(true);
             }
             else {
