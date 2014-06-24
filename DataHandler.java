@@ -7,10 +7,10 @@ import textrpg.items.*;
 
 public class DataHandler {
 
-    public static void doTheStuff() {
-        Connection c = null;
-        Statement stmt = null;
+    private static Connection c = null;
+    private static Statement stmt = null;
 
+    public static void openDatabase() {
         try {
             Class.forName("org.sqlite.JDBC");
             c = DriverManager.getConnection("jdbc:sqlite:./src/textrpg/data/items.db");
@@ -18,7 +18,20 @@ public class DataHandler {
             System.out.println("Opened database successfully");
 
             stmt = c.createStatement();
-            
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+    }
+    
+    private static void printExceptionError(Exception e) {
+        System.out.println(e.getClass().getName() + ": " + e.getMessage());
+    }
+
+    public static void doTheStuff() {
+
+        try {
+
             Scanner scan = new Scanner(System.in);
             int input = -1;
             while (input != 0) {
@@ -50,7 +63,7 @@ public class DataHandler {
             c.close();
         }
         catch (Exception e) {
-            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+            printExceptionError(e);
             System.exit(0);
         }
     }
@@ -62,7 +75,7 @@ public class DataHandler {
             System.out.println("Created table ITEMS");
         }
         catch (Exception e) {
-            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+            printExceptionError(e);
         }
     }
 
@@ -84,7 +97,7 @@ public class DataHandler {
             System.out.println("Inserted HP pot and Slime Extract");
         }
         catch (Exception e) {
-            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+            printExceptionError(e);
         }
 
         //ResultSet rs = stmt.executeQuery("SELECT OBJECT FROM ITEMS where ID=1");
@@ -139,7 +152,7 @@ public class DataHandler {
                 stmt.executeUpdate(sql);
             }
             catch (Exception e) {
-                System.out.println(e.getClass().getName() + ": " + e.getMessage());
+                printExceptionError(e);
             }
             System.out.println("Inserted " + newItem.getName() + " into database.");
 
@@ -158,7 +171,7 @@ public class DataHandler {
                 System.out.println("Deleted table ITEMS");
             }
             catch (Exception e) {
-                System.out.println(e.getClass().getName() + ": " + e.getMessage());
+                printExceptionError(e);
             }
         }
     }
@@ -173,7 +186,24 @@ public class DataHandler {
             System.out.println();
         }
         catch (Exception e) {
-            System.out.println(e.getClass().getName() + ": " + e.getMessage());
+            printExceptionError(e);
         }
+    }
+    
+    public static Item getItem(int i) {
+        Gson gson = new Gson();
+        ResultSet rs;
+        Item newItem = null;
+        try {
+            rs = stmt.executeQuery("SELECT OBJECT FROM ITEMS where ID=" + i);
+            System.out.println("trying....");
+            newItem = gson.fromJson(rs.getString("object"), Item.class);
+            System.out.println("item: " + newItem);
+        }
+        catch (Exception e) {
+            printExceptionError(e);
+        }
+        
+        return newItem;
     }
 }

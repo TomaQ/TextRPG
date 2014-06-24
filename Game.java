@@ -22,6 +22,8 @@ public class Game {
     public Game(Player hero) {
         //Eventually there'll be a database that stores all of the rooms and other things
         printBreak();
+        
+        DataHandler.openDatabase(); //Opens the database
 
         //This block is temp for now since rooms are just objects sitting in a class right now
         Room prRoom = new PowerRangerRoom(null, null, null, null);
@@ -175,6 +177,8 @@ public class Game {
         Equipment bronze = new BronzeChest();
         hero.getInventory().add(iron);
         hero.setChest(bronze);
+        
+        hero.addItemToInventory(DataHandler.getItem(3));
     }
 
     //Formats for shortcuts

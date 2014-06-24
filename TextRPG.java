@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class TextRPG {
-    final static int DATA_BASE = 1;
+    final static int DATA_BASE = 0;
 
     public TextRPG() throws IOException {
         System.out.println("New Game = 1, Continue = 2");
