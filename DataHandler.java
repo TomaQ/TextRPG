@@ -32,7 +32,7 @@ public class DataHandler {
             printExceptionError(e);
         }
     }
-    
+
     private static void printExceptionError(Exception e) {
         System.out.println(e.getClass().getName() + ": " + e.getMessage());
     }
@@ -40,7 +40,7 @@ public class DataHandler {
     public static void doTheStuff() {
 
         try {
-            
+
             openDatabase();
 
             Scanner scan = new Scanner(System.in);
@@ -93,7 +93,6 @@ public class DataHandler {
     //For testing only atm
     private static void insertNewObject(Statement stmt) {
         try {
-            
 
             Item hpPot = new HealthPotion();
             String hpPotJ = gson.toJson(hpPot);
@@ -111,23 +110,20 @@ public class DataHandler {
         catch (Exception e) {
             printExceptionError(e);
         }
-
-        //ResultSet rs = stmt.executeQuery("SELECT OBJECT FROM ITEMS where ID=1");
-        //Item newHpPot = gson.fromJson(rs.getString("object"), Item.class);
     }
-    
+
     private static void insertNewItem(Statement stmt) {
-        
+
         Scanner scan = new Scanner(System.in);
         System.out.println("Are you sure? y/n");
         String input = scan.nextLine();
-        
-        if(input.equalsIgnoreCase("y")) {
-            
+
+        if (input.equalsIgnoreCase("y")) {
+
             String[] newItemValues = new String[7];
-          
+
             int[] statsModified = new int[7];//Fix all of this later
-            
+
             System.out.println("ID: ");
             newItemValues[0] = scan.nextLine();
             System.out.println("Name: ");
@@ -138,37 +134,36 @@ public class DataHandler {
             newItemValues[3] = scan.nextLine();
             System.out.println("Gold worth: ");
             newItemValues[4] = scan.nextLine();
-            
+
             System.out.println("Stats (HP, Mana, STR, MAG, AGI, DEF, MDEF): ");
-            for(int i = 0; i < statsModified.length; i++) {
+            for (int i = 0; i < statsModified.length; i++) {
                 statsModified[i] = scan.nextInt(); //no error checking, fix later
                 scan.nextLine();
             }
-                    
-            
+
             System.out.println("Tags (When done enter -1): ");
             String tagsInput = scan.nextLine();
             ArrayList<String> tags = new ArrayList<>();
-            
-            while(!tagsInput.equalsIgnoreCase("-1")) {
+
+            while (!tagsInput.equalsIgnoreCase("-1")) {
                 tags.add(tagsInput);
                 tagsInput = scan.nextLine();
             }
-                
+
             System.out.println("Consumable (1 or 0): ");
             newItemValues[6] = scan.nextLine();
-            
+
             Item newItem = new Item();
             newItem.setName(newItemValues[1]);
             newItem.setItemDescription(newItemValues[2]);
             newItem.setItemType(Integer.valueOf(newItemValues[3]));
             newItem.setGoldWorth(Integer.valueOf(newItemValues[4]));
-            
+
             newItem.setStatsModified(statsModified);
 
             String[] tagsArray = new String[tags.size()]; //Need to test
             newItem.setTags(tags.toArray(tagsArray));
-            
+
             if (newItemValues[6].equals("1")) {
                 newItem.setConsumable(true);
             }
@@ -194,7 +189,7 @@ public class DataHandler {
         System.out.println("Are you sure? y/n");
         Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
-        
+
         if (input.equalsIgnoreCase("y")) {
             try {
                 String sql = "DROP TABLE ITEMS";
@@ -211,7 +206,7 @@ public class DataHandler {
         try {
             System.out.println();
             ResultSet rs = stmt.executeQuery("SELECT * FROM ITEMS");
-            while(rs.next()) {
+            while (rs.next()) {
                 System.out.println(rs.getInt("id") + ", " + rs.getString("object"));
             }
             System.out.println();
@@ -220,9 +215,9 @@ public class DataHandler {
             printExceptionError(e);
         }
     }
-    
+
     public static Item getItem(int i) {
-        
+
         ResultSet rs;
         Item newItem = null;
         try {
@@ -232,7 +227,7 @@ public class DataHandler {
         catch (Exception e) {
             printExceptionError(e);
         }
-        
+
         return newItem;
     }
 
@@ -310,7 +305,7 @@ public class DataHandler {
 
         return newShop;
     }
-    
+
     public static NPC getNPC(int i) {
         ResultSet rs;
         NPC newNPC = null;
@@ -325,7 +320,7 @@ public class DataHandler {
 
         return newNPC;
     }
-    
+
     public static Monster getMonster(int i) {
         ResultSet rs;
         Monster newMonster = null;
