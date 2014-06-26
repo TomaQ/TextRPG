@@ -18,6 +18,7 @@ public class DataHandler {
     private static Connection c = null;
     private static Statement stmt = null;
     private static Gson gson = new Gson();
+    private static Scanner scan = new Scanner(System.in);
 
     public static void openDatabase() {
         try {
@@ -43,10 +44,9 @@ public class DataHandler {
 
             openDatabase();
 
-            Scanner scan = new Scanner(System.in);
             int input = -1;
             while (input != 0) {
-                System.out.println("Create Items Database: 1\nInsert New Item: 2\nPrint Database: 3\nDelete Database: 6\nExit: 0");
+                System.out.println("Create Items Database: 1\nInsert New Object: 2\nPrint Database: 3\nDelete Database: 6\nExit: 0");
                 input = scan.nextInt();
                 scan.nextLine();
 
@@ -55,7 +55,7 @@ public class DataHandler {
                         createDatabase(stmt);
                         break;
                     case 2:
-                        insertNewItem(stmt);
+                        createNewObject(stmt);
                         break;
                     case 3:
                         printDatabase(stmt);
@@ -79,6 +79,34 @@ public class DataHandler {
         }
     }
 
+    private static void createNewObject(Statement stmt) {
+        System.out.println("What do you want to create?\nItem: 1\nEquipment: 2\nWeapon: 3\nRoom: 4\nSkill: 5\nShop: 6\nNPC: 7\nMonster: 8\n");
+        int input = scan.nextInt();
+        scan.nextLine();
+
+        switch (input) {
+            case 1:
+                insertNewItem(stmt);
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+            case 5:
+                break;
+            case 6:
+                break;
+            case 7:
+                break;
+            case 8:
+                break;
+            default:
+                break;
+        }
+    }
+
     private static void createDatabase(Statement stmt) {
         try {
             String sql = "CREATE TABLE ITEMS (ID INT PRIMARY KEY NOT NULL, OBJECT TEXT NOT NULL)";
@@ -91,7 +119,7 @@ public class DataHandler {
     }
 
     //For testing only atm
-    private static void insertNewObject(Statement stmt) {
+    /*private static void insertPreItem(Statement stmt) {
         try {
 
             Item hpPot = new HealthPotion();
@@ -110,11 +138,10 @@ public class DataHandler {
         catch (Exception e) {
             printExceptionError(e);
         }
-    }
+    }*/
 
     private static void insertNewItem(Statement stmt) {
 
-        Scanner scan = new Scanner(System.in);
         System.out.println("Are you sure? y/n");
         String input = scan.nextLine();
 
@@ -184,10 +211,19 @@ public class DataHandler {
 
         }
     }
+    
+    private static void insertNewEquipment(Statement stmt) {
+        System.out.println("Are you sure? y/n");
+        String input = scan.nextLine();
+
+        if (input.equalsIgnoreCase("y")) {
+            
+            System.out.println("ID: ");
+        }
+    }
 
     private static void deleteDatabase(Statement stmt) {
         System.out.println("Are you sure? y/n");
-        Scanner scan = new Scanner(System.in);
         String input = scan.nextLine();
 
         if (input.equalsIgnoreCase("y")) {
