@@ -89,6 +89,7 @@ public class DataHandler {
                 insertNewItem(stmt);
                 break;
             case 2:
+                insertNewEquipment(stmt);
                 break;
             case 3:
                 break;
