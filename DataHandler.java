@@ -32,7 +32,7 @@ public class DataHandler {
                 path = "jdbc:sqlite:./data/items.db";
             }
             
-            c = DriverManager.getConnection("jdbc:sqlite:./src/textrpg/data/items.db");
+            c = DriverManager.getConnection(path);
             //c.setAutoCommit(false);
             System.out.println("Opened database successfully");
 
