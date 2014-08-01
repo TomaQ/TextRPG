@@ -19,10 +19,19 @@ public class DataHandler {
     private static Statement stmt = null;
     private static Gson gson = new Gson();
     private static Scanner scan = new Scanner(System.in);
+    private static final boolean development = true;
 
     public static void openDatabase() {
         try {
             Class.forName("org.sqlite.JDBC");
+            String path; //Path to the database
+            if (development) {
+                path = "jdbc:sqlite:./src/textrpg/data/items.db";
+            }
+            else {
+                path = "jdbc:sqlite:./data/items.db";
+            }
+            
             c = DriverManager.getConnection("jdbc:sqlite:./src/textrpg/data/items.db");
             //c.setAutoCommit(false);
             System.out.println("Opened database successfully");
