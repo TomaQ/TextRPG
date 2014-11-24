@@ -107,7 +107,7 @@ public class Player extends Entity {
      * Prints the players inventory in the format 'itemName(quantity)'
      */
     public void printInventory() {
-        Game.printBreak();
+        Format.printBreak();
         System.out.println("Your inventory:");
         String inven = "Gold: " + getGold() + ", ";//the inventory string that gets printed out
         String[][] invenCount = Game.getCountedInventory(getInventory());
@@ -122,9 +122,7 @@ public class Player extends Entity {
                 }
             }
         }
-        if (inven.length() > 2) {//formatting
-            inven = inven.substring(0, inven.length() - 2);
-        }
+        inven = Format.removeEndingComma(inven);
 
         System.out.println(inven);
     }
@@ -156,13 +154,13 @@ public class Player extends Entity {
     public void setGold(int i){gold = i;}
     
     public void printStatus() {
-        Game.printBreak();
+        Format.printBreak();
         System.out.println("Name: " + getName() + "\tJob: " + getJobName() + "\tLevel:" + getLevel());
         System.out.println("Health:" + getCurrentHealth() + "\nMana:" + getCurrentMana() + "\nStrength:" + getCurrentStrength() + "\nMagic:" + getCurrentMagic() + "\nAgility:" + getCurrentAgility() + "\nDefense:" + getCurrentDefense() + "\nMagic Defense:" + getCurrentMagicDefense());
     }
 
     public void printEquipment() {
-        Game.printBreak();
+        Format.printBreak();
         System.out.println("Weapons: " + getWeapon().getName() + "/" + getOffHand().getName());
         System.out.println("Chest: " + getChest().getName() + "\tLegs: " + getLegs().getName());
         System.out.println("Bracers: " + getBracers().getName() + "\tBoots: " + getBoots().getName());

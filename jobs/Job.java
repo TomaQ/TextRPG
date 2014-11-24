@@ -4,7 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
-import textrpg.Game;
+import textrpg.Format;
 import textrpg.Player;
 import textrpg.skills.Skill;
 
@@ -51,7 +51,7 @@ public class Job {
 
     //Prints all of the skills learned
     public void printSkills() {
-        Game.printBreak();
+        Format.printBreak();
         String skil = "";
         for (int i = 0; i < skillsLearned.size(); i++) {
             skil += (skillsLearned.get(i).getSkillName() + ", ");

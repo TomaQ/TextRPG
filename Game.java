@@ -13,7 +13,6 @@ import textrpg.weapons.*;
 public class Game {
 
     Scanner scan = new Scanner(System.in);
-    static String lineBreak = "=========================="; //String for breaking up likes, might get rid of
 
     Room currentRoom = null; //the current room the player is in
     String userInput = ""; //does this need to be global?
@@ -21,7 +20,7 @@ public class Game {
     //loadRooms() maybe
     public Game(Player hero) {
         //Eventually there'll be a database that stores all of the rooms and other things
-        printBreak();
+        Format.printBreak();
         
         DataHandler.openDatabase(); //Opens the database
 
@@ -46,10 +45,6 @@ public class Game {
         }
 
         System.out.println("Bye!!");
-    }
-
-    public static final void printBreak() {//prints a LINE_BREAKERRR!
-        System.out.println(lineBreak);
     }
 
     private void command(Player hero) {//checks what to do from the users input
@@ -219,7 +214,7 @@ public class Game {
     
     //Prints all of the available commands
     private void printCommands() {
-        printBreak();
+        Format.printBreak();
         System.out.println("north, south, east, west - Moves you arround to different rooms.");
         System.out.println("battle - Starts a testing fight against a slime.");
         System.out.println("look - Tells you the room description.");
@@ -236,7 +231,7 @@ public class Game {
         System.out.println("unequip - Unequips something from yourself. Useage is unequip 'object' where object is what you want to unequip from yourself.");
         System.out.println("examine - Tells you about the item.");
         System.out.println("quit - Quits the game.");
-        printBreak();
+        Format.printBreak();
     }
 
     //Figures out what to take

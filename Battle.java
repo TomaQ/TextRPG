@@ -25,7 +25,7 @@ public final class Battle {
         monster = m;
         turns = 1;
 
-        Game.printBreak();
+        Format.printBreak();
         System.out.println("You have engaged in battle with " + m.getName() + "!");
 
         if (moveFirst()) {
@@ -65,7 +65,7 @@ public final class Battle {
             h.setCurrentExp(h.getCurrentExp() + m.getExpWorth());
         }
 
-        Game.printBreak();
+        Format.printBreak();
     }
 
     //Calculates who gets the first turn based on agility
